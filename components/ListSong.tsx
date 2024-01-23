@@ -24,18 +24,18 @@ export default function ListSong({ keywords }: { keywords: string }) {
         <Loading />
       ) : (
         data?.result?.songs?.map((data: any) => (
-          <Suspense key={crypto.randomUUID()} fallback={<Loading />}>
-            <SongCard
-              key={crypto.randomUUID()}
-              title={data?.name}
-              artist={data?.ar
-                ?.map((data: { name: string }) => data.name)
-                ?.toString()
-                ?.replaceAll(",", " & ")}
-              id={data?.id}
-              img={data?.al?.picUrl}
-            />
-          </Suspense>
+          // <Suspense key={crypto.randomUUID()} fallback={<Loading />}>
+          <SongCard
+            key={crypto.randomUUID()}
+            title={data?.name}
+            artist={data?.ar
+              ?.map((data: { name: string }) => data.name)
+              ?.toString()
+              ?.replaceAll(",", " & ")}
+            id={data?.id}
+            img={data?.al?.picUrl}
+          />
+          // </Suspense>
         ))
       )}
     </div>

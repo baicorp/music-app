@@ -1,7 +1,5 @@
 import SearchBox from "@/components/SearchBox";
 import ListSong from "@/components/ListSong";
-import Loading from "./Loading";
-import { Suspense } from "react";
 
 export default async function Home({
   searchParams,
