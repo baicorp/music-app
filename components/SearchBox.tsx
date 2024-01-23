@@ -1,15 +1,19 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function SearchBox() {
-  const [input, setInput] = useState("");
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [input, setInput] = useState(searchParams.get("keywords") || "");
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    router.push(`?keywords=${input.trim()}`);
+    const params = new URLSearchParams(searchParams);
+    params.set("keywords", input);
+    replace(`${pathname}?${params.toString()}`);
   }
 
   return (
