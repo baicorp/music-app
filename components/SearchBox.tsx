@@ -5,14 +5,14 @@ import { FormEvent, useState } from "react";
 
 export default function SearchBox() {
   const searchParams = useSearchParams();
-  const [input, setInput] = useState(searchParams.get("keywords") || "");
+  const [input, setInput] = useState(searchParams.get("vId"));
   const pathname = usePathname();
   const { replace } = useRouter();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
-    params.set("keywords", input);
+    params.set("vId", input!);
     replace(`${pathname}?${params.toString()}`);
   }
 
@@ -22,8 +22,8 @@ export default function SearchBox() {
         <input
           type="text"
           className="outline-none bg-transparent"
-          placeholder="search by title or artist"
-          value={input}
+          placeholder="youtube video id"
+          value={input || ""}
           onChange={(e) => {
             setInput(e.target.value);
           }}

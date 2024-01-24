@@ -1,5 +1,6 @@
 import SearchBox from "@/components/SearchBox";
-import ListSong from "@/components/ListSong";
+import Tab from "@/components/Tab";
+import MusicList from "@/components/MusicList";
 
 export default async function Home({
   searchParams,
@@ -13,7 +14,10 @@ export default async function Home({
         <SearchBox />
       </div>
       <p className="mb-4">Search for : {searchParams.keywords}</p>
-      <ListSong keywords={searchParams.keywords as string} />
+      <Tab />
+      <div className="mt-5">
+        <MusicList />
+      </div>
     </main>
   );
 }

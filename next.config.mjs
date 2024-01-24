@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: "http",
         hostname: "p1.music.126.net",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "pipedproxy.kavin.rocks",
+      },
     ],
   },
 };
