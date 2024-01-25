@@ -17,12 +17,12 @@ export default function SearchBox() {
   }
 
   return (
-    <div className="flex gap-2 items-center p-4 rounded-lg bg-white text-black">
+    <div className="flex gap-2 items-center p-3 rounded-lg bg-white text-black">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           className="outline-none bg-transparent"
-          placeholder="youtube video id"
+          placeholder="Search music"
           value={input || ""}
           onChange={(e) => {
             setInput(e.target.value);

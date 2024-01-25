@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "pipedproxy.kavin.rocks",
       },
+      {
+        protocol: "https",
+        hostname: "pipedproxy.syncpundit.io",
+      },
     ],
   },
 };
