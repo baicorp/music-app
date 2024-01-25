@@ -14,8 +14,7 @@ export default function ClickElement({
   return (
     <div
       onClick={() => {
-        console.log("fetch id: ", id);
-        setId(ids);
+        setId((prev) => (prev = ids));
       }}
       className="cursor-pointer"
     >

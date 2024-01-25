@@ -4,7 +4,7 @@ const BASE_URL = "https://pipedapi.kavin.rocks";
 const BASE_URL_ALTERNATIVE = "https://pipedapi.syncpundit.io/";
 
 export async function getMusic(videoId: string): Promise<MusicDetail> {
-  const res = await fetch(`${BASE_URL_ALTERNATIVE}/streams/${videoId}`);
+  const res = await fetch(`${BASE_URL}/streams/${videoId}`);
   return await res.json();
 }
 

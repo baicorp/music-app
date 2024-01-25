@@ -30,7 +30,11 @@ export default function AudioPlayer() {
             {data?.uploader!}
           </p>
         </div>
-        <audio controls autoPlay src={data?.audioStreams[4]?.url!}></audio>
+        <audio
+          controls
+          autoPlay
+          src={data?.audioStreams[4]?.url! || data?.audioStreams[0]?.url!}
+        ></audio>
       </div>
     </div>
   );
