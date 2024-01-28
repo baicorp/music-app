@@ -1,0 +1,955 @@
+{
+  "title": "(What's The Story) Morning Glory? (Remastered)",
+  "artists": {
+    "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+    "name": "Oasis"
+  },
+  "duration": "2 hours, 49 minutes",
+  "type": "Album",
+  "thumbnails": [
+    {
+      "height": 60,
+      "url": "https://lh3.googleusercontent.com/FoVQFdW6zBi3sNA_yZJSV3VTWmi0belhhFzleuEbn27utkirstj1woXHfWmWqkNyHla37ZFbk_F6jvVV=w60-h60-l90-rj",
+      "width": 60
+    },
+    {
+      "height": 120,
+      "url": "https://lh3.googleusercontent.com/FoVQFdW6zBi3sNA_yZJSV3VTWmi0belhhFzleuEbn27utkirstj1woXHfWmWqkNyHla37ZFbk_F6jvVV=w120-h120-l90-rj",
+      "width": 120
+    },
+    {
+      "height": 226,
+      "url": "https://lh3.googleusercontent.com/FoVQFdW6zBi3sNA_yZJSV3VTWmi0belhhFzleuEbn27utkirstj1woXHfWmWqkNyHla37ZFbk_F6jvVV=w226-h226-l90-rj",
+      "width": 226
+    },
+    {
+      "height": 544,
+      "url": "https://lh3.googleusercontent.com/FoVQFdW6zBi3sNA_yZJSV3VTWmi0belhhFzleuEbn27utkirstj1woXHfWmWqkNyHla37ZFbk_F6jvVV=w544-h544-l90-rj",
+      "width": 544
+    }
+  ],
+  "tracks": [
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:24",
+      "duration_seconds": 204,
+      "feedbackTokens": {
+        "add": "AB9zfpKyUh72dXqPINPQwqL605jfsfHn_Rp_78lpSUiWgrkIEyzpqtxjpLz-TsQ_70BKCuUonlEQEuIK8s7peqj7HF7UERrClA",
+        "remove": "AB9zfpLvFJjxlBUn_OTCioO4iGRUrXotnqF9EQOqq1OGpI1B1CtLc-ld7SZVfRvEqhZRxHHq09GcsXvxKyND9ycPmRdRuFSWfA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Hello",
+      "videoId": "AzLjrfCqrio",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:01",
+      "duration_seconds": 241,
+      "feedbackTokens": {
+        "add": "AB9zfpIuO_p79dFn6s0DCM1cGSepW5ODSvxNobKaahxpw_IUdwAw8sI3UEkrR45Wm1Y3FebNwaMKce9hqwDaXvnEVQp4e2-W6w",
+        "remove": "AB9zfpKWWieXjmek7Fnt_8N3OIjhX1QjXCf6jsCKJk2XZ9rFQlIbxkvD71RbTPrjRCsu-XQx6_ow2LLNxZ4YNZUHOuzpNSQRnA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Roll with It",
+      "videoId": "vI_yW402Vws",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:19",
+      "duration_seconds": 259,
+      "feedbackTokens": {
+        "add": "AB9zfpLnjCSlaB9cdTfbU07ogHae16mFnyC7QLeRI--uIVXMr0q66HDNAs_OyS_kAQxzlcGJVL3p3bhx6saKvO_sa3iIKBSUhQ",
+        "remove": "AB9zfpKg-lE39Kd_FiZvRCt2ogMJ3JOWFtSYEan4tFUGVxo6ltGyDsjcH1miN4lA7eY3QTkAOQpV5GNm8rTFmFfrc_s-Ge1mnA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Wonderwall",
+      "videoId": "6hzrDeceEKc",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:50",
+      "duration_seconds": 290,
+      "feedbackTokens": {
+        "add": "AB9zfpLFAkFmMVNrvAP13W7yP585YaYv2cGwWVsq8v3dOwPHQkJmhcQN1fHvLSiAS16L_3QN_YFPsQlJXEM53EeVhG7OyiofuQ",
+        "remove": "AB9zfpJfACV_jETvjSJ2CgXBEaGXgy12-W4eW8NKREDF0B6H9APkpBoiG1H226Grzvdbj_KPysHXkHLW4gWIO76NVuTDMjtTOw"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Don't Look Back in Anger",
+      "videoId": "r8OipmKFDeM",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:42",
+      "duration_seconds": 342,
+      "feedbackTokens": {
+        "add": "AB9zfpIU2IpCpfD0_6KRsU9BznsDyWePCQe0WXh1znh59EscC3uKhWjZ3OvHD4eWS_EQiqgCoo6wpL1_Vb5AxLOaxKadCHjYGg",
+        "remove": "AB9zfpIIr8UO4J97ISaRt2OxGFJaPjBBND6YOEPx9Huh6wLPhsCkPBW75yfYq-Il1dOjzDy98EnAFR292dAKXFbzTbXV-Sr_LQ"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Hey Now",
+      "videoId": "eAFQcwFHuY0",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "0:45",
+      "duration_seconds": 45,
+      "feedbackTokens": {
+        "add": "AB9zfpKEb6eKJ4TI7F_JF_pdpcDhm1Jm8AAWSr74lyRY6maE9qVl1HCs3dqs-OxP3E1OTBmF0qiip_XQTrD5Y89L4nUnhaLbwg",
+        "remove": "AB9zfpJc_voDmHk49P-ki94h5er0NrQYK2IU8RpdcEqLTaqPBp3OF1IWRAO88wl3Df25i2BpPSXRbfEm6g8yGZKKEt7rNbdVrA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Untitled",
+      "videoId": "LUj7yhsXciY",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:28",
+      "duration_seconds": 328,
+      "feedbackTokens": {
+        "add": "AB9zfpKnCPriH_ZqbX9z2K2nnlXhJb9X9bk9WmLVRnBLUodyNdg4w44Z5H_pC_QBI7nMMCYAbtBZad3ozrGCLwH7cfv6Xj5Ykw",
+        "remove": "AB9zfpIzRDKPxfA6y50OytpjsThO0GvHf1R6ocpYOelJLW4QJXnazAWOV7SAUt4wV6ETWYtWhB0IE9v_IhVv_Osu6CdISbRO9Q"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Some Might Say",
+      "videoId": "szrXUSkTAjI",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:55",
+      "duration_seconds": 295,
+      "feedbackTokens": {
+        "add": "AB9zfpJks26feW1SZNC_0sm0psnOhcZuxwnepGukkVyG20a2SNKypz-qu6J34iW6mW0rv5pYWoWJSNNaajRGUhAWomFyHN_l6A",
+        "remove": "AB9zfpL3-oiQ5GgzH6CD2Ixozcc8grbGjvsYSI02Yua6sHSPXV3dMqVDOes91b1wdwZ2djXWsGKsGgJgaxpyh556L9ajtc8Dcw"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Cast No Shadow",
+      "videoId": "3K9BZHQyNIU",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:41",
+      "duration_seconds": 221,
+      "feedbackTokens": {
+        "add": "AB9zfpKdnNOk4jbFN_stoIwClsLyXJz_rJ58-uaFN5ZVXkHvD5U2gdTzxV81CJDSlW4F3NpAvS6PWHnUdJPy9zGNjgBcySIsAg",
+        "remove": "AB9zfpJ5dd6awtoXAMRDmVpID4Z_fO7DmrFJlK4izG22BhSrZG7CudRk2MsF93nhKAZaaECtgSeDuT0vIre98tw_14uaw3jVVg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "She's Electric",
+      "videoId": "VSM1iQMTFqI",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:04",
+      "duration_seconds": 304,
+      "feedbackTokens": {
+        "add": "AB9zfpK72L18Fgg0olSDzb-jrhT8HubsPyx9Bj680oq8_LfhOZchUnbNUZ4VZtNYNJTcHhL-Qekj-DtmzQZE0d7NgPDpNQlmsw",
+        "remove": "AB9zfpJnWzqWeJvHXaKbOBgkmU8NV44-UN2EMra_17ZI5qutUISWUk1UJpbhn4MhbtoqVWjILr4do2TVYP7j1GtOWoVbrXMBpQ"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Morning Glory",
+      "videoId": "akgNBClVcDA",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "0:40",
+      "duration_seconds": 40,
+      "feedbackTokens": {
+        "add": "AB9zfpIoX5fFe7WKtCtqIXLGVgTs8RRSABslvKH_hgG-71lv2k8ecRoh8XlspHuPrhujc1vuolkRinQa6a3pRIfrNNc1kSLpkw",
+        "remove": "AB9zfpKJx0u6frp-wVQlaXmYb3gGRR6sqRYYwPpPEl_j-HEocdkgbUaFyl6v0lTqvbCIo7rb6qkkOFDw_BMVfuc928jB8_DSnA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Untitled",
+      "videoId": "Q7tIgn3Ndnc",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "7:32",
+      "duration_seconds": 452,
+      "feedbackTokens": {
+        "add": "AB9zfpKcVsdx30iIlidaaMp3nXt8Cuvu1Ipx4ohZiqdQFAMU4fq6LNLTC7P953unBV2ftmtcL2amnKAq2oGQgt-6697xJnLkQw",
+        "remove": "AB9zfpLjk0JCS_QT2eYQ_or5Qa9YvuGJHM9TOmr0Fj_l5tWXY9tqAQlIcSDBSQ64u7NAaAa_oagyjGjYIRx_GYRIEGgU43YZOA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Champagne Supernova",
+      "videoId": "-cJauX_q6wI",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:24",
+      "duration_seconds": 264,
+      "feedbackTokens": {
+        "add": "AB9zfpJgnrQYwV1qCVUUyRt1hno-gnBIYMMwWOED-JqLmvjduySB_E6WYaokc63iLDQTYHVUdyRBwT-thaAbbUeiN7zFHFev9A",
+        "remove": "AB9zfpJnbRR4eFT64p1exhOFTN8IOmn8YmfI02jg_AzkZeS35OA3GOOgTEZ2KKNIwYvScqFcFnDV0YTpmAffj-ustZMPBoMJLg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Talk Tonight",
+      "videoId": "huuVVHJ4hvQ",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:28",
+      "duration_seconds": 268,
+      "feedbackTokens": {
+        "add": "AB9zfpJO-IGKvH-MCr1qAmtQYZaFsfMoHYHYns4S5gMkQ-Fd_CccHM-Eb86WHUGCOwxrhYn5gxC_9rQK7eSEYaX2hOenx2hWeQ",
+        "remove": "AB9zfpKOxeOi2IH3V0AVWelumTBCIVURhcNLVIo455AJjjTMSCMubCC3sjKFESpPI2nrw044I8m07g8TRpLu7bNCqqSDTP1Skg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Acquiesce",
+      "videoId": "j0Dd8X9oUhU",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:42",
+      "duration_seconds": 282,
+      "feedbackTokens": {
+        "add": "AB9zfpKVQyRdmvNGRJPNVlI8hoZVS3DvcQP29H74sHPLnq2mtq92pSeEnykRRsm7OuptFbn-e8XvSvnFZZFrb7CND29G34kyig",
+        "remove": "AB9zfpKARGPyVpVYgXhvwC70-3UoA4Oo-YhYwxctXBsxloSYH7DXZWFFtDUdvGUloo_GCfoCKNdP_8MI4R6IZU5RMF-7QpkA7A"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Headshrinker",
+      "videoId": "4EhiVJVaNqQ",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:01",
+      "duration_seconds": 241,
+      "feedbackTokens": {
+        "add": "AB9zfpKt2NFsI6lQbUeWw7v5BZGC82k6ZQaKwiVXEia4_xIpnfMjZJkYtGA05i00lfd7wEB8Tqi50nu1MlT0ma3veXFjqG7r4g",
+        "remove": "AB9zfpKMv5aIlaYn2-eFr82TbrvvrstEDapSLGhdSyfQ1wwFHd3bLhKS-R4aCaQSt7wOB4hrTbIyVnNFDh9zd4Cp2y5k1gFu-w"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "It's Better People",
+      "videoId": "ksgLSghiPx8",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:40",
+      "duration_seconds": 280,
+      "feedbackTokens": {
+        "add": "AB9zfpJh3jnLSP6VXoR9AIhvb0_dSiCKa1ChuMTyAdqPAkscyyc4Ya08hCb4gCqVXX2QFX2-ZMTdUcdK2MyZsYM_2a7slo-Kdw",
+        "remove": "AB9zfpIA8gixxk0Xqzl5XOXrYnPSQBS9U_LFKv5s0XIphaIWPn-SYsosJaPM1WaGjjCgIw76jWaFFwtXOqAfOSSN31GPO3ux_A"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Rockin' Chair",
+      "videoId": "w7491BIpGZA",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:45",
+      "duration_seconds": 225,
+      "feedbackTokens": {
+        "add": "AB9zfpJNDCyGmYKbBckavNSCquhMtM-n6aYgdoNVy0RR45zs2G-BQSDjPle-Gskz6h5r5hWG0uApYBRl0a5VVDdFbZZryDgq7w",
+        "remove": "AB9zfpLTXCUWt1r-skmyqBCqSHN1agPG-5fechoZfs2au_lkZjWpIIRNf7W2LMVLTeM--XJDoNfGmnnx2vhywIuifeSeIBP0yA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Step Out",
+      "videoId": "Vwu2uGQFCzk",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:25",
+      "duration_seconds": 205,
+      "feedbackTokens": {
+        "add": "AB9zfpKe_H2w7RywJhjwfUdevxzmywyvfihlmkCQe2PzuU6J2Rme8YRdzgxYARRCn7rwQqbGX_6Xbh4UQvNWDPimqOsM71ziMA",
+        "remove": "AB9zfpKRG3ITuhaTYILJCzlVQ9CHS0BWmYNzFHh54jqZIAaHvpUxRT7jE0fwt0f2JG0UqjmDMAqUVGgWwuDRD4sKy794GyD8kw"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Underneath the Sky",
+      "videoId": "KwTVRemzwLs",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:13",
+      "duration_seconds": 313,
+      "feedbackTokens": {
+        "add": "AB9zfpKM2o5j2o7J9apfUzn6TcZGuUOkmuOlthcjmYKwkXHiOgJ2XmHk_6t0QQuxcIHmLx12uOBP66Smj0cmAul7qX4-v0t7Jw",
+        "remove": "AB9zfpJtbPICG7qCmCHy0iZbaRXH8Vib2VoTZw60ri5Sip4QLw07v7ttGBSGFXBUlUHGRDj_iUfEnQi3WmhMBNuu337G7wxlBQ"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Cum On Feel the Noize",
+      "videoId": "AFDCY5rpogg",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:45",
+      "duration_seconds": 345,
+      "feedbackTokens": {
+        "add": "AB9zfpKfvVjCX7dXhemLxmb8lrCSMPP-Ui-RnD6GzsZ_JzOCM9kfT5nnTRKNk6GX2zCQcsvQejFQOF6bfRMTrm1AMzVk4GEWiw",
+        "remove": "AB9zfpLqVRCCNyo1wfMDIt5NRYnoM-ARoh8wXaSHzFfw_6rRKZw1j7HN0HDvvjNQ30FrS0kkHTt4GP3C809lP5XVAxPUrd5UlA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Round Are Way",
+      "videoId": "g9fI4Xeqv30",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:23",
+      "duration_seconds": 263,
+      "feedbackTokens": {
+        "add": "AB9zfpKjP4k5fxWTTMI8bH5D21H3C6s0cFSf112f4XGdg0GhUAiAg4CAyoYdeqUZjS-bydgbbtKsEwCOvMz7Ju2otzTmbxSRfw",
+        "remove": "AB9zfpIXKbPHdbIo5TMoJQgepg6VxETtTJauSCveHsvfiMrACZqRFfsERLwgdRLZZa9upK9Zo6s3a5coRfgnna8cAuXpRB_wsQ"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "The Swamp Song",
+      "videoId": "ea67ah2C9yc",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:26",
+      "duration_seconds": 326,
+      "feedbackTokens": {
+        "add": "AB9zfpLWdV0Kzg-RCzNx-xFm2EC2lz0cOYOqqfan9Hfe-unLfYlEqlXI-pBhn-TUhslaZWngnt_dxWXYJ1XdxU4-LT5HO1Dw5g",
+        "remove": "AB9zfpJ_3ahQni_KFy71oRCOwzRTMAP1yzpesS12mH0xbvg0CEcKLkOW_RsM0cUXNRA2W0Qh1OuF6X2IMOkRCFPlMTJhye96sA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "The Masterplan",
+      "videoId": "nGQq_U1L8Bo",
+      "videoType": "MUSIC_VIDEO_TYPE_OMV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:03",
+      "duration_seconds": 243,
+      "feedbackTokens": {
+        "add": "AB9zfpInE_fei3SISgmTikj69dOqQLHakcZS-MZjy0YxSS6Lau4hMEcG8qBe8yjlPlieX5zDQCmdrZavfgPlK91gAlK24D8JSA",
+        "remove": "AB9zfpJTa-XoFlhwsuuRyA3TyuZREf0s237iQ8cuYRXtripdYfo0rMz3fyBNT-c8wuvN5REUnvd-Qv8bB5g0EGyp0maLCQPN0w"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Bonehead's Bank Holiday",
+      "videoId": "8V2fgZb3VhI",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "6:58",
+      "duration_seconds": 418,
+      "feedbackTokens": {
+        "add": "AB9zfpLW4vt6Ga-XXZSPRDUr3WIF0zB24utD1Mg1cWCmReQx7sWbezcQdSsG6PcYjpHB82giEsbttfVQtwnnl5cNTfpRs0owMg",
+        "remove": "AB9zfpIL1NsSjGAGFBxs-3JyOKMdc1jGibREzs5tQpydYRssjZjG9cbKSHUeLStDOsrsk3RQs_FZPZgsE5eA0aJ1loac41Gm7Q"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Champagne Supernova",
+      "videoId": "J-jM4EIyteM",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "2:18",
+      "duration_seconds": 138,
+      "feedbackTokens": {
+        "add": "AB9zfpI9wl2OfaQ9tS9eqsnlDk_lNYX9fZAgd0A7u5-BVFq5nzGl_RvL60Xu6EX0_K8dEZZt2KRdIsUt6X6BvtJwZSs7RszyuA",
+        "remove": "AB9zfpLdgeMzn7paQ1YfvsUvbpZ_ZTRTsBtRSU09i95J37gRRRbeRq97SjFW1JtZRKicN4D9ScMGc9sVyM8CLCkJX2vlOAfKrw"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "You've Got to Hide Your Love Away",
+      "videoId": "kHoO5ZjT28A",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:55",
+      "duration_seconds": 235,
+      "feedbackTokens": {
+        "add": "AB9zfpLAFAEcyhsEnHQB4CaNwjh3turtaziQWvxl-6PThS67OVtpbXIwiUXX_nODJFnXKhtGZ34A5qasrr6u_SGkXlQG8R8y1w",
+        "remove": "AB9zfpJDQWTPP-O5G2nWiCQmNKnGwNxR7OEAgjSNhDvbRLyFBFfu0RToHTSA1Jlv0hiwT7iaAep83K32MrcUUdj_0kftWv3q1w"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Acquiesce (Live at Earls Court)",
+      "videoId": "cZusW-XdaPI",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:04",
+      "duration_seconds": 244,
+      "feedbackTokens": {
+        "add": "AB9zfpJedOoWTl874f7DbnLrKG9uHCyw4gFvUTzE6Glr57JmZXgzj-B4PsK4z2fTLQYsHojGmLMBwLtYEI05qGR5Y2rpoTJR2Q",
+        "remove": "AB9zfpJXEPUCXFA0EEAYuJ-Q5ygbbqcbbIVyw8kvas8PHcJjgxpArUohmUA_TbAZBgNwNCoDozHLrXI6dVVd1Ms3WviZ9UwFOg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Some Might Say (Demo)",
+      "videoId": "mlVINzslrPs",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "5:07",
+      "duration_seconds": 307,
+      "feedbackTokens": {
+        "add": "AB9zfpLBz72STiYxEulyD-GyXJDPS4r9Wf8o0QlME8JxZ9q9qtdawrOTLGuqluHsFOLhHtXRNslzJMvcAianUmUmG0DbsPJTuQ",
+        "remove": "AB9zfpJ80cYrtkRxt8_uW7_5UslAAX5O6rl9sxzWaqdrX8M7bVOOEhZ38sSZPNL0CaSBKLLeRzp_MqZqkYJZM9AsTeM2P5KyiQ"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Some Might Say (Live at Roskilde)",
+      "videoId": "rZdYx4UZXrQ",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:03",
+      "duration_seconds": 183,
+      "feedbackTokens": {
+        "add": "AB9zfpLT19EOL-LO8tS-mt9vREUqK1LpfbqLbTioHEsE8hvMeVfkAr-__LL-Tuxdf0S6Q88E6pu_Tem60ZieqsVIjOsRSjKRwQ",
+        "remove": "AB9zfpJXBNbxLWNqsrk0V_oR02DVUZ-9KoRWLRC9-UyE0EyoM_0Q2whzEug0yToUuzNp4d7uzvD-Kl01ctLvtnAWLGhaj9Sk-w"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "She's Electric (Demo)",
+      "videoId": "OJ5D-oVloL4",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:43",
+      "duration_seconds": 223,
+      "feedbackTokens": {
+        "add": "AB9zfpIwdCQhgVfevvFfk5hvt1fMaN_G98QO3Ei_eBoXma186Y6EjtfiuuAqj2XVrwcSex1u6inb_oWB6HfBp0caPRp3n46sXA",
+        "remove": "AB9zfpL3T17cTV42CAakKlPBbBR9nMPlEVMxBXxc_-wOPRFQW4mXrOFndFnsZ7Axa7ETgfXPETRojvnerX2n235zK64-tny4jw"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Talk Tonight (Live at Bath Pavilion)",
+      "videoId": "G6tzYWzHekg",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:05",
+      "duration_seconds": 245,
+      "feedbackTokens": {
+        "add": "AB9zfpK0VdB2oqkRODyPZmktnfFgh11Du9S5m7w2NXRfwabDjy0KgTpBWWZnNocCMfkVP0yuf_KexhfsXI0sdq33Pz7JW3YhEw",
+        "remove": "AB9zfpL-F_PwM3USle6DSLwmM9YbV8Whg6R2xzpmDSkNUW5LiGBCUmslzd2gp8p1wFNxS98Q-hcVhOZkPRjnmo4EVJJm3g5S9w"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Rockin' Chair (Demo)",
+      "videoId": "xBbspNmgDRw",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:24",
+      "duration_seconds": 204,
+      "feedbackTokens": {
+        "add": "AB9zfpLuxZiRey89EcdhV5x_MdJvV_gqN57Y4kyLq1obS91sf9464OKtcGPuIMJMgOyJiwV5Yjs4BUjUkPGD9UWQijqA3YCrtw",
+        "remove": "AB9zfpL4Ve5F61DIRGeDaG01x-dfh9PYPzQWkui0fRYQ1j6iEsNxxDdn9QVtaKL8QWh4R8ZNnKu7GfD1tA3_euhSVWCSPc_Kyg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Hello (Live at Roskilde)",
+      "videoId": "2h5BJx2o_ug",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:08",
+      "duration_seconds": 248,
+      "feedbackTokens": {
+        "add": "AB9zfpJsVYjItxzQwa_WBLClRLyV7agRMsYJ6xFn0CyoDTWt5q9gUvhRMwtPMUiwytf28g3PbRgCkJz86m75M_AOP76nmasAPw",
+        "remove": "AB9zfpK4Qt8hF43VEL1hDuIMi-k0GV3AW8Jpl-6kCxQgOshV3bSb694eTJ9Qm2vG59nNQ70f523Kf-27p3Os8DrigYmdCTBf-Q"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Roll with It (Live at Roskilde)",
+      "videoId": "XapGBb6LHAE",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:48",
+      "duration_seconds": 288,
+      "feedbackTokens": {
+        "add": "AB9zfpJlhqks_v84wZ11K4xKQCUGu9KFW8Tc0Z4IL9NCVVl3DRNFVtoIVRB8B1B0y5XCn0vxry9ED1rIZBChMzVdWtqdzPiGmQ",
+        "remove": "AB9zfpJhyAJGfLwXwCIyHCl5fVhSd-DwD3_MhsuMp-jhR5oCJy1J7hySig0qbdlGfaeWiMt43dASXq-J7ltLSb7M9N6ItdXjUA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Morning Glory (Live at Roskilde)",
+      "videoId": "BMzOo6tYRMY",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "3:08",
+      "duration_seconds": 188,
+      "feedbackTokens": {
+        "add": "AB9zfpJLjN3cWlgA2Tu0fh7F1OlUb1VNByohHH09RGjfCE6AN-_4S0FAP8ZxAYSsUIQdoV_CVNoJ5PPRMtsAcEtOv2n75RWiYA",
+        "remove": "AB9zfpKtzbaGVRWdLQdyixfsUuCbHtIxwJMXb861KqPDG2YF209KPTL2uGqEnE2mbKbQ8TD2-fMNZfFcKhD0kWJOEBG-UXRwmg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Hey Now (Demo)",
+      "videoId": "qo9HCA-IVVM",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "2:09",
+      "duration_seconds": 129,
+      "feedbackTokens": {
+        "add": "AB9zfpKxfAq50tfbb0BddTqqeEDrQnwa5Bi1xMGsqzy_9lv41ggkv6SrnCqq1hvEkj6gk99JMj1bY6ekg7ObxM0Zzzw5MnUUjA",
+        "remove": "AB9zfpJzBAVmTy7j_jCtyH1glNSWFK_TXEXxdugK1o6D15YFhsIbuvn76mtickPyLiGUECfC0a5Giw9nmNKH-Kyx9GgrkefDEg"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Bonehead's Bank Holiday (Demo)",
+      "videoId": "hpDRl0Q1DiM",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:52",
+      "duration_seconds": 292,
+      "feedbackTokens": {
+        "add": "AB9zfpJDpH-Yx_TkCKO5ZNJB1ZgTdiTdrEGfMYPw_PbTloacbmyVNHiOquHOyBdlCRHRXUGrVuRdtNxECw86u2pe5xjib88vwQ",
+        "remove": "AB9zfpKLwzZtOLU8zrE90X1bZzlxXzT8RaO4gi95gePwYwVGDCMoRcX8Gb3x6cr_tIHRrg0_hymys5_tlLGNO01w34D2-1iukA"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Round Are Way (MTV Unplugged)",
+      "videoId": "dTclq59_x5I",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:06",
+      "duration_seconds": 246,
+      "feedbackTokens": {
+        "add": "AB9zfpKPhFe7peUYO9mXLLJd-ragzYrKMkO8CIytZ2VNz-0jyWIrwGbbuUkkZNl9AAizey86ET9klzQI8ciiQvZ25l1-3_Ys9w",
+        "remove": "AB9zfpLNAhpfHPGRH2w9gnbfoXzQ0mhQsDjCvCkHc31UJ94Uk52u8_9FopoIRiLoiWqhupdWvk6cRSS-5nRUJrzlgLc9LJbEzw"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "Cast No Shadow (Live at Maine Road)",
+      "videoId": "HdXz0wfiGMg",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    },
+    {
+      "album": "(What's The Story) Morning Glory? (Remastered)",
+      "artists": [
+        {
+          "id": "UCmMUZbaYdNH0bEd1PAlAqsA",
+          "name": "Oasis"
+        }
+      ],
+      "duration": "4:56",
+      "duration_seconds": 296,
+      "feedbackTokens": {
+        "add": "AB9zfpKAdkGMbxf-dgVF7kqpzl9UKnetf4kQxtxtQPWSI9hf1tBlD56CynhqlQ5l-bXzVBRDfycv-uoRyvOh8WMLkqrWfUGZZA",
+        "remove": "AB9zfpLBWXTSjOEoV2xJ-6ZGOIse_jCpVT_k8oh3GL4pIwoNNpaCw6t6nB4tP7paskYPN8O1XPbYXU37A6jvvb9QWfDU9YSP9Q"
+      },
+      "inLibrary": false,
+      "isAvailable": true,
+      "isExplicit": false,
+      "likeStatus": "INDIFFERENT",
+      "thumbnails": null,
+      "title": "The Masterplan (Live at Knebworth Park)",
+      "videoId": "-A7_6bomb1o",
+      "videoType": "MUSIC_VIDEO_TYPE_ATV"
+    }
+  ],
+  "trackCount": 40,
+  "year": "1995"
+}

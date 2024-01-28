@@ -1,6 +1,7 @@
 import React from "react";
 import { promises as fs } from "fs";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Album() {
   const file = await fs.readFile(process.cwd() + "/data/album.json", "utf8");
@@ -9,13 +10,15 @@ export default async function Album() {
   return data.contents.map((content: any) => {
     const thumbnail = content.thumbnails[0].url;
     return (
-      <AlbumCard
-        key={content.browseId}
-        browseId={content.browseId}
-        thumbnails={thumbnail}
-        title={content.title}
-        year={content.year}
-      />
+      <Link href={`album/${content?.browseId}`}>
+        <AlbumCard
+          key={content.browseId}
+          browseId={content.browseId}
+          thumbnails={thumbnail}
+          title={content.title}
+          year={content.year}
+        />
+      </Link>
     );
   });
 }

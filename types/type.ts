@@ -1,161 +1,215 @@
-export interface MusicDetail {
-  error?: string;
-  title: string;
-  description: string;
-  uploadDate: Date;
-  uploader: string;
-  uploaderUrl: string;
-  uploaderAvatar: string;
-  thumbnailUrl: string;
-  hls: string;
-  dash: null;
-  lbryId: null;
-  category: string;
-  license: string;
-  visibility: string;
-  tags: string[];
-  metaInfo: any[];
-  uploaderVerified: boolean;
-  duration: number;
-  views: number;
-  likes: number;
-  dislikes: number;
-  uploaderSubscriberCount: number;
-  audioStreams: OStream[];
-  videoStreams: OStream[];
-  relatedStreams: RelatedStream[];
-  subtitles: any[];
-  livestream: boolean;
-  proxyUrl: string;
-  chapters: any[];
-  previewFrames: PreviewFrame[];
-}
-
-export interface OStream {
-  url: string;
-  format: Format;
-  quality: string;
-  mimeType: MIMEType;
-  codec: null | string;
-  audioTrackId: null;
-  audioTrackName: null;
-  audioTrackType: null;
-  audioTrackLocale: null;
-  videoOnly: boolean;
-  itag: number;
-  bitrate: number;
-  initStart: number;
-  initEnd: number;
-  indexStart: number;
-  indexEnd: number;
-  width: number;
-  height: number;
-  fps: number;
-  contentLength: number;
-}
-
-export enum Format {
-  M4A = "M4A",
-  MPEG4 = "MPEG_4",
-  Webm = "WEBM",
-  WebmaOpus = "WEBMA_OPUS",
-}
-
-export enum MIMEType {
-  AudioMp4 = "audio/mp4",
-  AudioWebm = "audio/webm",
-  VideoMp4 = "video/mp4",
-  VideoWebm = "video/webm",
-}
-
-export interface PreviewFrame {
-  urls: string[];
-  frameWidth: number;
-  frameHeight: number;
-  totalCount: number;
-  durationPerFrame: number;
-  framesPerPageX: number;
-  framesPerPageY: number;
-}
-
-export interface RelatedStream {
-  url: string;
-  type: Type;
-  title?: string;
-  thumbnail: string;
-  uploaderName: string;
-  uploaderUrl: null | string;
-  uploaderAvatar?: string;
-  uploadedDate?: string;
-  shortDescription?: null;
-  duration?: number;
-  views?: number;
-  uploaded?: number;
-  uploaderVerified: boolean;
-  isShort?: boolean;
-  name?: string;
-  playlistType?: string;
-  videos?: number;
-}
-
-export enum Type {
-  Playlist = "playlist",
-  Stream = "stream",
-}
-
 // audio card
 export type AudioCard = {
   title: string;
   uploader: string;
-  audioStreams: OStream[];
+  audioStreams: string;
   thumbnailUrl: string;
 };
 
-// search result
-export interface SearchResults {
-  album: Album;
-  artists: Artist[];
-  category: string;
-  duration: string;
-  duration_seconds: number;
-  feedbackTokens: FeedbackTokens;
-  inLibrary: boolean;
-  isExplicit: boolean;
-  resultType: string;
-  thumbnails: Thumbnail[];
-  title: string;
+// music detail from youtubei
+export interface VideoData {
+  responseContext: ResponseContext;
+  playabilityStatus: PlayabilityStatus;
+  streamingData: StreamingData;
+  playbackTracking: PlaybackTracking;
+  videoDetails: VideoDetails;
+  playerConfig: PlayerConfig;
+  storyboards: Storyboards;
+  trackingParams: string;
+  attestation: Attestation;
+  adBreakHeartbeatParams: string;
+  streamUrl: string;
+}
+
+export interface ResponseContext {
+  visitorData: string;
+  maxAgeSeconds: number;
+}
+
+export interface PlayabilityStatus {
+  status: string;
+  playableInEmbed: boolean;
+}
+
+export interface StreamingData {
+  expiresInSeconds: string;
+  formats: Format[];
+  adaptiveFormats: AdaptiveFormat[];
+}
+
+export interface Format {
+  itag: number;
+  mimeType: string;
+  bitrate: number;
+  width: number;
+  height: number;
+  lastModified: string;
+  quality: string;
+  fps: number;
+  qualityLabel: string;
+  projectionType: string;
+  audioQuality: string;
+  approxDurationMs: string;
+  audioSampleRate: string;
+  audioChannels: number;
+  signatureCipher: string;
+}
+
+export interface AdaptiveFormat {
+  itag: number;
+  mimeType: string;
+  bitrate: number;
+  width?: number;
+  height?: number;
+  initRange: InitRange;
+  indexRange: IndexRange;
+  lastModified: string;
+  contentLength: string;
+  quality: string;
+  fps?: number;
+  qualityLabel?: string;
+  projectionType: string;
+  averageBitrate: number;
+  approxDurationMs: string;
+  signatureCipher: string;
+  colorInfo?: ColorInfo;
+  highReplication?: boolean;
+  audioQuality?: string;
+  audioSampleRate?: string;
+  audioChannels?: number;
+  loudnessDb?: number;
+  xtags?: string;
+  isDrc?: boolean;
+}
+
+export interface InitRange {
+  start: string;
+  end: string;
+}
+
+export interface IndexRange {
+  start: string;
+  end: string;
+}
+
+export interface ColorInfo {
+  transferCharacteristics: string;
+}
+
+export interface PlaybackTracking {
+  videostatsPlaybackUrl: VideostatsPlaybackUrl;
+  videostatsDelayplayUrl: VideostatsDelayplayUrl;
+  videostatsWatchtimeUrl: VideostatsWatchtimeUrl;
+  ptrackingUrl: PtrackingUrl;
+  qoeUrl: QoeUrl;
+  atrUrl: AtrUrl;
+  videostatsScheduledFlushWalltimeSeconds: number[];
+  videostatsDefaultFlushIntervalSeconds: number;
+}
+
+export interface VideostatsPlaybackUrl {
+  baseUrl: string;
+}
+
+export interface VideostatsDelayplayUrl {
+  baseUrl: string;
+}
+
+export interface VideostatsWatchtimeUrl {
+  baseUrl: string;
+}
+
+export interface PtrackingUrl {
+  baseUrl: string;
+}
+
+export interface QoeUrl {
+  baseUrl: string;
+}
+
+export interface AtrUrl {
+  baseUrl: string;
+  elapsedMediaTimeSeconds: number;
+}
+
+export interface VideoDetails {
   videoId: string;
-  videoType: string;
-  year: any;
-}
-
-export interface Album {
-  id: string;
-  name: string;
-}
-
-export interface Artist {
-  id: string;
-  name: string;
-}
-
-export interface FeedbackTokens {
-  add: string;
-  remove: string;
+  title: string;
+  lengthSeconds: string;
+  keywords: string[];
+  channelId: string;
+  isOwnerViewing: boolean;
+  shortDescription: string;
+  isCrawlable: boolean;
+  thumbnail: Thumbnail;
+  allowRatings: boolean;
+  viewCount: string;
+  author: string;
+  isPrivate: boolean;
+  isUnpluggedCorpus: boolean;
+  isLiveContent: boolean;
 }
 
 export interface Thumbnail {
-  height: number;
-  url: string;
-  width: number;
+  thumbnails: Thumbnail2[];
 }
 
-// quick picks
-export interface QuickPicks {
-  album: Album;
-  artists: Artist[];
-  isExplicit: boolean;
-  thumbnails: Thumbnail[];
-  title: string;
-  videoId: string;
+export interface Thumbnail2 {
+  url: string;
+  width: number;
+  height: number;
+}
+
+export interface PlayerConfig {
+  audioConfig: AudioConfig;
+  mediaCommonConfig: MediaCommonConfig;
+  webPlayerConfig: WebPlayerConfig;
+}
+
+export interface AudioConfig {
+  loudnessDb: number;
+  perceptualLoudnessDb: number;
+  enablePerFormatLoudness: boolean;
+}
+
+export interface MediaCommonConfig {
+  dynamicReadaheadConfig: DynamicReadaheadConfig;
+}
+
+export interface DynamicReadaheadConfig {
+  maxReadAheadMediaTimeMs: number;
+  minReadAheadMediaTimeMs: number;
+  readAheadGrowthRateMs: number;
+}
+
+export interface WebPlayerConfig {
+  useCobaltTvosDash: boolean;
+}
+
+export interface Storyboards {
+  playerStoryboardSpecRenderer: PlayerStoryboardSpecRenderer;
+}
+
+export interface PlayerStoryboardSpecRenderer {
+  spec: string;
+  recommendedLevel: number;
+}
+
+export interface Attestation {
+  playerAttestationRenderer: PlayerAttestationRenderer;
+}
+
+export interface PlayerAttestationRenderer {
+  challenge: string;
+  botguardData: BotguardData;
+}
+
+export interface BotguardData {
+  program: string;
+  interpreterSafeUrl: InterpreterSafeUrl;
+  serverEnvironment: number;
+}
+
+export interface InterpreterSafeUrl {
+  privateDoNotAccessOrElseTrustedResourceUrlWrappedValue: string;
 }

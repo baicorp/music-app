@@ -1,7 +1,7 @@
 import SearchBox from "@/components/SearchBox";
 import Musics from "@/components/Musics";
 import { Suspense } from "react";
-import Loading from "./Loading";
+import Loading from "@/components/Loading";
 import Test from "@/components/Test";
 import Album from "@/components/Album";
 
@@ -17,7 +17,7 @@ export default async function Home({
         <SearchBox />
       </div>
       <div>
-        <p className="font-bold text-lg md:text-xl ml-4">
+        <p className="font-bold text-lg ml-4">
           {searchParams.vId === "" || searchParams.vId === undefined
             ? "Qucik Picks"
             : `Search for : ${searchParams.vId}`}
