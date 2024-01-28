@@ -7,13 +7,14 @@ export default function SearchBox() {
   const searchParams = useSearchParams();
   const [input, setInput] = useState(searchParams.get("vId"));
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const { replace, push } = useRouter();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
     params.set("vId", input!);
-    replace(`${pathname}?${params.toString()}`);
+    // replace(`${pathname}?${params.toString()}`);
+    push(`search/?${params.toString()}`);
   }
 
   return (

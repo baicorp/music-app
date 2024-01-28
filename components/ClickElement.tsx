@@ -17,7 +17,7 @@ export default function ClickElement({
         console.log(ids);
         setId((prev) => (prev = ids));
       }}
-      className="cursor-pointer w-min"
+      className="cursor-pointer"
     >
       {children}
     </div>

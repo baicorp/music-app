@@ -2,10 +2,16 @@ import Image from "next/image";
 import React from "react";
 import TrackItemAlbum from "@/components/TrackItemAlbum";
 import { secondsToMinutesAndSeconds } from "@/utils/durationConverter";
-import { getAlbum } from "@/utils/pipedAPI";
+import { getPlaylist } from "@/utils/pipedAPI";
+import { MusicCard } from "@/components/Musics";
+import ClickElement from "@/components/ClickElement";
 
-export default async function Album({ params }: { params: { id: string } }) {
-  const data = await getAlbum(params.id);
+export default async function Playlist({
+  params,
+}: {
+  params: { playlistId: string };
+}) {
+  const data = await getPlaylist(params.playlistId);
 
   return (
     <div className="p-4">
@@ -33,8 +39,8 @@ export default async function Album({ params }: { params: { id: string } }) {
           </p>
         </div>
       </div>
-      <div className="gap-2 mt-5">
-        {data?.tracks?.map((track: any, index: number) => {
+      <div className="flex flex-col gap-3 mt-6">
+        {data?.tracks?.map((track: any) => {
           const artist = track?.artists
             .map((artist: any) => artist.name)
             .join()
@@ -42,15 +48,16 @@ export default async function Album({ params }: { params: { id: string } }) {
           const trackDuration = secondsToMinutesAndSeconds(
             parseInt(track?.duration)
           );
+          const thumbnail = track?.thumbnails[0]?.url;
           return (
-            <TrackItemAlbum
-              key={track?.videoId}
-              order={index}
-              trackId={track?.videoId}
-              title={track?.title}
-              artistName={artist}
-              duration={trackDuration}
-            />
+            <ClickElement key={crypto.randomUUID()} ids={track?.videoId}>
+              <MusicCard
+                thumbnailUrl={thumbnail}
+                artist={artist}
+                title={track?.title}
+                videoId={track?.videoId}
+              />
+            </ClickElement>
           );
         })}
       </div>

@@ -2,33 +2,30 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Album({ albumData }: { albumData: any[] }) {
-  return albumData.map((content: any) => {
+export default function Playlist({ playlistData }: { playlistData: any[] }) {
+  return playlistData.map((content: any) => {
     const thumbnail = content.thumbnails[0].url;
     return (
-      <Link href={`album/${content?.browseId}`}>
-        <AlbumCard
-          key={content.browseId}
-          browseId={content.browseId}
+      <Link key={crypto.randomUUID()} href={`playlist/${content?.playlistId}`}>
+        <PlaylistCard
+          key={content.playlistId}
           thumbnails={thumbnail}
           title={content.title}
-          year={content.year}
+          description={content.description}
         />
       </Link>
     );
   });
 }
 
-function AlbumCard({
-  browseId,
+function PlaylistCard({
   title,
   thumbnails,
-  year,
+  description,
 }: {
-  browseId: string;
   title: string;
   thumbnails: string;
-  year: string;
+  description: string;
 }) {
   return (
     <div className="shrink-0 w-[160px]">
@@ -44,7 +41,7 @@ function AlbumCard({
           {title}
         </p>
         <p className="text-sm font-semibold text-gray-400 line-clamp-1">
-          {year}
+          {description}
         </p>
       </div>
     </div>

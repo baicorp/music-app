@@ -1,43 +1,32 @@
-import SearchBox from "@/components/SearchBox";
 import Musics from "@/components/Musics";
-import { Suspense } from "react";
-import Loading from "@/components/Loading";
-import Test from "@/components/Test";
 import Album from "@/components/Album";
+import { home } from "@/utils/pipedAPI";
+import Playlist from "@/components/Playlist";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function Home() {
+  const data = await home();
   return (
-    <main className="flex flex-col">
-      <h1 className="text-2xl font-bold mt-5 mb-5 self-center">🎧</h1>
-      <div className="mb-8 self-center">
-        <SearchBox />
-      </div>
+    <main className="flex flex-col mt-10">
       <div>
-        <p className="font-bold text-lg ml-4">
-          {searchParams.vId === "" || searchParams.vId === undefined
-            ? "Qucik Picks"
-            : `Search for : ${searchParams.vId}`}
-        </p>
+        <p className="font-bold text-lg ml-4">{data?.data[3]?.title}</p>
         <div className="mt-3 pl-4 overflow-x-auto gap-2 flex flex-col flex-wrap h-[208px]">
-          <Suspense key={searchParams.vId as string} fallback={<Loading />}>
-            <Musics query={searchParams.vId as string} />
-          </Suspense>
+          <Musics musicData={data?.data[3]?.contents || []} />
         </div>
       </div>
       <div className="mt-6">
         <p className="font-bold text-lg md:text-xl ml-4">
-          {searchParams.vId === "" || searchParams.vId === undefined
-            ? "Album"
-            : ""}
+          {data?.data[0]?.title}
         </p>
         <div className="mt-3 pl-4 overflow-x-auto flex gap-4 ">
-          <Suspense key={searchParams.vId as string} fallback={<Loading />}>
-            <Album />
-          </Suspense>
+          <Album albumData={data?.data[0]?.contents || []} />
+        </div>
+      </div>
+      <div className="mt-6">
+        <p className="font-bold text-lg md:text-xl ml-4">
+          {data?.data[8]?.title}
+        </p>
+        <div className="mt-3 pl-4 overflow-x-auto flex gap-4 ">
+          <Playlist playlistData={data?.data[8]?.contents || []} />
         </div>
       </div>
     </main>

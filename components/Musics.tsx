@@ -1,28 +1,16 @@
-import { QuickPicks, SearchResults } from "@/types/pyYtMusic";
-import { home, search } from "@/utils/pipedAPI";
 import ClickElement from "./ClickElement";
 
-export default async function Musics({ query }: { query: string }) {
-  let musicData: SearchResults[] | QuickPicks[];
-  let errorMessage: string;
+export default async function Musics({ musicData }: { musicData: any[] }) {
   try {
-    if (query === "" || query === undefined) {
-      const quicPicks = await home();
-      musicData = quicPicks;
-    } else {
-      const data = await search(query);
-      musicData = data;
-    }
-
     // return list of <MusicCard /> component
-    return musicData.map((data) => {
+    return musicData.map((data: any) => {
       // generate artist name
       const artist = data.artists
-        .map((data) => data.name)
+        .map((data: any) => data.name)
         .toString()
         .replaceAll(",", " & ");
       return (
-        <ClickElement key={data?.videoId} ids={data.videoId}>
+        <ClickElement key={crypto.randomUUID()} ids={data.videoId}>
           <MusicCard
             title={data.title}
             artist={artist}
@@ -33,30 +21,31 @@ export default async function Musics({ query }: { query: string }) {
       );
     });
   } catch (error) {
-    errorMessage = "Try again later 🔨";
-    return <p>{error as string}</p>;
+    return <p>{"Try again later 🔨"}</p>;
   }
 }
+
+type MusicCardProps = {
+  videoId: string;
+  thumbnailUrl: string;
+  title: string;
+  artist: string;
+};
 
 export function MusicCard({
   videoId,
   thumbnailUrl,
   title,
   artist,
-}: {
-  videoId: string;
-  thumbnailUrl: string;
-  title: string;
-  artist: string;
-}) {
+}: MusicCardProps) {
   return (
-    <div key={videoId} className="flex min-w-[300px] md:min-w-96 rounded-md">
+    <div className="flex min-w-[300px] md:min-w-96 rounded-md">
       <img
         src={thumbnailUrl}
         alt={title + "image"}
-        className="w-16 h-16 object-center object-cover rounded-md"
+        className="w-16 h-16 shrink-0 object-center object-cover rounded-md"
       />
-      <div className="flex flex-col justify-center px-4">
+      <div className="flex grow flex-col justify-center px-4">
         <p className="font-semibold text-white line-clamp-1">{title}</p>
         <p className="text-sm font-semibold text-gray-400 line-clamp-1">
           {artist}
