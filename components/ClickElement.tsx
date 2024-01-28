@@ -14,9 +14,10 @@ export default function ClickElement({
   return (
     <div
       onClick={() => {
+        console.log(ids);
         setId((prev) => (prev = ids));
       }}
-      className="cursor-pointer"
+      className="cursor-pointer w-min"
     >
       {children}
     </div>

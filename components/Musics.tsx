@@ -1,36 +1,41 @@
-import { QuickPicks, SearchResults } from "@/types/type";
+import { QuickPicks, SearchResults } from "@/types/pyYtMusic";
 import { home, search } from "@/utils/pipedAPI";
 import ClickElement from "./ClickElement";
 
 export default async function Musics({ query }: { query: string }) {
   let musicData: SearchResults[] | QuickPicks[];
+  let errorMessage: string;
+  try {
+    if (query === "" || query === undefined) {
+      const quicPicks = await home();
+      musicData = quicPicks;
+    } else {
+      const data = await search(query);
+      musicData = data;
+    }
 
-  if (query === "" || query === undefined) {
-    const quicPicks = await home();
-    musicData = quicPicks;
-  } else {
-    const data = await search(query);
-    musicData = data;
+    // return list of <MusicCard /> component
+    return musicData.map((data) => {
+      // generate artist name
+      const artist = data.artists
+        .map((data) => data.name)
+        .toString()
+        .replaceAll(",", " & ");
+      return (
+        <ClickElement key={data?.videoId} ids={data.videoId}>
+          <MusicCard
+            title={data.title}
+            artist={artist}
+            thumbnailUrl={data.thumbnails[0].url}
+            videoId={data.videoId}
+          />
+        </ClickElement>
+      );
+    });
+  } catch (error) {
+    errorMessage = "Try again later 🔨";
+    return <p>{error as string}</p>;
   }
-
-  // return list of <MusicCard /> component
-  return musicData.map((data) => {
-    // generate artist name
-    const artist = data.artists
-      .map((data) => data.name)
-      .toString()
-      .replaceAll(",", " & ");
-    return (
-      <ClickElement key={data?.videoId} ids={data.videoId}>
-        <MusicCard
-          title={data.title}
-          artist={artist}
-          thumbnailUrl={data.thumbnails[0].url}
-          videoId={data.videoId}
-        />
-      </ClickElement>
-    );
-  });
 }
 
 export function MusicCard({
@@ -45,7 +50,7 @@ export function MusicCard({
   artist: string;
 }) {
   return (
-    <div key={videoId} className="flex md:max-w-96">
+    <div key={videoId} className="flex min-w-[300px] md:min-w-96 rounded-md">
       <img
         src={thumbnailUrl}
         alt={title + "image"}

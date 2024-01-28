@@ -22,6 +22,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "pipedproxy.syncpundit.io",
       },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
     ],
   },
 };

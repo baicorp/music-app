@@ -1,22 +1,28 @@
-"use client";
+// "use client";
 
-import { useSearchParams } from "next/navigation";
-import React from "react";
-import useSWR from "swr";
+// import useSWR from "swr";
+import { basicInfo, search } from "@/utils/youtubei";
+import { MusicCard } from "./Musics";
 
-export default function Test() {
-  const searchParams = useSearchParams();
-  const query = (searchParams.get("vId") as string) || "hello";
+export default async function Test() {
+  // const { data, isLoading } = useSWR("sunflower", search);
+  const data = await search("ata halilintar");
+  const isLoading = false;
+  // const data = await basicInfo();
 
-  const { data, isLoading } = useSWR(query, () =>
-    fetch(`http://127.0.0.1:5000/search?query=${query}`).then((data) =>
-      data.json()
-    )
-  );
+  // const musicList = isLoading
+  //   ? "⏳"
+  //   : data?.videos?.map((detail) => {
+  //       return (
+  //         <MusicCard
+  //           key={detail?.title?.text}
+  //           title={detail?.title?.text!}
+  //           artist={detail?.author?.name}
+  //           thumbnailUrl={detail?.thumbnails[0].url}
+  //           videoId={detail?.id}
+  //         />
+  //       );
+  //     });
 
-  return (
-    <div>
-      <pre className="text-xs">{JSON.stringify(data, null, 2)}</pre>
-    </div>
-  );
+  return <>{isLoading ? "⏳" : <pre>{JSON.stringify(data, null, 2)}</pre>}</>;
 }
