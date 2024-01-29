@@ -1,40 +1,27 @@
 // generate streamable url from given signatureCipher
-export default function getUrlStream(signatureCipher: string) {
-  var PP = {
-    U0: function (a: any, b: any) {
-      var c = a[0];
-      a[0] = a[b % a.length];
-      a[b % a.length] = c;
-    },
-    ng: function (a: any) {
-      a.reverse();
-    },
-    mM: function (a: any, b: any) {
-      a.splice(0, b);
-    },
-  };
+export function getUrlStream(signatureCipher: string): string {
+  const cipher = new URLSearchParams(signatureCipher);
+  const s = cipher.get("s");
+  const baseURL = cipher.get("url");
+  if (!s) return "";
+  // Convert string to array of characters
+  let charArray = s.split("");
 
-  var YLa = function (a) {
-    a = a.split("");
-    PP.ng(a, 57);
-    PP.mM(a, 2);
-    PP.U0(a, 24);
-    PP.U0(a, 44);
-    PP.mM(a, 1);
-    PP.ng(a, 32);
-    PP.U0(a, 6);
-    return a.join("");
-  };
+  // Swap index 0 with index 6
+  [charArray[0], charArray[6]] = [charArray[6], charArray[0]];
 
-  // the chipper have 3 query parameter ("s", "sp", "url")
-  const chipper = new URLSearchParams(signatureCipher);
+  // Swap index 60 with index 80
+  [charArray[60], charArray[80]] = [charArray[80], charArray[60]];
 
-  // get base url
-  const BASE_URL = chipper.get("url");
+  // Swap index 80 with the last character number 3
+  [charArray[80], charArray[charArray.length - 1]] = [
+    charArray[charArray.length - 1],
+    charArray[80],
+  ];
 
-  // decode the "s" query parameter value
-  const decodedS = YLa(chipper.get("s"));
+  // Remove the last 3 characters
+  charArray.splice(charArray.length - 3, 3);
 
-  // generate streamable url by append it back "decodedS" value to the BASE_URL as a query parameter identified by "sig".
-  return `${BASE_URL}&sig=${decodedS}`;
+  // Convert array back to string and return
+  return `${baseURL}&sig=${charArray.join("")}`;
 }

@@ -9,12 +9,11 @@ export default function ClickElement({
   children: ReactElement | ReactElement[];
   ids: string;
 }) {
-  const { id, setId } = useMusic();
+  const { setId } = useMusic();
 
   return (
     <div
       onClick={() => {
-        console.log(ids);
         setId((prev) => (prev = ids));
       }}
       className="cursor-pointer"

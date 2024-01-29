@@ -1,24 +1,28 @@
-import { VideoData } from "@/types/type";
-import { QuickPicks, SearchResults } from "@/types/pyYtMusic";
+import { StreamingData } from "@/types/typePipedApi";
+import { SearchResults } from "@/types/pyYtMusic";
+import { AudioStream } from "@/types/typePipedApi";
 import getUrlStream from "./decipher";
 
 const SELF_BASE_URL = "https://cyan-rich-abalone.cyclic.app";
 const BASE_URL = "https://pipedapi.kavin.rocks";
 const BASE_URL_ALTERNATIVE = "https://piped.12a.app";
 
-export async function getMusic(videoId: string): Promise<VideoData> {
+// get streaming from piped api
+export async function getMusicFromPiped(
+  videoId: string
+): Promise<StreamingData> {
   const res = await fetch(`${BASE_URL}/streams/${videoId}`, {
     cache: "force-cache",
-    method: "POST",
+    method: "GET",
   });
   const data = await res.json();
-  const signatureCipher =
-    data?.streamingData?.adaptiveFormats[
-      data?.streamingData?.adaptiveFormats.length - 1
-    ].signatureCipher;
-
-  data.streamUrl = getUrlStream(signatureCipher);
-
+  const getOnlyAudioSrc = data?.audioStreams?.filter((stream: AudioStream) =>
+    stream.mimeType.includes("audio")
+  );
+  data!.audioStreamUrl = getOnlyAudioSrc.reduce(
+    (prev: AudioStream, current: AudioStream) =>
+      prev.bitrate > current.bitrate ? prev : current
+  );
   return data;
 }
 

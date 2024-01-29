@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import TrackItemAlbum from "@/components/TrackItemAlbum";
-import { secondsToMinutesAndSeconds } from "@/utils/durationConverter";
 import { getAlbum } from "@/utils/pipedAPI";
 import ClickElement from "@/components/ClickElement";
 
@@ -44,9 +43,6 @@ export default async function Album({
             .map((artist: any) => artist.name)
             .join()
             .replaceAll(",", " & ");
-          const trackDuration = secondsToMinutesAndSeconds(
-            parseInt(track?.duration)
-          );
           return (
             <ClickElement key={crypto.randomUUID()} ids={track?.videoId}>
               <TrackItemAlbum
@@ -54,7 +50,7 @@ export default async function Album({
                 trackId={track?.videoId}
                 title={track?.title}
                 artistName={artist}
-                duration={trackDuration}
+                duration={track?.duration}
               />
             </ClickElement>
           );
