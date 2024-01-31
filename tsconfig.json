@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "utils/decipher.ts"
+    "utils/decipher.ts",
+    "app/api/stream/route.js"
   ],
   "exclude": ["node_modules"]
 }

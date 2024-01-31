@@ -2,26 +2,22 @@
 
 import useMusic from "@/hooks/useMusic";
 import { getMusicFromInvidious } from "@/utils/invidiousApi";
-import React, {
-  RefObject,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import Loading from "./Loading";
+
+async function fetcher(id: string) {
+  const res = await fetch(`http://localhost:3000/api/stream?videoId=${id}`, {
+    method: "POST",
+  });
+  const data = res.json();
+  return data;
+}
 
 export default function AudioPlayer2() {
   const { id } = useMusic();
   const audioElement = useRef<HTMLAudioElement>(null);
-  const { data, isLoading } = useSWRImmutable(id, getMusicFromInvidious);
-
-  const thumbnailUrl =
-    data?.videoThumbnails[data?.videoThumbnails?.length - 1]?.url;
-  const title = data?.title;
-  const uploader = data?.author;
-  const url = data?.adaptiveFormats[0].url;
+  const { data, isLoading } = useSWRImmutable(id, fetcher);
 
   return (
     <div className={`${id ? "" : "hidden"}`}>
@@ -30,19 +26,21 @@ export default function AudioPlayer2() {
       ) : (
         <div className="bg-[#1f1f1f] flex overflow-hidden">
           <img
-            src={thumbnailUrl}
-            alt={title + " image"}
+            src={data?.thumbnailUrl}
+            alt={data?.title + " image"}
             className="w-24 h-[72px] object-cover object-center"
           />
           <div className="grow relative flex justify-between items-center">
             <div className="pl-5">
-              <p className="font-semibold text-white line-clamp-1">{title}</p>
+              <p className="font-semibold text-white line-clamp-1">
+                {data?.title}
+              </p>
               <p className="text-sm font-semibold text-gray-400 line-clamp-1">
-                {uploader}
+                {data?.uploader}
               </p>
             </div>
             <div className="pr-4">
-              <audio ref={audioElement} src={url || ""}></audio>
+              <audio ref={audioElement} src={data?.url || ""}></audio>
               <TogglePlay
                 audioElement={audioElement}
                 isLoading={isLoading}
@@ -73,7 +71,7 @@ function TogglePlay({ audioElement, id, isLoading }: AudioProps) {
       .catch(() => {
         const errorElement = errorMessage.current;
         setTimeout(() => {
-          errorElement ? (errorMessage.current.style.bottom = "-300px") : "";
+          errorElement ? (errorElement.style.bottom = "-300px") : "";
         }, 3000);
         errorElement ? (errorMessage.current.style.bottom = "50%") : "";
       })

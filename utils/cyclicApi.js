@@ -8,3 +8,10 @@ export async function getMusicFromCyclic(videoId) {
   );
   return res.json();
 }
+
+// data structure
+// const thumbnailUrl =
+//   data?.videoThumbnails[data?.videoThumbnails?.length - 1]?.url;
+// const title = data?.title;
+// const uploader = data?.author;
+// const url = data?.adaptiveFormats[0].url;
