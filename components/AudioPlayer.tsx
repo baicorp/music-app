@@ -1,76 +1,145 @@
 "use client";
 
 import useMusic from "@/hooks/useMusic";
-// import { getMusicFromPiped } from "@/utils/pipedAPI";
-import { getMusicFromCyclic } from "@/utils/cyclicApi";
+import { getMusicFromInvidious } from "@/utils/invidiousApi";
+import React, {
+  RefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import useSWRImmutable from "swr/immutable";
 import Loading from "./Loading";
-import Image from "next/image";
-import { getUrlStream } from "@/utils/decipher";
 
-export default function AudioPlayer() {
+export default function AudioPlayer2() {
   const { id } = useMusic();
-  const { data, isLoading } = useSWRImmutable(id, getMusicFromCyclic);
+  const audioElement = useRef<HTMLAudioElement>(null);
+  const { data, isLoading } = useSWRImmutable(id, getMusicFromInvidious);
 
-  // from cyclic
-  const thumbnailUrl = data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
-  const title = data?.videoDetails?.title;
-  const uploader = data?.videoDetails?.author;
-  const signatureCipher =
-    data?.streamingData?.adaptiveFormats[
-      data?.streamingData?.adaptiveFormats?.length - 1
-    ]?.signatureCipher;
-  console.log();
-  const urlStream = getUrlStream(signatureCipher);
-  console.log(urlStream);
-  console.log(id);
-  const streamingData = urlStream;
+  const thumbnailUrl =
+    data?.videoThumbnails[data?.videoThumbnails?.length - 1]?.url;
+  const title = data?.title;
+  const uploader = data?.author;
+  const url = data?.adaptiveFormats[0].url;
 
-  //if no id return empty element
-  if (!id) return <></>;
-
-  return isLoading ? (
-    <Loading />
-  ) : data ? (
-    // using piped api resource
-    // <div className="bg-[#f1f3f4] flex overflow-hidden">
-    //   <Image
-    //     src={data?.thumbnailUrl}
-    //     alt={data?.title + " image"}
-    //     className="w-24 object-cover object-center"
-    //     width={300}
-    //     height={300}
-    //   />
-    //   <div className="flex flex-col justify-center pt-2">
-    //     <div className="px-5">
-    //       <p className="font-semibold text-black line-clamp-1">{data?.title}</p>
-    //       <p className="text-sm font-semibold text-gray-600 line-clamp-1">
-    //         {data?.uploader}
-    //       </p>
-    //     </div>
-    //     <audio controls autoPlay src={data?.audioStreamUrl?.url}></audio>
-    //   </div>
-    // </div>
-    // using cyclic api resource
-    <div className="bg-[#f1f3f4] flex overflow-hidden">
-      <Image
-        src={thumbnailUrl}
-        alt={title + " image"}
-        className="w-24 object-cover object-center"
-        width={300}
-        height={300}
-      />
-      <div className="flex flex-col justify-center pt-2">
-        <div className="px-5">
-          <p className="font-semibold text-black line-clamp-1">{data?.title}</p>
-          <p className="text-sm font-semibold text-gray-600 line-clamp-1">
-            {uploader}
-          </p>
+  return (
+    <div className={`${id ? "" : "hidden"}`}>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="bg-[#1f1f1f] flex overflow-hidden">
+          <img
+            src={thumbnailUrl}
+            alt={title + " image"}
+            className="w-24 h-[72px] object-cover object-center"
+          />
+          <div className="grow relative flex justify-between items-center">
+            <div className="pl-5">
+              <p className="font-semibold text-white line-clamp-1">{title}</p>
+              <p className="text-sm font-semibold text-gray-400 line-clamp-1">
+                {uploader}
+              </p>
+            </div>
+            <div className="pr-4">
+              <audio ref={audioElement} src={url || ""}></audio>
+              <TogglePlay
+                audioElement={audioElement}
+                isLoading={isLoading}
+                id={id!}
+              />
+              <Progress audioElement={audioElement} id={id!} />
+            </div>
+          </div>
         </div>
-        <audio controls autoPlay src={streamingData}></audio>
-      </div>
+      )}
     </div>
-  ) : (
-    <p>try again 👍</p>
+  );
+}
+
+type AudioProps = {
+  audioElement: RefObject<HTMLAudioElement>;
+  isLoading?: boolean;
+  id?: string;
+};
+
+function TogglePlay({ audioElement, id, isLoading }: AudioProps) {
+  const [paused, setIsPaused] = useState<boolean>();
+  const errorMessage = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    audioElement.current
+      ?.play()
+      .catch(() => {
+        const errorElement = errorMessage.current;
+        setTimeout(() => {
+          errorElement ? (errorMessage.current.style.bottom = "-300px") : "";
+        }, 3000);
+        errorElement ? (errorMessage.current.style.bottom = "50%") : "";
+      })
+      .finally(() => {
+        setIsPaused(audioElement.current?.paused);
+      });
+  }, [id]);
+
+  function toggle() {
+    if (audioElement.current?.paused) {
+      audioElement.current?.play();
+      setIsPaused(false);
+    } else if (!audioElement.current?.paused) {
+      audioElement.current?.pause();
+      setIsPaused(true);
+    }
+  }
+
+  return (
+    <div className="relative">
+      <p
+        ref={errorMessage}
+        className="absolute w-[113px] duration-300 p-1 rounded-md text-xs -left-[10px] -bottom-96 translate-y-1/2 -translate-x-full bg-rose-500 text-white"
+      >
+        Can't play this song
+      </p>
+      <button
+        className="bg-gray-200 text-2xl border"
+        disabled={isLoading}
+        onClick={toggle}
+      >
+        {isLoading ? <Loading /> : paused ? "▶️" : "⏸️"}
+      </button>
+    </div>
+  );
+}
+
+function Progress({ audioElement, id }: AudioProps) {
+  const [timeStamp, setTimeStamp] = useState(0);
+
+  const progresRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setTimeStamp(0);
+    const handleTimeUpdate = () => {
+      const progress =
+        ((audioElement?.current?.currentTime || 1) /
+          (audioElement?.current?.duration || 0)) *
+        100;
+      setTimeStamp(progress);
+    };
+
+    audioElement.current?.addEventListener("timeupdate", handleTimeUpdate);
+
+    // Cleanup function
+    return () => {
+      audioElement.current?.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [audioElement, id]);
+
+  return (
+    <div className="h-1 absolute bottom-0 right-0 left-0">
+      <div
+        ref={progresRef}
+        className="h-full bg-slate-300"
+        style={{ width: `${timeStamp || 0}%` }}
+      ></div>
+    </div>
   );
 }

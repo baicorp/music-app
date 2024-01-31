@@ -32,7 +32,7 @@ export default function RootLayout({
               </Link>
             </div>
           </div>
-          <div className="h-[164px]"></div>
+          <div className="h-[130px]"></div>
         </MusicProvider>
       </body>
     </html>
