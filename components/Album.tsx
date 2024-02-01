@@ -5,8 +5,9 @@ import Link from "next/link";
 export default function Album({ albumData }: { albumData: any[] }) {
   return albumData.map((content: any) => {
     const thumbnail = content.thumbnails[0].url;
+    console.log("album id : ", content?.browseId);
     return (
-      <Link href={`album/${content?.browseId}`}>
+      <Link href={`album/${content?.browseId || ""} `}>
         <AlbumCard
           key={content.browseId}
           browseId={content.browseId}
@@ -19,7 +20,7 @@ export default function Album({ albumData }: { albumData: any[] }) {
   });
 }
 
-function AlbumCard({
+export function AlbumCard({
   browseId,
   title,
   thumbnails,

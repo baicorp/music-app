@@ -39,7 +39,7 @@ export function MusicCard({
   artist,
 }: MusicCardProps) {
   return (
-    <div className="flex min-w-[300px] md:min-w-96 rounded-md">
+    <div className="flex min-w-[300px] md:min-w-96 max-w-[384px] rounded-md">
       <img
         src={thumbnailUrl}
         alt={title + "image"}

@@ -18,7 +18,7 @@ export default function Playlist({ playlistData }: { playlistData: any[] }) {
   });
 }
 
-function PlaylistCard({
+export function PlaylistCard({
   title,
   thumbnails,
   description,

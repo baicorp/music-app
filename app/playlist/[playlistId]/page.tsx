@@ -11,7 +11,19 @@ export default async function Playlist({
 }: {
   params: { playlistId: string };
 }) {
-  const data = await getPlaylist(params.playlistId);
+  let data: any;
+  try {
+    const datas = await getPlaylist(params.playlistId);
+    data = datas;
+  } catch (err) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p className="font-semibold text-lg">
+          Failed to fetch data, try another one
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">

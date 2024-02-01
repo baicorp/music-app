@@ -9,7 +9,19 @@ export default async function Album({
 }: {
   params: { browseId: string };
 }) {
-  const data = await getAlbum(params.browseId);
+  let data: any;
+  try {
+    const datas = await getAlbum(params.browseId);
+    data = datas;
+  } catch (err) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p className="font-semibold text-lg">
+          Failed to fetch data, try another one
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">
