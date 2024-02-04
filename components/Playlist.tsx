@@ -1,17 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AlbumOrPlaylistItem } from "@/app/research/searchResult";
 
-export default function Playlist({ playlistData }: { playlistData: any[] }) {
-  return playlistData.map((content: any) => {
-    const thumbnail = content.thumbnails[0].url;
+export default function Playlist({
+  playlistData,
+}: {
+  playlistData: AlbumOrPlaylistItem[];
+}) {
+  return playlistData.map((content) => {
     return (
       <Link key={crypto.randomUUID()} href={`playlist/${content?.playlistId}`}>
         <PlaylistCard
-          key={content.playlistId}
-          thumbnails={thumbnail}
+          thumbnails={content.thumbnail}
           title={content.title}
-          description={content.description}
+          description={content?.artist}
         />
       </Link>
     );

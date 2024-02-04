@@ -8,7 +8,7 @@ export default function layout({
 }) {
   return (
     <div>
-      <div className="pl-4 py-5 bg-[#1c1c1c]">
+      <div className="lg:px-6 xl:px-10 py-5 bg-[#1c1c1c] sticky top-0">
         <Link href={"/"}>⬅️ Back</Link>
       </div>
       {children}

@@ -1,10 +1,18 @@
 "use client";
 
 import useMusic from "@/hooks/useMusic";
-import { getMusicFromInvidious } from "@/utils/invidiousApi";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, {
+  ReactElement,
+  ReactNode,
+  RefObject,
+  cloneElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import useSWRImmutable from "swr/immutable";
 import Loading from "./Loading";
+import { getMusicPlayer, getPlaylist } from "@/utils/MusicClient";
 
 async function fetcher(id: string) {
   const res = await fetch(`http://localhost:3000/api/stream?videoId=${id}`, {
@@ -14,21 +22,40 @@ async function fetcher(id: string) {
   return data;
 }
 
+type MusicPlayerProps = {
+  title: string;
+  thumbnailUrl: string;
+  uploader: string;
+  url: string;
+};
+
 export default function AudioPlayer2() {
   const { id } = useMusic();
   const audioElement = useRef<HTMLAudioElement>(null);
+  // const [data, setData] = useState<MusicPlayerProps>();
+  // const [isLoading, setIsLoading] = useState(false);
   const { data, isLoading } = useSWRImmutable(id, fetcher);
+
+  // useEffect(() => {
+  //   async function getMusic() {
+  //     const data = await getMusicPlayer(id || "1");
+  //     setData(data);
+  //   }
+  //   getMusic();
+  // }, [id]);
+
+  // console.log(data?.title);
 
   return (
     <div className={`${id ? "" : "hidden"}`}>
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="bg-[#1f1f1f] flex overflow-hidden">
+        <div className="bg-[#1f1f1f] flex overflow-hidden relative">
           <img
             src={data?.thumbnailUrl}
             alt={data?.title + " image"}
-            className="w-24 h-[72px] object-cover object-center"
+            className="w-24 object-cover object-center rounded-md py-3 pl-4"
           />
           <div className="grow relative flex justify-between items-center">
             <div className="pl-5">
@@ -40,7 +67,14 @@ export default function AudioPlayer2() {
               </p>
             </div>
             <div className="pr-4">
-              <audio ref={audioElement} src={data?.url || ""}></audio>
+              <audio
+                ref={audioElement}
+                src={data?.url || ""}
+                autoPlay
+                onEnded={() => {
+                  console.log("song ended bos");
+                }}
+              ></audio>
               <TogglePlay
                 audioElement={audioElement}
                 isLoading={isLoading}
@@ -132,7 +166,7 @@ function Progress({ audioElement, id }: AudioProps) {
   }, [audioElement, id]);
 
   return (
-    <div className="h-1 absolute bottom-0 right-0 left-0">
+    <div className="h-[2px] rounded-sm absolute bottom-0 right-0 left-0">
       <div
         ref={progresRef}
         className="h-full bg-slate-300"

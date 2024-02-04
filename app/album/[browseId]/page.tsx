@@ -24,7 +24,7 @@ export default async function Album({
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 lg:px-6 xl:px-10">
       <div className="flex">
         <Image
           src={data?.thumbnails[2].url}

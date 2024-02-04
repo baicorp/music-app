@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import TrackItemAlbum from "@/components/TrackItemAlbum";
 import { secondsToMinutesAndSeconds } from "@/utils/durationConverter";
-import { getPlaylist } from "@/utils/pipedAPI";
+import { getPlaylist } from "@/utils/MusicClient";
 import { MusicCard } from "@/components/Musics";
 import ClickElement from "@/components/ClickElement";
 
@@ -17,19 +17,19 @@ export default async function Playlist({
     data = datas;
   } catch (err) {
     return (
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center lg:px-6 xl:px-10">
         <p className="font-semibold text-lg">
-          Failed to fetch data, try another one
+          Failed to fetch data, try another one 🔨
         </p>
       </div>
     );
   }
 
   return (
-    <div className="p-4">
+    <div className="py-4 lg:px-6 xl:px-10">
       <div className="flex">
         <Image
-          src={data?.thumbnails[2].url}
+          src={data?.playlistThumbnail}
           alt={`${data?.title} thumbnail`}
           width={266}
           height={266}
@@ -40,32 +40,19 @@ export default async function Playlist({
             {data?.title}
           </p>
           <div className="flex items-center mt-3">
-            <p className="font-semibold text-xs text-gray-400">{data?.year}</p>
-            <span>・</span>
             <p className="font-semibold text-xs text-gray-400">
-              {`${data?.trackCount} songs`}
+              {data?.trackCount}
             </p>
           </div>
-          <p className="font-semibold text-xs text-gray-400">
-            {`${data?.duration} songs`}
-          </p>
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-6">
         {data?.tracks?.map((track: any) => {
-          const artist = track?.artists
-            .map((artist: any) => artist.name)
-            .join()
-            .replaceAll(",", " & ");
-          const trackDuration = secondsToMinutesAndSeconds(
-            parseInt(track?.duration)
-          );
-          const thumbnail = track?.thumbnails[0]?.url;
           return (
             <ClickElement key={crypto.randomUUID()} ids={track?.videoId}>
               <MusicCard
-                thumbnailUrl={thumbnail}
-                artist={artist}
+                thumbnailUrl={track?.thumbnail}
+                artist={track?.artist}
                 title={track?.title}
                 videoId={track?.videoId}
               />

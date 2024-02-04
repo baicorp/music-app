@@ -6,9 +6,19 @@ import ClickElement from "@/components/ClickElement";
 import Link from "next/link";
 
 export default async function Home() {
-  const data = await home();
+  let data;
+  try {
+    const datas = await home();
+    data = datas;
+  } catch (error) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p>Try again later 🛠️</p>
+      </div>
+    );
+  }
   return (
-    <main className="flex flex-col mt-10">
+    <main className="overflow-hidden lg:px-6 xl:px-10">
       {data.data?.map((result: any) => {
         return <Result key={result.title} result={result} />;
       })}
@@ -18,9 +28,29 @@ export default async function Home() {
 
 function Result({ result }: { result: any }) {
   return (
-    <div className="mt-6">
+    <div className="mt-8">
       <p className="font-bold text-lg ml-4">{result.title}</p>
-      <div className="mt-3 pl-4 overflow-x-auto gap-2 flex flex-col flex-wrap h-[208px]">
+      <div className="mt-3 pl-4 overflow-x-auto gap-2 md:gap-4 flex flex-col flex-wrap h-[210px] md:h-[250px] empty:hidden">
+        {result?.contents?.map((data: any) => {
+          if (data.videoId) {
+            const artist = data.artists
+              .map((data: any) => data.name)
+              .toString()
+              .replaceAll(",", " & ");
+            return (
+              <ClickElement key={crypto.randomUUID()} ids={data.videoId}>
+                <MusicCard
+                  title={data.title}
+                  artist={artist}
+                  thumbnailUrl={data.thumbnails[0].url}
+                  videoId={data.videoId}
+                />
+              </ClickElement>
+            );
+          }
+        })}
+      </div>
+      <div className="mt-3 pl-4 overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
         {result?.contents?.map((data: any) => {
           if (data.browseId) {
             const thumbnail = data.thumbnails[0].url;
@@ -53,23 +83,6 @@ function Result({ result }: { result: any }) {
                 />
               </Link>
             );
-          } else if (data.videoId) {
-            const artist = data.artists
-              .map((data: any) => data.name)
-              .toString()
-              .replaceAll(",", " & ");
-            return (
-              <ClickElement key={crypto.randomUUID()} ids={data.videoId}>
-                <MusicCard
-                  title={data.title}
-                  artist={artist}
-                  thumbnailUrl={data.thumbnails[0].url}
-                  videoId={data.videoId}
-                />
-              </ClickElement>
-            );
-          } else {
-            return <p>try again</p>;
           }
         })}
       </div>

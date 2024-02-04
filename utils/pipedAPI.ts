@@ -1,7 +1,6 @@
 import { StreamingData } from "@/types/typePipedApi";
 import { SearchResults } from "@/types/pyYtMusic";
 import { AudioStream } from "@/types/typePipedApi";
-import getUrlStream from "./decipher";
 
 const SELF_BASE_URL = "https://cyan-rich-abalone.cyclic.app";
 const BASE_URL = "https://pipedapi.kavin.rocks";

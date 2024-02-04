@@ -1,20 +1,15 @@
 import ClickElement from "./ClickElement";
+import { SongItem } from "@/app/research/searchResult";
 
-export default async function Musics({ musicData }: { musicData: any[] }) {
+export default function Musics({ musicData }: { musicData: SongItem[] }) {
   try {
-    // return list of <MusicCard /> component
-    return musicData.map((data: any) => {
-      // generate artist name
-      const artist = data.artists
-        .map((data: any) => data.name)
-        .toString()
-        .replaceAll(",", " & ");
+    return musicData.map((data) => {
       return (
         <ClickElement key={crypto.randomUUID()} ids={data.videoId}>
           <MusicCard
             title={data.title}
-            artist={artist}
-            thumbnailUrl={data.thumbnails[0].url}
+            artist={data.artist}
+            thumbnailUrl={data.thumbnail}
             videoId={data.videoId}
           />
         </ClickElement>
@@ -39,7 +34,7 @@ export function MusicCard({
   artist,
 }: MusicCardProps) {
   return (
-    <div className="flex min-w-[300px] md:min-w-96 max-w-[384px] rounded-md">
+    <div className="flex w-[300px] md:w-[384px] rounded-md">
       <img
         src={thumbnailUrl}
         alt={title + "image"}

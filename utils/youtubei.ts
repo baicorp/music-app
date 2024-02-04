@@ -1,14 +1,15 @@
-import { Innertube, UniversalCache } from "youtubei.js";
-const { YouTube } = require("popyt");
+import { ClientType, Innertube } from "youtubei.js";
 
-const yt = await Innertube.create();
-const youtube = new YouTube("AIzaSyA8eiZmM1FaDVjRy-df2KTyQ_vz_yYM39w");
-
-export async function search(query: string) {
-  const search = await youtube.searchVideos(query);
-  return search;
-}
+const yt = await Innertube.create({
+  device_category: "mobile",
+  client_type: ClientType.MUSIC,
+});
 
 export async function basicInfo(videoId: string) {
   return await yt.getInfo(videoId, "YTMUSIC");
+}
+
+export async function search(query: string) {
+  // return await yt.getInfo(videoId, "YTMUSIC");
+  return await yt.search(query);
 }
