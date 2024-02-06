@@ -1,8 +1,12 @@
+import Album from "@/components/Album";
+import Channels from "@/components/Channels";
 import Loading from "@/components/Loading";
 import Musics from "@/components/Musics";
 import Playlist from "@/components/Playlist";
 import SearchBox from "@/components/SearchBox";
 import { search } from "@/utils/MusicClient";
+import Image from "next/image";
+import Link from "next/link";
 import React, { Suspense } from "react";
 
 export default function page({
@@ -50,9 +54,14 @@ async function SearchResult({ query }: { query: string }) {
             <Musics key={crypto.randomUUID()} musicData={data?.contents} />
           </div>
         ) : title?.toLowerCase() === "artists" ? (
-          <div key={crypto.randomUUID()}>artist</div>
-        ) : title?.toLowerCase() === "albums" ||
-          title?.toLowerCase() === "community playlists" ? (
+          <div key={crypto.randomUUID()} className="flex gap-4">
+            <Channels channelsData={data.contents} />
+          </div>
+        ) : title?.toLowerCase() === "albums" ? (
+          <div className="flex gap-4">
+            <Album albumData={data?.contents} />
+          </div>
+        ) : title?.toLowerCase() === "community playlists" ? (
           <div className="flex gap-4">
             <Playlist playlistData={data?.contents} />
           </div>

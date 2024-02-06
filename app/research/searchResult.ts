@@ -76,7 +76,10 @@ function albumOrPlaylistResult(songObject: any) {
         ?.playlistId,
     title: flexColumns[0],
     thumbnail:
-      item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+      item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+        item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length -
+          1
+      ]?.url,
     artist: flexColumns[3],
     year: flexColumns.filter((data: string) => data.match(/.*\d.*/))[0], // year for album
     views: flexColumns.filter((data: string) => data.match(/.*\d.*/))[0], // for playlist
@@ -89,7 +92,10 @@ function channelResult(songObject: any) {
   return {
     channelId: item?.navigationEndpoint?.browseEndpoint?.browseId,
     thumbnail:
-      item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+      item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+        item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length -
+          1
+      ]?.url,
     artist: flexColumns[0],
   };
 }
@@ -114,7 +120,8 @@ export function processPlaylistData(data: any) {
     if (!item) return null;
 
     const title = item?.title?.runs[0]?.text;
-    const thumbnail = item?.thumbnail?.thumbnails[0]?.url;
+    const thumbnail =
+      item?.thumbnail?.thumbnails[item?.thumbnail?.thumbnails.length - 1]?.url;
     const duration = item?.lengthText?.runs[0]?.text;
     const videoId = item?.videoId;
     const artist = item?.shortBylineText?.runs[0]?.text;

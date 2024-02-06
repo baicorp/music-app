@@ -3,6 +3,7 @@ import React from "react";
 import TrackItemAlbum from "@/components/TrackItemAlbum";
 import { getAlbum } from "@/utils/pipedAPI";
 import ClickElement from "@/components/ClickElement";
+import { getPlaylist } from "@/utils/MusicClient";
 
 export default async function Album({
   params,
@@ -11,7 +12,7 @@ export default async function Album({
 }) {
   let data: any;
   try {
-    const datas = await getAlbum(params.browseId);
+    const datas = await getPlaylist(params.browseId);
     data = datas;
   } catch (err) {
     return (
@@ -27,7 +28,7 @@ export default async function Album({
     <div className="p-4 lg:px-6 xl:px-10">
       <div className="flex">
         <Image
-          src={data?.thumbnails[2].url}
+          src={data?.playlistThumbnail}
           alt={`${data?.title} thumbnail`}
           width={266}
           height={266}
@@ -51,17 +52,13 @@ export default async function Album({
       </div>
       <div className="gap-2 mt-5">
         {data?.tracks?.map((track: any, index: number) => {
-          const artist = track?.artists
-            .map((artist: any) => artist.name)
-            .join()
-            .replaceAll(",", " & ");
           return (
             <ClickElement key={crypto.randomUUID()} ids={track?.videoId}>
               <TrackItemAlbum
                 order={index}
                 trackId={track?.videoId}
                 title={track?.title}
-                artistName={artist}
+                artistName={track?.artist}
                 duration={track?.duration}
               />
             </ClickElement>

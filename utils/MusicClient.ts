@@ -78,7 +78,10 @@ export async function getPlaylist(playlistId: string) {
   // get playlist thumbnail
   const playlistThumbnail =
     data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
-      ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails[1]?.url;
+      ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails[
+      data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
+        ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails.length - 1
+    ]?.url;
   return {
     playlistThumbnail: playlistThumbnail,
     ...processPlaylistData(datas),
