@@ -23,6 +23,81 @@ export function processSearchData(data: any[]) {
     "community playlists",
   ];
   const result = data.map((result: any) => {
+    if (result?.musicCardShelfRenderer) {
+      const subtitle = result?.musicCardShelfRenderer?.subtitle?.runs.map(
+        (run: any) => run.text
+      );
+      if (
+        subtitle[0].toLowerCase() === "song" ||
+        subtitle[0].toLowerCase() === "video"
+      ) {
+        return {
+          title:
+            result?.musicCardShelfRenderer?.header
+              ?.musicCardShelfHeaderBasicRenderer?.title?.runs[0]?.text,
+          contents: [
+            {
+              title: result?.musicCardShelfRenderer?.title?.runs[0]?.text,
+              videoId:
+                result?.musicCardShelfRenderer?.title?.runs[0]
+                  ?.navigationEndpoint?.watchEndpoint?.videoId,
+              thumbnail:
+                result?.musicCardShelfRenderer?.thumbnail
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0].url,
+              duration: subtitle[subtitle.length - 1],
+              artist: subtitle[2],
+              type: subtitle[0],
+            },
+          ],
+        };
+      } else if (
+        subtitle[0].toLowerCase() === "album" ||
+        subtitle[0].toLowerCase() === "playlist"
+      ) {
+        return {
+          title:
+            result?.musicCardShelfRenderer?.header
+              ?.musicCardShelfHeaderBasicRenderer?.title?.runs[0]?.text,
+          contents: [
+            {
+              title: result?.musicCardShelfRenderer?.title?.runs[0]?.text,
+              playlistId:
+                result?.musicCardShelfRenderer?.buttons[0]?.buttonRenderer
+                  ?.command?.watchPlaylistEndpoint?.playlistId,
+              thumbnail:
+                result?.musicCardShelfRenderer?.thumbnail
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+                  result?.musicCardShelfRenderer?.thumbnail
+                    ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+                ].url,
+              year: subtitle.filter((data: any) => data.match(/^\d{4}$/))[0],
+              type: subtitle[0],
+            },
+          ],
+        };
+      } else if (subtitle[0].toLowerCase() === "artist") {
+        return {
+          title:
+            result?.musicCardShelfRenderer?.header
+              ?.musicCardShelfHeaderBasicRenderer?.title?.runs[0]?.text,
+          contents: [
+            {
+              artist: result?.musicCardShelfRenderer?.title?.runs[0]?.text,
+              channelId:
+                result?.musicCardShelfRenderer?.title?.runs[0]
+                  ?.navigationEndpoint?.browseEndpoint?.browseId,
+              thumbnail:
+                result?.musicCardShelfRenderer?.thumbnail
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+                  result?.musicCardShelfRenderer?.thumbnail
+                    ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+                ].url,
+              type: subtitle[0],
+            },
+          ],
+        };
+      }
+    }
     const title = result?.musicShelfRenderer?.title?.runs[0]?.text;
     if (!acceptedSearchList.includes(title?.toLowerCase())) return null;
     return {
@@ -81,7 +156,7 @@ function albumOrPlaylistResult(songObject: any) {
           1
       ]?.url,
     artist: flexColumns[3],
-    year: flexColumns.filter((data: string) => data.match(/.*\d.*/))[0], // year for album
+    year: flexColumns.filter((data: string) => data.match(/^\d{4}$/))[0], // year for album
     views: flexColumns.filter((data: string) => data.match(/.*\d.*/))[0], // for playlist
   };
 }

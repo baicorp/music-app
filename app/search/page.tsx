@@ -5,8 +5,6 @@ import Musics from "@/components/Musics";
 import Playlist from "@/components/Playlist";
 import SearchBox from "@/components/SearchBox";
 import { search } from "@/utils/MusicClient";
-import Image from "next/image";
-import Link from "next/link";
 import React, { Suspense } from "react";
 
 export default function page({
@@ -34,6 +32,7 @@ async function SearchResult({ query }: { query: string }) {
   try {
     if (query === "") return <></>;
     const datas = await search(query);
+    console.log(datas[0]?.contents[0]);
     data = datas;
   } catch (error) {
     return (
@@ -48,8 +47,25 @@ async function SearchResult({ query }: { query: string }) {
     return (
       <div key={title} className="mb-6">
         <h2 className="text-2xl font-semibold mb-3">{title}</h2>
-        {title?.toLowerCase() === "songs" ||
-        title?.toLowerCase() === "videos" ? (
+        {title?.toLowerCase() === "top result" ? (
+          data.contents[0].type === "Song" ||
+          data.contents[0].type === "Video" ? (
+            <div className="flex flex-col gap-4">
+              <Musics key={crypto.randomUUID()} musicData={data?.contents} />
+            </div>
+          ) : data.contents[0].type === "Album" ||
+            data.contents[0].type === "Playlist" ? (
+            <Album albumData={data?.contents} />
+          ) : (
+            <div className="flex gap-4">
+              <Channels
+                key={crypto.randomUUID()}
+                channelsData={data?.contents}
+              />
+            </div>
+          )
+        ) : title?.toLowerCase() === "songs" ||
+          title?.toLowerCase() === "videos" ? (
           <div className="flex flex-col gap-4">
             <Musics key={crypto.randomUUID()} musicData={data?.contents} />
           </div>

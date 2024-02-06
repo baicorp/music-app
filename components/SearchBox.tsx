@@ -17,7 +17,6 @@ export default function SearchBox() {
   }
 
   useEffect(() => {
-    console.log("effect");
     setInput(searchParams.get("query"));
   }, [searchParams.get("query")]);
 

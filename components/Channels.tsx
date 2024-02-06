@@ -11,7 +11,7 @@ export default function Channels({ channelsData }: { channelsData: any }) {
         >
           <Image
             src={channel.thumbnail}
-            alt={channel.artist}
+            alt={channel.artist || ""}
             width={700}
             height={700}
             className="w-32 h-32 object-cover rounded-full"

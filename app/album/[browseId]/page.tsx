@@ -45,9 +45,6 @@ export default async function Album({
               {`${data?.trackCount} songs`}
             </p>
           </div>
-          <p className="font-semibold text-xs text-gray-400">
-            {`${data?.duration} songs`}
-          </p>
         </div>
       </div>
       <div className="gap-2 mt-5">
