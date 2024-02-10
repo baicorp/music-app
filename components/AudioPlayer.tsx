@@ -35,6 +35,7 @@ export default function AudioPlayer2() {
   // const [data, setData] = useState<MusicPlayerProps>();
   // const [isLoading, setIsLoading] = useState(false);
   const { data, isLoading } = useSWRImmutable(id, fetcher);
+  console.log(data);
 
   // useEffect(() => {
   //   async function getMusic() {
