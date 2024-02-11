@@ -2,19 +2,32 @@
 import useMusic from "@/hooks/useMusic";
 import React, { ReactElement } from "react";
 
+type ClickElementProps = {
+  children: ReactElement | ReactElement[];
+  id: string;
+  artist: string;
+  thumbnail: string;
+  title: string;
+};
+
 export default function ClickElement({
   children,
-  ids,
-}: {
-  children: ReactElement | ReactElement[];
-  ids: string;
-}) {
-  const { setId } = useMusic();
+  id,
+  artist,
+  thumbnail,
+  title,
+}: ClickElementProps) {
+  const { setTrackData } = useMusic();
 
   return (
     <div
       onClick={() => {
-        setId((prev) => (prev = ids));
+        setTrackData({
+          id: id,
+          artist: artist,
+          thumbnail: thumbnail,
+          title: title,
+        });
       }}
       className="cursor-pointer"
     >

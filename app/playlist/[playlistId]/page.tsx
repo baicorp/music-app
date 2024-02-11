@@ -5,13 +5,19 @@ import { secondsToMinutesAndSeconds } from "@/utils/durationConverter";
 import { getPlaylist } from "@/utils/MusicClient";
 import { MusicCard } from "@/components/Musics";
 import ClickElement from "@/components/ClickElement";
+import { TrackProps } from "@/app/research/searchResult";
 
 export default async function Playlist({
   params,
 }: {
   params: { playlistId: string };
 }) {
-  let data: any;
+  let data: {
+    title: any;
+    trackCount: string;
+    tracks: TrackProps[];
+    playlistThumbnail: any;
+  };
   try {
     const datas = await getPlaylist(params.playlistId);
     data = datas;
@@ -26,7 +32,7 @@ export default async function Playlist({
   }
 
   return (
-    <div className="py-4 lg:px-6 xl:px-10">
+    <div className="p-4 lg:px-6 xl:px-10">
       <div className="flex">
         <Image
           src={data?.playlistThumbnail}
@@ -47,9 +53,15 @@ export default async function Playlist({
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-6">
-        {data?.tracks?.map((track: any) => {
+        {data?.tracks?.map((track) => {
           return (
-            <ClickElement key={crypto.randomUUID()} ids={track?.videoId}>
+            <ClickElement
+              key={crypto.randomUUID()}
+              id={track?.videoId}
+              artist={track?.artist}
+              thumbnail={track?.thumbnail}
+              title={track?.title}
+            >
               <MusicCard
                 thumbnailUrl={track?.thumbnail}
                 artist={track?.artist}

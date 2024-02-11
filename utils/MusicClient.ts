@@ -48,6 +48,14 @@ export async function search(query: string) {
   return processSearchData(datas);
 }
 
+type TrackProps = {
+  videoId: string;
+  title: string;
+  thumbnail: string;
+  artist: string;
+  duration: string;
+};
+
 export async function getPlaylist(playlistId: string) {
   const body = {
     playlistId: playlistId,

@@ -13,7 +13,7 @@ export default function page({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   return (
-    <div className="mt-10 flex flex-col gap-2 p-4">
+    <div className="mt-5 flex flex-col gap-2 p-4 lg:px-6 xl:px-10">
       <div className="mb-10">
         <SearchBox />
       </div>
@@ -32,7 +32,6 @@ async function SearchResult({ query }: { query: string }) {
   try {
     if (query === "") return <></>;
     const datas = await search(query);
-    console.log(datas[0]?.contents[0]);
     data = datas;
   } catch (error) {
     return (

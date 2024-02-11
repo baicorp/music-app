@@ -123,8 +123,109 @@ export function processSearchData(data: any[]) {
   return result.filter((data: any) => data !== null);
 }
 
+export function processChannelData(data: any[]) {
+  const acceptedSearchList = [
+    "songs",
+    "videos",
+    // "artists",
+    "albums",
+    "community playlists",
+  ];
+  const result = data.map((result: any) => {
+    if (result?.musicShelfRenderer) {
+      const contents = result?.musicShelfRenderer?.map((data: any) => {
+        return songResult(data);
+      });
+      return {
+        title: result?.musicShelfRenderer?.title?.runs[0]?.text,
+        contents: contents,
+      };
+    } else if (result?.musicCarouselShelfRenderer) {
+      const title =
+        result?.musicCarouselShelfRenderer?.header
+          ?.musicCarouselShelfBasicHeaderRenderer?.title?.runs[0]?.text;
+      if (!acceptedSearchList.includes(title?.toLowerCase())) return null;
+      return {
+        title: title,
+        contents: result?.musicCarouselShelfRenderer?.contents?.map(
+          (object: any) => {
+            if (
+              title?.toLowerCase() === "songs" ||
+              title?.toLowerCase() === "videos"
+            ) {
+              return songResultFromChannel(object);
+            } else if (
+              title?.toLowerCase() === "albums" ||
+              title?.toLowerCase() === "community playlists"
+            ) {
+              return albumOrPlaylistResult(object);
+            } else {
+            }
+          }
+        ),
+      };
+    } else {
+      return null;
+    }
+  });
+  return result.filter((data: any) => data !== null);
+}
+
+// parse playlist from playlistId
+export type TrackProps = {
+  videoId: string;
+  title: string;
+  thumbnail: string;
+  artist: string;
+  duration: string;
+};
+export function processPlaylistData(data: any) {
+  const contents = data?.contents;
+  const contentsData = contents.map((data: any) => {
+    const item = data?.playlistPanelVideoRenderer;
+
+    if (!item) return null;
+    return {
+      videoId: item?.videoId,
+      title: item?.title?.runs[0]?.text,
+      thumbnail:
+        item?.thumbnail?.thumbnails[item?.thumbnail?.thumbnails.length - 1]
+          ?.url,
+      artist: item?.shortBylineText?.runs[0]?.text,
+      duration: item?.lengthText?.runs[0]?.text,
+    };
+  });
+  const finalContentsData: TrackProps[] = contentsData.filter(
+    (data: any) => data !== null
+  );
+
+  return {
+    title: data?.title,
+    trackCount: `${finalContentsData.length} songs`,
+    tracks: finalContentsData,
+  };
+}
+
 function songResult(songObject: any) {
   const item = songObject?.musicResponsiveListItemRenderer;
+  const flexColumns = parseFlexColumnsData(item?.flexColumns || []);
+  return {
+    videoId:
+      item?.overlay?.musicItemThumbnailOverlayRenderer?.content
+        ?.musicPlayButtonRenderer?.playNavigationEndpoint?.watchEndpoint
+        ?.videoId,
+    title: flexColumns[0],
+    thumbnail:
+      item?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+    duration:
+      flexColumns.filter((data: string) => data.match(/\b(\d+:\d+)\b/))[0] ||
+      "0",
+    artist: flexColumns[1],
+  };
+}
+
+function songResultFromChannel(songObject: any) {
+  const item = songObject?.musicTwoRowItemRenderer;
   const flexColumns = parseFlexColumnsData(item?.flexColumns || []);
   return {
     videoId:
@@ -184,35 +285,4 @@ function parseFlexColumnsData(data: any[]) {
       )
     )
     ?.flat();
-}
-
-// parse playlist from playlistId
-export function processPlaylistData(data: any) {
-  const contents = data?.contents;
-  const contentsData = contents.map((data: any) => {
-    const item = data?.playlistPanelVideoRenderer;
-
-    if (!item) return null;
-
-    const title = item?.title?.runs[0]?.text;
-    const thumbnail =
-      item?.thumbnail?.thumbnails[item?.thumbnail?.thumbnails.length - 1]?.url;
-    const duration = item?.lengthText?.runs[0]?.text;
-    const videoId = item?.videoId;
-    const artist = item?.shortBylineText?.runs[0]?.text;
-    return {
-      videoId: videoId,
-      title: title,
-      thumbnail: thumbnail,
-      artist: artist,
-      duration: duration,
-    };
-  });
-  const finalContentsData = contentsData.filter((data: any) => data !== null);
-
-  return {
-    title: data?.title,
-    trackCount: `${finalContentsData.length} songs`,
-    tracks: finalContentsData,
-  };
 }

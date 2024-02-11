@@ -4,13 +4,19 @@ import TrackItemAlbum from "@/components/TrackItemAlbum";
 import { getAlbum } from "@/utils/pipedAPI";
 import ClickElement from "@/components/ClickElement";
 import { getPlaylist } from "@/utils/MusicClient";
+import { TrackProps } from "@/app/research/searchResult";
 
 export default async function Album({
   params,
 }: {
   params: { browseId: string };
 }) {
-  let data: any;
+  let data: {
+    title: any;
+    trackCount: string;
+    tracks: TrackProps[];
+    playlistThumbnail: any;
+  };
   try {
     const datas = await getPlaylist(params.browseId);
     data = datas;
@@ -39,8 +45,8 @@ export default async function Album({
             {data?.title}
           </p>
           <div className="flex items-center mt-3">
-            <p className="font-semibold text-xs text-gray-400">{data?.year}</p>
-            <span>・</span>
+            {/* <p className="font-semibold text-xs text-gray-400">{data?.year}</p> */}
+            {/* <span>・</span> */}
             <p className="font-semibold text-xs text-gray-400">
               {`${data?.trackCount} songs`}
             </p>
@@ -48,9 +54,15 @@ export default async function Album({
         </div>
       </div>
       <div className="gap-2 mt-5">
-        {data?.tracks?.map((track: any, index: number) => {
+        {data?.tracks?.map((track, index: number) => {
           return (
-            <ClickElement key={crypto.randomUUID()} ids={track?.videoId}>
+            <ClickElement
+              key={crypto.randomUUID()}
+              id={track?.videoId}
+              artist={track?.artist}
+              thumbnail={track?.thumbnail}
+              title={track?.title}
+            >
               <TrackItemAlbum
                 order={index}
                 trackId={track?.videoId}

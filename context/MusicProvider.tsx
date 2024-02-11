@@ -2,24 +2,55 @@
 
 import React, { ReactElement, ReactNode, createContext, useState } from "react";
 
-type CurrentMusicContextValue = {
-  id: string | null;
-  setId: React.Dispatch<React.SetStateAction<string | null>>;
+type MusicData = {
+  id: string;
+  title: string;
+  thumbnail: string;
+  artist: string;
 };
 
-export const currentMusic = createContext<CurrentMusicContextValue | undefined>(
-  undefined
-);
+type CurrentMusicContextValue = {
+  trackData: MusicData | undefined;
+  setTrackData: (data: MusicData) => void;
+};
+// export const currentMusic = createContext<CurrentMusicContextValue|undefined>(undefined);
+
+// export default function MusicProvider({
+//   children,
+// }: {
+//   children: ReactElement | ReactElement[] | ReactNode;
+// }) {
+//   const [trackData, setTrackData] = useState<MusicData | undefined>(undefined);
+
+//   function handleSetTrackData(data: MusicData) {
+//     setTrackData(data);
+//   }
+
+//   return (
+//     <currentMusic.Provider value={{trackData , handleSetTrackData }}>
+//       {children}
+//     </currentMusic.Provider>
+//   );
+// }
+
+export const CurrentMusicContext = createContext<
+  CurrentMusicContextValue | undefined
+>(undefined);
 
 export default function MusicProvider({
   children,
 }: {
   children: ReactElement | ReactElement[] | ReactNode;
 }) {
-  const [id, setId] = useState<string | null>(null);
+  const [trackData, setTrackData] = useState<MusicData | undefined>(undefined);
+
+  function handleSetTrackData(data: MusicData) {
+    setTrackData(data);
+  }
+
   return (
-    <currentMusic.Provider value={{ id, setId }}>
+    <CurrentMusicContext.Provider value={{ trackData, setTrackData }}>
       {children}
-    </currentMusic.Provider>
+    </CurrentMusicContext.Provider>
   );
 }
