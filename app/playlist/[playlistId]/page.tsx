@@ -39,7 +39,7 @@ export default async function Playlist({
           alt={`${data?.title} thumbnail`}
           width={266}
           height={266}
-          className="w-[40%] h-auto object-cover object-center rounded-sm"
+          className="w-[50%] aspect-video object-contain object-center rounded-sm"
         />
         <div className="px-4 py-2">
           <p className="font-bold text-lg line-clamp-3 leading-tight">
@@ -61,6 +61,7 @@ export default async function Playlist({
               artist={track?.artist}
               thumbnail={track?.thumbnail}
               title={track?.title}
+              trackList={data?.tracks}
             >
               <MusicCard
                 thumbnailUrl={track?.thumbnail}

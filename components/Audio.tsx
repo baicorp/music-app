@@ -1,4 +1,5 @@
 "use client";
+import useMusic from "@/hooks/useMusic";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 
@@ -34,8 +35,9 @@ type MusicPlayerProps = {
 };
 
 export default function Audio({ videoId }: { videoId: string }) {
-  console.log(videoId);
   const { data } = useSWRImmutable(videoId, fetcherSingel);
+
+  const { listTrackData, setTrackData } = useMusic();
 
   const [playerLoad, setPlayerLoad] = useState(true);
   const audioElement = useRef<HTMLAudioElement>(null);
@@ -45,7 +47,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   }, [videoId]);
 
   async function handleError(e: React.SyntheticEvent<HTMLAudioElement, Event>) {
-    console.log("try another source url ");
+    console.log("trying another source url ");
     e.currentTarget.src = data?.url[1]!;
   }
 
@@ -57,6 +59,19 @@ export default function Audio({ videoId }: { videoId: string }) {
         onError={(e) => handleError(e)}
         autoPlay
         onPlay={() => setPlayerLoad(false)}
+        onEnded={() => {
+          if (!listTrackData) {
+            return;
+          }
+          let cuurrentIndexVideoId = listTrackData?.findIndex(
+            (data) => data.videoId === videoId
+          );
+          cuurrentIndexVideoId++;
+          if (cuurrentIndexVideoId > listTrackData.length - 1) {
+            return;
+          }
+          setTrackData(listTrackData[cuurrentIndexVideoId]);
+        }}
       ></audio>
       <TogglePlay audioElement={audioElement} isLoading={playerLoad} />
       <Progress audioElement={audioElement} trackData={data} />
@@ -72,6 +87,7 @@ type AudioProps = {
 
 function TogglePlay({ audioElement, isLoading }: AudioProps) {
   const [paused, setIsPaused] = useState<boolean>();
+
   function toggle() {
     if (audioElement.current?.paused) {
       audioElement.current?.play();
@@ -81,6 +97,12 @@ function TogglePlay({ audioElement, isLoading }: AudioProps) {
       setIsPaused(true);
     }
   }
+
+  useEffect(() => {
+    audioElement.current?.addEventListener("ended", () => {
+      setIsPaused(true);
+    });
+  });
 
   return (
     <div className="relative">

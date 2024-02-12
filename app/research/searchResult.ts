@@ -177,7 +177,7 @@ export type TrackProps = {
   title: string;
   thumbnail: string;
   artist: string;
-  duration: string;
+  duration?: string;
 };
 export function processPlaylistData(data: any) {
   const contents = data?.contents;

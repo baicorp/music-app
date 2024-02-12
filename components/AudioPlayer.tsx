@@ -26,7 +26,7 @@ export default function AudioPlayer() {
             </p>
           </div>
           <div className="pr-4">
-            <Audio videoId={trackData.id} />
+            <Audio videoId={trackData.videoId} />
           </div>
         </div>
       </div>

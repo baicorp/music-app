@@ -5,7 +5,7 @@ import { CurrentMusicContext } from "@/context/MusicProvider";
 
 export default function useMusic() {
   const currentMusics = useContext(CurrentMusicContext);
-  if (currentMusics === undefined) {
+  if (!currentMusics) {
     throw new Error("useMusic must be inside a musicProvider");
   }
   return currentMusics;

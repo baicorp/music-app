@@ -1,9 +1,10 @@
 "use client";
 
+import { TrackProps } from "@/app/research/searchResult";
 import React, { ReactElement, ReactNode, createContext, useState } from "react";
 
-type MusicData = {
-  id: string;
+export type MusicData = {
+  videoId: string;
   title: string;
   thumbnail: string;
   artist: string;
@@ -11,27 +12,12 @@ type MusicData = {
 
 type CurrentMusicContextValue = {
   trackData: MusicData | undefined;
-  setTrackData: (data: MusicData) => void;
+  setTrackData: React.Dispatch<React.SetStateAction<MusicData | undefined>>;
+  listTrackData: TrackProps[] | undefined;
+  setListTrackData: React.Dispatch<
+    React.SetStateAction<TrackProps[] | undefined>
+  >;
 };
-// export const currentMusic = createContext<CurrentMusicContextValue|undefined>(undefined);
-
-// export default function MusicProvider({
-//   children,
-// }: {
-//   children: ReactElement | ReactElement[] | ReactNode;
-// }) {
-//   const [trackData, setTrackData] = useState<MusicData | undefined>(undefined);
-
-//   function handleSetTrackData(data: MusicData) {
-//     setTrackData(data);
-//   }
-
-//   return (
-//     <currentMusic.Provider value={{trackData , handleSetTrackData }}>
-//       {children}
-//     </currentMusic.Provider>
-//   );
-// }
 
 export const CurrentMusicContext = createContext<
   CurrentMusicContextValue | undefined
@@ -43,13 +29,14 @@ export default function MusicProvider({
   children: ReactElement | ReactElement[] | ReactNode;
 }) {
   const [trackData, setTrackData] = useState<MusicData | undefined>(undefined);
-
-  function handleSetTrackData(data: MusicData) {
-    setTrackData(data);
-  }
+  const [listTrackData, setListTrackData] = useState<TrackProps[] | undefined>(
+    undefined
+  );
 
   return (
-    <CurrentMusicContext.Provider value={{ trackData, setTrackData }}>
+    <CurrentMusicContext.Provider
+      value={{ trackData, setTrackData, listTrackData, setListTrackData }}
+    >
       {children}
     </CurrentMusicContext.Provider>
   );
