@@ -5,12 +5,21 @@ export default function Musics({ musicData }: { musicData: SongItem[] }) {
   try {
     return musicData.map((data) => {
       return (
-        <ClickElement key={crypto.randomUUID()} ids={data.videoId}>
+        <ClickElement
+          key={crypto.randomUUID()}
+          id={data.videoId!}
+          artist={data?.artist!}
+          thumbnail={data?.thumbnail}
+          // @ts-ignore
+          trackList={musicData || []}
+          title={data?.title}
+        >
           <MusicCard
             title={data.title}
-            artist={data.artist}
+            // @ts-ignore
+            artist={data.artist || data.subtitle?.split("|")[0]}
             thumbnailUrl={data.thumbnail}
-            videoId={data.videoId}
+            videoId={data.videoId!}
           />
         </ClickElement>
       );
@@ -24,7 +33,7 @@ type MusicCardProps = {
   videoId: string;
   thumbnailUrl: string;
   title: string;
-  artist: string;
+  artist?: string;
 };
 
 export function MusicCard({

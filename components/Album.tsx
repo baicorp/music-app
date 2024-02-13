@@ -5,15 +5,12 @@ import Link from "next/link";
 export default function Album({ albumData }: { albumData: any[] }) {
   return albumData.map((content: any) => {
     return (
-      <Link
-        key={content.playlistId}
-        href={`album/${content?.playlistId || ""} `}
-      >
+      <Link key={crypto.randomUUID()} href={`/album/${content?.browseId}`}>
         <AlbumCard
-          browseId={content?.playlistId}
+          browseId={content?.playlistId || content?.browseId}
           thumbnails={content?.thumbnail}
           title={content?.title}
-          year={content?.year}
+          year={content?.year || content?.subtitle.replaceAll("|", " ")}
         />
       </Link>
     );
@@ -32,7 +29,7 @@ export function AlbumCard({
   year: string;
 }) {
   return (
-    <div className="shrink-0 w-[160px]">
+    <div className="shrink-0 w-[160px] h-full">
       <Image
         src={thumbnails}
         alt={`${title}-thumbnail`}
@@ -40,7 +37,7 @@ export function AlbumCard({
         height={226}
         className="w-40 h-w-40 rounded-md"
       />
-      <div className="mt-1 flex-1 flex flex-col gap-1 justify-between">
+      <div className="mt-1 flex-1 flex flex-col gap-1 justify-between relative">
         <p className="font-semibold text-white text-lg line-clamp-2 leading-tight">
           {title}
         </p>

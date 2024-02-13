@@ -1,9 +1,11 @@
+import { ChannelData } from "@/types/type";
+
 export type SongItem = {
-  videoId: string; // overlay?.musicItemThumbnailOverlayRenderer?.content?.musicPlayButtonRenderer?.playNavigationEndpoint?.watchEndpoint?.videoId
+  videoId?: string; // overlay?.musicItemThumbnailOverlayRenderer?.content?.musicPlayButtonRenderer?.playNavigationEndpoint?.watchEndpoint?.videoId
   title: string; // flexColumns?.map((data: any) => data?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map((data: any) => data?.text))?.flat()?.join()
   thumbnail: string;
-  duration: string;
-  artist: string;
+  duration?: string;
+  artist?: string;
 };
 
 export type AlbumOrPlaylistItem = {
@@ -285,4 +287,115 @@ function parseFlexColumnsData(data: any[]) {
       )
     )
     ?.flat();
+}
+
+export function extractChannelData(channelObject: any): ChannelData {
+  return {
+    artistName:
+      channelObject?.header?.musicImmersiveHeaderRenderer?.title?.runs[0]?.text,
+    description:
+      channelObject?.header?.musicImmersiveHeaderRenderer?.description?.runs[0]
+        ?.text,
+    thumbnail:
+      channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
+        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+        channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
+          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+      ]?.url,
+    thumbnailWidth:
+      channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
+        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+        channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
+          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+      ]?.width,
+    thumbnailHeight:
+      channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
+        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+        channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
+          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+      ]?.height,
+    contents:
+      channelObject?.contents?.singleColumnBrowseResultsRenderer?.tabs[0]?.tabRenderer?.content?.sectionListRenderer?.contents?.map(
+        (data: any) => {
+          if (data?.musicShelfRenderer) {
+            return {
+              headerTitle: data?.musicShelfRenderer?.title?.runs[0]?.text,
+              contents: data?.musicShelfRenderer?.contents?.map((data: any) => {
+                return {
+                  title:
+                    data?.musicResponsiveListItemRenderer?.flexColumns[0]
+                      ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs[0]
+                      ?.text,
+                  thumbnail:
+                    data?.musicResponsiveListItemRenderer?.thumbnail
+                      ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+                  subtitle: data?.musicResponsiveListItemRenderer?.flexColumns
+                    ?.map((data: any) =>
+                      data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                        (data: any) => data?.text?.trim()
+                      )
+                    )
+                    ?.flat(100)
+                    ?.filter((data: any) => data.trim() !== ",")
+                    ?.join()
+                    ?.replaceAll(",", "|"),
+                  videoId:
+                    data?.musicResponsiveListItemRenderer?.overlay
+                      ?.musicItemThumbnailOverlayRenderer?.content
+                      ?.musicPlayButtonRenderer?.playNavigationEndpoint
+                      ?.watchEndpoint?.videoId,
+                  type: "video",
+                };
+              }),
+            };
+          }
+          if (data?.musicCarouselShelfRenderer) {
+            const contentTypeTitle =
+              data?.musicCarouselShelfRenderer?.header
+                ?.musicCarouselShelfBasicHeaderRenderer?.title?.runs[0]?.text;
+            return {
+              headerTitle:
+                data?.musicCarouselShelfRenderer?.header
+                  ?.musicCarouselShelfBasicHeaderRenderer?.title?.runs[0]?.text,
+              contents: data?.musicCarouselShelfRenderer?.contents?.map(
+                (data: any) => {
+                  return {
+                    title: data?.musicTwoRowItemRenderer?.title?.runs[0]?.text,
+                    subtitle: data?.musicTwoRowItemRenderer?.subtitle?.runs
+                      ?.map((data: any) => data?.text?.trim())
+                      .flat(100)
+                      ?.filter((data: any) => data.trim() !== ",")
+                      .join()
+                      ?.replaceAll(",", "|"),
+                    thumbnail:
+                      data?.musicTwoRowItemRenderer?.thumbnailRenderer
+                        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+                    videoId:
+                      data?.musicTwoRowItemRenderer?.navigationEndpoint
+                        ?.watchEndpoint?.videoId,
+                    browseId:
+                      data?.musicTwoRowItemRenderer?.navigationEndpoint
+                        ?.browseEndpoint?.browseId,
+                    type:
+                      contentTypeTitle?.toLowerCase() === "fans might also like"
+                        ? "artist"
+                        : contentTypeTitle?.toLowerCase() === "songs"
+                        ? "video"
+                        : contentTypeTitle?.toLowerCase() === "albums"
+                        ? "album"
+                        : contentTypeTitle?.toLowerCase() === "singles"
+                        ? "single"
+                        : contentTypeTitle?.toLowerCase() === "videos"
+                        ? "video"
+                        : contentTypeTitle?.toLowerCase() === "featured on"
+                        ? "playlist"
+                        : undefined,
+                  };
+                }
+              ),
+            };
+          }
+        }
+      ),
+  };
 }

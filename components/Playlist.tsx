@@ -3,18 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { AlbumOrPlaylistItem } from "@/app/research/searchResult";
 
-export default function Playlist({
-  playlistData,
-}: {
-  playlistData: AlbumOrPlaylistItem[];
-}) {
+export default function Playlist({ playlistData }: { playlistData: any[] }) {
+  if (!playlistData) {
+    return null;
+  }
   return playlistData.map((content) => {
     return (
-      <Link key={crypto.randomUUID()} href={`playlist/${content?.playlistId}`}>
+      <Link
+        key={crypto.randomUUID()}
+        // @ts-ignore
+        href={`/playlist/${content?.browseId?.slice(2) || content?.playlistId}`}
+      >
         <PlaylistCard
           thumbnails={content.thumbnail}
           title={content.title}
-          description={content?.artist}
+          // @ts-ignore
+          description={content?.subtitle?.split("|")[2]}
         />
       </Link>
     );

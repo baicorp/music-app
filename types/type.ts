@@ -213,3 +213,26 @@ export interface BotguardData {
 export interface InterpreterSafeUrl {
   privateDoNotAccessOrElseTrustedResourceUrlWrappedValue: string;
 }
+
+export interface ChannelData {
+  artistName: string;
+  description: string;
+  thumbnail: string;
+  thumbnailWidth: number;
+  thumbnailHeight: number;
+  contents: Content[];
+}
+
+export interface Content {
+  headerTitle: string;
+  contents: Content2[];
+}
+
+export interface Content2 {
+  title: string;
+  thumbnail: string;
+  subtitle: string;
+  videoId?: string;
+  type: string;
+  browseId?: string;
+}

@@ -38,7 +38,14 @@ function Result({ result }: { result: any }) {
               .toString()
               .replaceAll(",", " & ");
             return (
-              <ClickElement key={crypto.randomUUID()} ids={data.videoId}>
+              <ClickElement
+                key={crypto.randomUUID()}
+                id={data.videoId}
+                artist={artist}
+                thumbnail={data.thumbnails[0].url}
+                title={data?.title}
+                trackList={result?.contents || []}
+              >
                 <MusicCard
                   title={data.title}
                   artist={artist}
