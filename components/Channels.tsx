@@ -6,7 +6,6 @@ export default function Channels({ channelsData }: { channelsData: any }) {
     return null;
   }
   return channelsData.map((channel: any) => {
-    console.log(channel?.title);
     return (
       <div key={channel.artist} className="shrink-0">
         <Link

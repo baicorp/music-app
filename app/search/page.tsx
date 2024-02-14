@@ -1,8 +1,5 @@
-import Album from "@/components/Album";
-import Channels from "@/components/Channels";
+import DynamicComponent from "@/components/DynamicComponent";
 import Loading from "@/components/Loading";
-import Musics from "@/components/Musics";
-import Playlist from "@/components/Playlist";
 import SearchBox from "@/components/SearchBox";
 import { search } from "@/utils/MusicClient";
 import React, { Suspense } from "react";
@@ -41,47 +38,33 @@ async function SearchResult({ query }: { query: string }) {
     );
   }
 
-  return data.map((data: any) => {
-    const title = data.title;
-    return (
-      <div key={title} className="mb-6">
-        <h2 className="text-2xl font-semibold mb-3">{title}</h2>
-        {title?.toLowerCase() === "top result" ? (
-          data.contents[0].type === "Song" ||
-          data.contents[0].type === "Video" ? (
-            <div className="flex flex-col gap-4">
-              <Musics key={crypto.randomUUID()} musicData={data?.contents} />
+  return (
+    <div className="flex flex-col gap-8">
+      {data.map((data) => {
+        if (!data) return null;
+        return (
+          <section key={data?.headerTitle + new Date()}>
+            <h2 className="text-xl font-bold mb-4 px-4">{data?.headerTitle}</h2>
+            <div
+              className={`${
+                ["video", "song"]?.includes(data?.contents[0]?.type)
+                  ? "flex flex-col gap-4"
+                  : "overflow-x-auto flex gap-4 last:pr-4"
+              } px-4`}
+            >
+              {data?.contents?.map((data: any) => {
+                return (
+                  <DynamicComponent
+                    key={data?.type + new Date()}
+                    props={data}
+                    type={data.type}
+                  />
+                );
+              })}
             </div>
-          ) : data.contents[0].type === "Album" ||
-            data.contents[0].type === "Playlist" ? (
-            <Album albumData={data?.contents} />
-          ) : (
-            <div className="flex gap-4">
-              <Channels
-                key={crypto.randomUUID()}
-                channelsData={data?.contents}
-              />
-            </div>
-          )
-        ) : title?.toLowerCase() === "songs" ||
-          title?.toLowerCase() === "videos" ? (
-          <div className="flex flex-col gap-4">
-            <Musics key={crypto.randomUUID()} musicData={data?.contents} />
-          </div>
-        ) : title?.toLowerCase() === "artists" ? (
-          <div key={crypto.randomUUID()} className="flex gap-4">
-            <Channels channelsData={data.contents} />
-          </div>
-        ) : title?.toLowerCase() === "albums" ? (
-          <div className="flex gap-4">
-            <Album albumData={data?.contents} />
-          </div>
-        ) : title?.toLowerCase() === "community playlists" ? (
-          <div className="flex gap-4">
-            <Playlist playlistData={data?.contents} />
-          </div>
-        ) : null}
-      </div>
-    );
-  });
+          </section>
+        );
+      })}
+    </div>
+  );
 }

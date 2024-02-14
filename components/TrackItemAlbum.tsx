@@ -6,6 +6,7 @@ type TrackItemAlbumProps = {
   title: string;
   artistName: string;
   duration: string;
+  playCounter: string;
 };
 
 export default function TrackItemAlbum({
@@ -14,11 +15,12 @@ export default function TrackItemAlbum({
   title,
   artistName,
   duration,
+  playCounter,
 }: TrackItemAlbumProps) {
   return (
     <div className="flex">
       <p className="w-14 h-14 shrink-0 flex justify-center items-center text-sm font-semibold">
-        {order + 1}
+        {order}
       </p>
       <div className="grow flex flex-col justify-end px-4 overflow-hidden">
         <p className="font-semibold text-white line-clamp-1">{title}</p>
@@ -28,6 +30,8 @@ export default function TrackItemAlbum({
           </p>
           <span>・</span>
           <p className="text-xs font-semibold text-gray-400">{duration}</p>
+          <span>・</span>
+          <p className="text-xs font-semibold text-gray-400">{playCounter}</p>
         </div>
       </div>
     </div>

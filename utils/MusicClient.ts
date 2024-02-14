@@ -3,7 +3,9 @@ import {
   processPlaylistData,
   processSearchData,
 } from "@/app/research/searchResult";
+import { extractSearchData } from "@/app/research/searchStructureData";
 import { getUrlStream } from "./cipher.js";
+import { extractAlbumData } from "@/app/research/albumStructureData";
 
 const headers = new Headers();
 headers.append("Host", "music.youtube.com");
@@ -43,10 +45,7 @@ export async function search(query: string) {
     }
   );
   const data = await res.json();
-  const datas =
-    data?.contents?.tabbedSearchResultsRenderer?.tabs[0]?.tabRenderer?.content
-      ?.sectionListRenderer?.contents;
-  return processSearchData(datas);
+  return extractSearchData(data);
 }
 
 type TrackProps = {
@@ -57,9 +56,9 @@ type TrackProps = {
   duration: string;
 };
 
-export async function getPlaylist(playlistId: string) {
+export async function getPlaylist(browseId: string) {
   const body = {
-    playlistId: playlistId,
+    playlistId: browseId,
     context: {
       client: {
         clientName: "WEB_REMIX",
@@ -95,6 +94,48 @@ export async function getPlaylist(playlistId: string) {
     playlistThumbnail: playlistThumbnail,
     ...processPlaylistData(datas),
   };
+}
+
+export async function getAlbum(browseId: string) {
+  const body = {
+    browseId: browseId,
+    context: {
+      client: {
+        clientName: "WEB_REMIX",
+        clientVersion: "1.20220918",
+      },
+      thirdParty: {
+        embedUrl: "https://www.youtube.com",
+      },
+    },
+  };
+
+  const res = await fetch(
+    "https://www.youtube.com/youtubei/v1/browse?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30",
+    {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    }
+  );
+  const data = await res.json();
+  //get main content
+  // const datas =
+  //   data?.contents?.singleColumnMusicWatchNextResultsRenderer?.tabbedRenderer
+  //     ?.watchNextTabbedResultsRenderer?.tabs[0]?.tabRenderer?.content
+  //     ?.musicQueueRenderer?.content?.playlistPanelRenderer;
+  // // get playlist thumbnail
+  // const playlistThumbnail =
+  //   data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
+  //     ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails[
+  //     data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
+  //       ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails.length - 1
+  //   ]?.url;
+  // return {
+  //   playlistThumbnail: playlistThumbnail,
+  //   ...processPlaylistData(datas),
+  // };
+  return extractAlbumData(data);
 }
 
 export async function getMusicPlayer(id: string) {

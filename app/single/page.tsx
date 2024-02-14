@@ -1,11 +1,11 @@
-import Image from "next/image";
-import React from "react";
-import TrackItemAlbum from "@/components/TrackItemAlbum";
 import ClickElement from "@/components/ClickElement";
+import TrackItemAlbum from "@/components/TrackItemAlbum";
 import { getAlbum } from "@/utils/MusicClient";
+import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
-export default async function Album({
+export default async function page({
   params,
 }: {
   params: { browseId: string };
