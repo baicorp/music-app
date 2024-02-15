@@ -1,37 +1,24 @@
+import { AlbumItem } from "@/types/album";
 import React from "react";
 
-type TrackItemAlbumProps = {
-  trackId: string;
-  order: number;
-  title: string;
-  artistName: string;
-  duration: string;
-  playCounter: string;
-};
-
 export default function TrackItemAlbum({
-  trackId,
-  order,
+  videoId,
+  index,
   title,
-  artistName,
   duration,
-  playCounter,
-}: TrackItemAlbumProps) {
+  plays,
+}: AlbumItem) {
   return (
     <div className="flex">
       <p className="w-14 h-14 shrink-0 flex justify-center items-center text-sm font-semibold">
-        {order}
+        {index}
       </p>
       <div className="grow flex flex-col justify-end px-4 overflow-hidden">
         <p className="font-semibold text-white line-clamp-1">{title}</p>
         <div className="flex items-center">
-          <p className="text-xs font-semibold text-gray-400 line-clamp-1">
-            {artistName}
-          </p>
+          <p className="text-xs font-semibold text-gray-400">{plays}</p>
           <span>・</span>
           <p className="text-xs font-semibold text-gray-400">{duration}</p>
-          <span>・</span>
-          <p className="text-xs font-semibold text-gray-400">{playCounter}</p>
         </div>
       </div>
     </div>

@@ -5,10 +5,11 @@ import {
   getPlaylist,
   getChannelData,
   search,
+  getAlbum,
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getChannelData("UCFeCzD2Fqr3jlMcGTt0Jnlg");
+  const data = await getAlbum("MPREb_98YcfN1GUNy");
 
   return (
     <>

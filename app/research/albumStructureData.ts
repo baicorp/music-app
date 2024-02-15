@@ -20,18 +20,23 @@ export function extractAlbumData(albumDataObject: any) {
       albumDataObject?.header?.musicDetailHeaderRenderer?.secondSubtitle?.runs?.map(
         (data: any) => data?.text
       ),
+    description:
+      albumDataObject?.header?.musicDetailHeaderRenderer?.description?.runs[0]
+        ?.text,
     contents: contents?.map((data: any) => {
       const dataItem = data?.musicResponsiveListItemRenderer;
       return {
         index: dataItem?.index?.runs[0]?.text,
         videoId: dataItem?.playlistItemData?.videoId,
-        title: dataItem?.flexColumns
-          ?.map((flexColumn: any) =>
-            flexColumn?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
-              (run: any) => (run?.text ? run?.text : undefined)
-            )
-          )
-          ?.flat(100),
+        title:
+          dataItem?.flexColumns[0]?.musicResponsiveListItemFlexColumnRenderer
+            ?.text?.runs[0]?.text,
+        plays:
+          dataItem?.flexColumns[
+            dataItem?.flexColumns?.length - 1
+          ]?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+            (run: any) => run?.text
+          )[0] || null,
         duration:
           dataItem?.fixedColumns[0]?.musicResponsiveListItemFixedColumnRenderer
             ?.text?.runs[0]?.text,
