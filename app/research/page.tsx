@@ -1,8 +1,14 @@
 import React from "react";
-import { getMusicPlayer, getPlaylist, search } from "@/utils/MusicClient";
+import {
+  getHome,
+  getMusicPlayer,
+  getPlaylist,
+  getChannelData,
+  search,
+} from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await search("nadine");
+  const data = await getHome();
 
   return (
     <>

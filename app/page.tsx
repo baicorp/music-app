@@ -4,12 +4,14 @@ import { home } from "@/utils/pipedAPI";
 import Playlist, { PlaylistCard } from "@/components/Playlist";
 import ClickElement from "@/components/ClickElement";
 import Link from "next/link";
+import { getHome } from "@/utils/MusicClient";
+import DynamicComponent from "@/components/DynamicComponent";
 
 export default async function Home() {
   let data;
   try {
-    const datas = await home();
-    data = datas;
+    // const datas = await home();
+    // data = datas;
   } catch (error) {
     return (
       <div className="h-screen flex justify-center items-center">
@@ -18,10 +20,13 @@ export default async function Home() {
     );
   }
   return (
-    <main className="overflow-hidden lg:px-6 xl:px-10">
-      {data.data?.map((result: any) => {
+    <main className="overflow-hidden p-4 lg:px-6 xl:px-10">
+      {/* {data.data?.map((result: any) => {
         return <Result key={result.title} result={result} />;
-      })}
+      })} */}
+      <div className="flex flex-col gap-5">
+        <HomeResult />
+      </div>
     </main>
   );
 }
@@ -95,4 +100,38 @@ function Result({ result }: { result: any }) {
       </div>
     </div>
   );
+}
+
+async function HomeResult() {
+  const data = await getHome();
+  const list = data?.map((data: any, index: number) => {
+    if (data?.headerTitle === "Quick picks") {
+      return (
+        <div key={index} className="flex flex-col gap-5">
+          <h1 className="font-bold text-lg">{data?.headerTitle}</h1>
+          <div className="overflow-x-auto gap-2 md:gap-4 flex flex-col flex-wrap h-[230px] md:h-[250px] empty:hidden">
+            {data?.contents?.map((data: any, index: number) => {
+              return (
+                <DynamicComponent key={index} type={data?.type} props={data} />
+              );
+            })}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div key={index} className="flex flex-col gap-5">
+          <h1 className="font-bold text-lg">{data?.headerTitle}</h1>
+          <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
+            {data?.contents?.map((data: any, index: number) => {
+              return (
+                <DynamicComponent key={index} type={data?.type} props={data} />
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+  });
+  return list;
 }

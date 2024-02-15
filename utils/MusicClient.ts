@@ -1,11 +1,11 @@
 import {
   extractChannelData,
   processPlaylistData,
-  processSearchData,
 } from "@/app/research/searchResult";
 import { extractSearchData } from "@/app/research/searchStructureData";
 import { getUrlStream } from "./cipher.js";
 import { extractAlbumData } from "@/app/research/albumStructureData";
+import { extractHomeData } from "@/app/research/homeStructureData";
 
 const headers = new Headers();
 headers.append("Host", "music.youtube.com");
@@ -55,6 +55,31 @@ type TrackProps = {
   artist: string;
   duration: string;
 };
+
+export async function getHome() {
+  const body = {
+    browseId: "FEmusic_home",
+    params:
+      "ggM8SgQICBADSgQIBxABSgQICRABSgQIDRABSgQIAxABSgQIChABSgQIBRABSgQIBBABSgQIDhABSgQIBhAB",
+    context: {
+      client: {
+        clientName: "WEB_REMIX",
+        clientVersion: "1.20220918",
+      },
+    },
+  };
+
+  const res = await fetch(
+    "https://music.youtube.com/youtubei/v1/browse?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30",
+    {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    }
+  );
+  const data = await res.json();
+  return extractHomeData(data);
+}
 
 export async function getPlaylist(browseId: string) {
   const body = {
@@ -119,22 +144,6 @@ export async function getAlbum(browseId: string) {
     }
   );
   const data = await res.json();
-  //get main content
-  // const datas =
-  //   data?.contents?.singleColumnMusicWatchNextResultsRenderer?.tabbedRenderer
-  //     ?.watchNextTabbedResultsRenderer?.tabs[0]?.tabRenderer?.content
-  //     ?.musicQueueRenderer?.content?.playlistPanelRenderer;
-  // // get playlist thumbnail
-  // const playlistThumbnail =
-  //   data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
-  //     ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails[
-  //     data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
-  //       ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails.length - 1
-  //   ]?.url;
-  // return {
-  //   playlistThumbnail: playlistThumbnail,
-  //   ...processPlaylistData(datas),
-  // };
   return extractAlbumData(data);
 }
 
