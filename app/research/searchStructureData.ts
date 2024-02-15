@@ -20,13 +20,54 @@ export function extractSearchData(searchDataObject: any) {
               ?.map((run: any) => run?.text?.trim())
               ?.flat(100)
               ?.filter((data: any) => data.trim() !== ","),
+            artists: content?.musicCardShelfRenderer?.subtitle?.runs
+              ?.map((run: any) => {
+                if (
+                  !run?.navigationEndpoint?.browseEndpoint?.browseId?.startsWith(
+                    "UC"
+                  )
+                )
+                  return null;
+                return {
+                  name: run?.text?.trim(),
+                  browseId: run?.navigationEndpoint?.browseEndpoint?.browseId,
+                };
+              })
+              ?.filter((data: any) => data !== null),
+            plays:
+              content?.musicCardShelfRenderer?.subtitle?.runs
+                ?.map((run: any) => {
+                  if (!run?.text?.endsWith("plays")) return null;
+                  return run?.text?.trim();
+                })
+                ?.filter((data: any) => data !== null)[0] || null,
+            views:
+              content?.musicCardShelfRenderer?.subtitle?.runs
+                ?.map((run: any) => {
+                  if (!run?.text?.endsWith("views")) return null;
+                  return run?.text?.trim();
+                })
+                ?.filter((data: any) => data !== null)[0] || null,
+            duration:
+              content?.musicCardShelfRenderer?.subtitle?.runs
+                ?.map((run: any) => {
+                  if (!timeRegex.test(run?.text)) return null;
+                  return run?.text;
+                })
+                ?.filter((data: any) => data !== null)[0] || null,
             videoId:
               content?.musicCardShelfRenderer?.title?.runs[0]
                 ?.navigationEndpoint?.watchEndpoint?.videoId,
             browseId:
               content?.musicCardShelfRenderer?.title?.runs[0]
                 ?.navigationEndpoint?.browseEndpoint?.browseId,
-            type: content?.musicCardShelfRenderer?.subtitle?.runs[0]?.text?.toLowerCase(),
+            // type: content?.musicCardShelfRenderer?.subtitle?.runs[0]?.text?.toLowerCase(),
+            type: contentType(
+              content?.musicCardShelfRenderer?.title?.runs[0]
+                ?.navigationEndpoint?.watchEndpoint?.videoId ||
+                content?.musicCardShelfRenderer?.title?.runs[0]
+                  ?.navigationEndpoint?.browseEndpoint?.browseId
+            ),
           },
         ],
       };
@@ -67,6 +108,62 @@ export function extractSearchData(searchDataObject: any) {
                   ?.musicThumbnailRenderer?.thumbnail?.thumbnails.length - 1
               ]?.url,
             subtitle: subtitle,
+            artists: content?.musicResponsiveListItemRenderer?.flexColumns
+              ?.map((flexColumn: any) =>
+                flexColumn.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                  (run: any) => {
+                    if (
+                      !run?.navigationEndpoint?.browseEndpoint?.browseId?.startsWith(
+                        "UC"
+                      )
+                    )
+                      return null;
+                    return {
+                      name: run?.text?.trim(),
+                      browseId:
+                        run?.navigationEndpoint?.browseEndpoint?.browseId,
+                    };
+                  }
+                )
+              )
+              ?.flat(100)
+              ?.filter((data: any) => data !== null),
+            plays:
+              content?.musicResponsiveListItemRenderer?.flexColumns
+                ?.map((flexColumn: any) =>
+                  flexColumn.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                    (run: any) => {
+                      if (!run?.text?.endsWith("plays")) return null;
+                      return run?.text;
+                    }
+                  )
+                )
+                ?.flat(100)
+                ?.filter((data: any) => data !== null)[0] || null,
+            views:
+              content?.musicResponsiveListItemRenderer?.flexColumns
+                ?.map((flexColumn: any) =>
+                  flexColumn.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                    (run: any) => {
+                      if (!run?.text?.endsWith("views")) return null;
+                      return run?.text;
+                    }
+                  )
+                )
+                ?.flat(100)
+                ?.filter((data: any) => data !== null)[0] || null,
+            duration:
+              content?.musicResponsiveListItemRenderer?.flexColumns
+                ?.map((flexColumn: any) =>
+                  flexColumn.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                    (run: any) => {
+                      if (!timeRegex.test(run?.text)) return null;
+                      return run?.text;
+                    }
+                  )
+                )
+                ?.flat(100)
+                ?.filter((data: any) => data !== null)[0] || null,
             videoId:
               content?.musicResponsiveListItemRenderer?.overlay
                 ?.musicItemThumbnailOverlayRenderer?.content
@@ -75,9 +172,17 @@ export function extractSearchData(searchDataObject: any) {
             browseId:
               content?.musicResponsiveListItemRenderer?.navigationEndpoint
                 ?.browseEndpoint?.browseId,
-            type: subtitle[subtitle.length - 1].includes("plays")
-              ? "video"
-              : subtitle[0]?.toLowerCase(),
+            // type: subtitle[subtitle.length - 1].includes("plays")
+            //   ? "song"
+            //   : subtitle[0]?.toLowerCase(),
+            type: contentType(
+              content?.musicResponsiveListItemRenderer?.overlay
+                ?.musicItemThumbnailOverlayRenderer?.content
+                ?.musicPlayButtonRenderer?.playNavigationEndpoint?.watchEndpoint
+                ?.videoId ||
+                content?.musicResponsiveListItemRenderer?.navigationEndpoint
+                  ?.browseEndpoint?.browseId
+            ),
           };
         }),
       };
@@ -95,6 +200,9 @@ export function contentType(id: string) {
   } else if (id?.startsWith("UC")) {
     return "artist";
   } else {
-    return "video";
+    return "song";
   }
 }
+
+export const timeRegex =
+  /^(0?\d|1\d|2[0-3]):([0-5]?\d):([0-5]?\d)$|^(0?\d|1\d|2[0-3]):([0-5]?\d)$|^(0?\d|1\d|2[0-3])$/;

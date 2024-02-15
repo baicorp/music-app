@@ -1,43 +1,15 @@
 import React from "react";
-import ClickElement from "../ClickElement";
-
-type SongCardProps = {
-  videoId?: string;
-  thumbnail: string;
-  title: string;
-  artist?: string;
-  subtitle: string[];
-  trackList: any[];
-};
+import { Song, Artist } from "@/types/song";
+import Link from "next/link";
 
 export default function SongCard({
   thumbnail,
   title,
-  videoId,
-  artist,
-  subtitle,
-  trackList,
-}: SongCardProps) {
-  return (
-    <ClickElement
-      key={crypto.randomUUID()}
-      id={videoId!}
-      artist={artist!}
-      thumbnail={thumbnail}
-      title={title}
-      trackList={trackList}
-    >
-      <MusicCard
-        title={title}
-        thumbnail={thumbnail}
-        subtitle={subtitle}
-        trackList={[]}
-      />
-    </ClickElement>
-  );
-}
-
-export function MusicCard({ thumbnail, title, subtitle }: SongCardProps) {
+  artists,
+  duration,
+  plays,
+  views,
+}: Song) {
   return (
     <div className="flex w-[300px] md:w-[384px] rounded-md">
       <img
@@ -47,17 +19,51 @@ export function MusicCard({ thumbnail, title, subtitle }: SongCardProps) {
       />
       <div className="flex grow flex-col justify-center px-4">
         <p className="font-semibold text-white line-clamp-1">{title}</p>
-        <p className="text-sm font-semibold text-gray-400 line-clamp-1">
-          <span className="hover:decoration-wavy hover:underline">
-            {subtitle[1] + " "}
-          </span>
-          {subtitle[2] + " "}
-          <span className="hover:decoration-wavy hover:underline">
-            {subtitle[3] + " "}
-          </span>
-          {subtitle?.slice(4)?.join()?.replaceAll(",", " ")}
-        </p>
+        <div className="flex gap-2">
+          <Artists artists={artists} />
+          <Plays plays={plays} />
+          <Views views={views} />
+          <Duration duration={duration} />
+        </div>
       </div>
     </div>
+  );
+}
+
+function Artists({ artists }: { artists: Artist[] }) {
+  if (!artists) return;
+  return artists?.map((artist, index) => {
+    return (
+      <Link
+        key={index}
+        href={`/artist/${artist.browseId}`}
+        className="text-sm font-semibold text-gray-400 line-clamp-1 hover:decoration-wavy hover:underline"
+      >
+        {artist.name}
+      </Link>
+    );
+  });
+}
+
+function Duration({ duration }: { duration: string | undefined }) {
+  if (!duration) return;
+  return (
+    <p className="text-sm font-semibold text-gray-400 line-clamp-1">
+      {duration}
+    </p>
+  );
+}
+
+function Plays({ plays }: { plays: string | undefined }) {
+  if (!plays) return;
+  return (
+    <p className="text-sm font-semibold text-gray-400 line-clamp-1">{plays}</p>
+  );
+}
+
+function Views({ views }: { views: string | undefined }) {
+  if (!views) return;
+  return (
+    <p className="text-sm font-semibold text-gray-400 line-clamp-1">{views}</p>
   );
 }

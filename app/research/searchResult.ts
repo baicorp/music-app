@@ -336,9 +336,41 @@ export function extractChannelData(channelObject: any): ChannelData {
                       )
                     )
                     ?.flat(100)
-                    ?.filter((data: any) => data.trim() !== ",")
+                    ?.filter((data: any) => data?.trim() !== ",")
                     ?.join()
                     ?.replaceAll(",", "|"),
+                  artists: data?.musicResponsiveListItemRenderer?.flexColumns
+                    ?.map((data: any) =>
+                      data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                        (run: any) => {
+                          if (
+                            !run?.navigationEndpoint?.browseEndpoint?.browseId?.startsWith(
+                              "UC"
+                            )
+                          )
+                            return null;
+                          return {
+                            name: run?.text,
+                            browseId:
+                              run?.navigationEndpoint?.browseEndpoint?.browseId,
+                          };
+                        }
+                      )
+                    )
+                    ?.flat(100)
+                    ?.filter((data: any) => data !== null),
+                  plays:
+                    data?.musicResponsiveListItemRenderer?.flexColumns
+                      ?.map((data: any) =>
+                        data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                          (run: any) => {
+                            if (!run?.text?.endsWith("plays")) return null;
+                            return run?.text;
+                          }
+                        )
+                      )
+                      ?.flat(100)
+                      ?.filter((data: any) => data !== null)[0] || null,
                   videoId:
                     data?.musicResponsiveListItemRenderer?.overlay
                       ?.musicItemThumbnailOverlayRenderer?.content
@@ -373,6 +405,38 @@ export function extractChannelData(channelObject: any): ChannelData {
                     videoId:
                       data?.musicTwoRowItemRenderer?.navigationEndpoint
                         ?.watchEndpoint?.videoId,
+                    artists: data?.musicTwoRowItemRenderer?.subtitle?.runs
+                      ?.map((run: any) => {
+                        if (
+                          !run?.navigationEndpoint?.browseEndpoint?.browseId?.startsWith(
+                            "UC"
+                          )
+                        )
+                          return null;
+                        return {
+                          name: run?.text?.trim(),
+                          browseId:
+                            run?.navigationEndpoint?.browseEndpoint?.browseId,
+                        };
+                      })
+                      .flat(100)
+                      ?.filter((data: any) => data !== null),
+                    plays:
+                      data?.musicTwoRowItemRenderer?.subtitle?.runs
+                        ?.map((run: any) => {
+                          if (!run?.text.endsWith("plays")) return null;
+                          return run?.text;
+                        })
+                        .flat(100)
+                        ?.filter((data: any) => data !== null)[0] || null,
+                    views:
+                      data?.musicTwoRowItemRenderer?.subtitle?.runs
+                        ?.map((run: any) => {
+                          if (!run?.text.endsWith("views")) return null;
+                          return run?.text;
+                        })
+                        .flat(100)
+                        ?.filter((data: any) => data !== null)[0] || null,
                     browseId:
                       data?.musicTwoRowItemRenderer?.navigationEndpoint
                         ?.browseEndpoint?.browseId,

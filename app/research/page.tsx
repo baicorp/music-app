@@ -8,7 +8,7 @@ import {
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getHome();
+  const data = await getChannelData("UCFeCzD2Fqr3jlMcGTt0Jnlg");
 
   return (
     <>
