@@ -15,7 +15,7 @@ export function extractAlbumData(albumDataObject: any) {
       ),
     thumbnail:
       albumDataObject?.header?.musicDetailHeaderRenderer?.thumbnail
-        ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[2].url,
+        ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[3].url,
     albumStat:
       albumDataObject?.header?.musicDetailHeaderRenderer?.secondSubtitle?.runs?.map(
         (data: any) => data?.text

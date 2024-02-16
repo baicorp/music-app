@@ -33,6 +33,7 @@ export default function SongCard({
 function Artists({ artists }: { artists: Artist[] }) {
   if (!artists) return;
   return artists?.map((artist, index) => {
+    if (!artist) return;
     return (
       <Link
         key={index}

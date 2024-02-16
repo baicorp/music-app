@@ -17,7 +17,7 @@ export default function PlaylistCard({
 }: PlaylistCardProps) {
   return (
     <div className="shrink-0 w-[160px]">
-      <Link href={`/playlist/${browseId.slice(2)}`}>
+      <Link href={`/playlist/${browseId}`}>
         <Image
           src={thumbnail}
           alt={title}

@@ -3,13 +3,13 @@ import {
   getHome,
   getMusicPlayer,
   getPlaylist,
-  getChannelData,
+  getChannel,
   search,
   getAlbum,
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getAlbum("MPREb_98YcfN1GUNy");
+  const data = await getChannel("UC4X7J9D6VbTIwnFDFNkfQ1A");
 
   return (
     <>

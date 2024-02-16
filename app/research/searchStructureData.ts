@@ -172,9 +172,6 @@ export function extractSearchData(searchDataObject: any) {
             browseId:
               content?.musicResponsiveListItemRenderer?.navigationEndpoint
                 ?.browseEndpoint?.browseId,
-            // type: subtitle[subtitle.length - 1].includes("plays")
-            //   ? "song"
-            //   : subtitle[0]?.toLowerCase(),
             type: contentType(
               content?.musicResponsiveListItemRenderer?.overlay
                 ?.musicItemThumbnailOverlayRenderer?.content

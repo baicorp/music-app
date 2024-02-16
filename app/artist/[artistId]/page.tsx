@@ -4,7 +4,7 @@ import Loading from "@/components/Loading";
 import Musics from "@/components/Musics";
 import Playlist from "@/components/Playlist";
 import { Content } from "@/types/type";
-import { getChannelData } from "@/utils/MusicClient";
+import { getChannel } from "@/utils/MusicClient";
 import Image from "next/image";
 import React, { Suspense } from "react";
 
@@ -19,7 +19,7 @@ export default function page({ params }: { params: { artistId: string } }) {
 }
 
 async function ChannelData({ channelId }: { channelId: string }) {
-  const data = await getChannelData(channelId);
+  const data = await getChannel(channelId);
 
   if (!data) return <p>sorry</p>;
 
@@ -36,9 +36,12 @@ async function ChannelData({ channelId }: { channelId: string }) {
           />
           <div className="bg-gradient-to-b from-[#191919] via-transparent to-[#0f0f0f] absolute inset-0"></div>
           <div className="absolute flex flex-col justify-end items-center lg:items-start inset-0 lg:px-6 xl:px-10 p-4">
-            <h1 className="font-bold lg:font-black text-4xl lg:text-6xl lg:mb-2">
-              {data?.artistName}
-            </h1>
+            <div className="flex gap-4 items-center justify-end">
+              <Avatar avatar={data?.avatar} />
+              <h1 className="font-bold lg:font-black text-4xl lg:text-6xl lg:mb-2">
+                {data?.artistName}
+              </h1>
+            </div>
             <div className="hidden lg:block">
               <p className="w-1/2 text-sm line-clamp-4">{data?.description}</p>
             </div>
@@ -85,6 +88,10 @@ function ChannelDataList({ contents }: { contents: Content[] }) {
               <div className="flex flex-col gap-4">
                 <Musics musicData={data?.contents} />
               </div>
+            ) : data?.headerTitle === "Playlists" ? (
+              <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
+                <Playlist playlistData={data?.contents} />
+              </div>
             ) : undefined}
           </div>
         </div>
@@ -92,4 +99,17 @@ function ChannelDataList({ contents }: { contents: Content[] }) {
     );
   });
   return list;
+}
+
+function Avatar({ avatar }: { avatar: string | undefined }) {
+  if (!avatar) return "";
+  return (
+    <Image
+      className="object-cover object-center rounded-full w-32 h-32 md:w-48 md:h-48"
+      src={avatar}
+      alt={"avatar"}
+      width={226}
+      height={226}
+    />
+  );
 }

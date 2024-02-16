@@ -220,6 +220,7 @@ export interface ChannelData {
   thumbnail: string;
   thumbnailWidth: number;
   thumbnailHeight: number;
+  avatar: string;
   contents: Content[];
 }
 

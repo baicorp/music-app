@@ -31,28 +31,29 @@ export default async function Album({
           <Image
             src={data?.thumbnail}
             alt={`${data?.title} thumbnail`}
-            width={266}
-            height={266}
+            width={544}
+            height={544}
             className="w-[40%] aspect-video object-cover object-center rounded-sm shrink-0"
           />
-          <div className="px-4 py-2">
+          <div className="px-4 py-2 text-sm md:text-base">
             <p className="font-bold text-3xl line-clamp-3 leading-tight">
               {data?.title}
             </p>
             <div className="flex flex-col my-4">
               <p className="font-semibold text-gray-400">
                 {data?.subtitle?.map((text: string, index: number) => {
-                  return index === 2 ? (
-                    <Link
-                      key={text.split("|")[1]}
-                      className="hover:decoration-wavy hover:underline"
-                      href={`/artist/${text.split("|")[1]}`}
-                    >
-                      {text.split("|")[0]}
-                    </Link>
-                  ) : (
-                    <span key={index}>{text}</span>
-                  );
+                  if (index === 2) {
+                    if (!text?.split("|")[1]) return <span>{text}</span>;
+                    return (
+                      <Link
+                        key={text.split("|")[1]}
+                        className="hover:decoration-wavy hover:underline"
+                        href={`/artist/${text.split("|")[1]}`}
+                      >
+                        {text.split("|")[0]}
+                      </Link>
+                    );
+                  }
                 })}
               </p>
               <p className="font-semibold text-gray-400">

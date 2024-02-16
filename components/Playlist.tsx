@@ -12,7 +12,7 @@ export default function Playlist({ playlistData }: { playlistData: any[] }) {
       <Link
         key={crypto.randomUUID()}
         // @ts-ignore
-        href={`/playlist/${content?.browseId?.slice(2) || content?.playlistId}`}
+        href={`/playlist/${content?.browseId || content?.playlistId}`}
       >
         <PlaylistCard
           thumbnails={content.thumbnail}

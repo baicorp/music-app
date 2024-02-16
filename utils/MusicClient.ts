@@ -1,11 +1,9 @@
-import {
-  extractChannelData,
-  processPlaylistData,
-} from "@/app/research/searchResult";
+import { extractChannelData } from "@/app/research/channelStructureData";
 import { extractSearchData } from "@/app/research/searchStructureData";
 import { getUrlStream } from "./cipher.js";
 import { extractAlbumData } from "@/app/research/albumStructureData";
 import { extractHomeData } from "@/app/research/homeStructureData";
+import { extractPlaylistData } from "@/app/research/playlistStructureData";
 
 const headers = new Headers();
 headers.append("Host", "music.youtube.com");
@@ -48,14 +46,6 @@ export async function search(query: string) {
   return extractSearchData(data);
 }
 
-type TrackProps = {
-  videoId: string;
-  title: string;
-  thumbnail: string;
-  artist: string;
-  duration: string;
-};
-
 export async function getHome() {
   const body = {
     browseId: "FEmusic_home",
@@ -83,19 +73,17 @@ export async function getHome() {
 
 export async function getPlaylist(browseId: string) {
   const body = {
-    playlistId: browseId,
+    browseId: browseId,
     context: {
       client: {
         clientName: "WEB_REMIX",
         clientVersion: "1.20220918",
       },
     },
-    racyCheckOk: true,
-    contentCheckOk: true,
   };
 
   const res = await fetch(
-    "https://music.youtube.com/youtubei/v1/next?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30",
+    "https://music.youtube.com/youtubei/v1/browse?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30",
     {
       method: "POST",
       headers: headers,
@@ -103,22 +91,7 @@ export async function getPlaylist(browseId: string) {
     }
   );
   const data = await res.json();
-  //get main content
-  const datas =
-    data?.contents?.singleColumnMusicWatchNextResultsRenderer?.tabbedRenderer
-      ?.watchNextTabbedResultsRenderer?.tabs[0]?.tabRenderer?.content
-      ?.musicQueueRenderer?.content?.playlistPanelRenderer;
-  // get playlist thumbnail
-  const playlistThumbnail =
-    data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
-      ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails[
-      data?.playerOverlays?.playerOverlayRenderer?.browserMediaSession
-        ?.browserMediaSessionRenderer?.thumbnailDetails?.thumbnails.length - 1
-    ]?.url;
-  return {
-    playlistThumbnail: playlistThumbnail,
-    ...processPlaylistData(datas),
-  };
+  return extractPlaylistData(data);
 }
 
 export async function getAlbum(browseId: string) {
@@ -188,7 +161,7 @@ export async function getMusicPlayer(id: string) {
   };
 }
 
-export async function getChannelData(browseId: string) {
+export async function getChannel(browseId: string) {
   const body = {
     browseId: browseId,
     context: {
