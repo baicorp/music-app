@@ -31,34 +31,38 @@ export default async function page({
           <Image
             src={data?.thumbnail}
             alt={`${data?.title} thumbnail`}
-            width={266}
-            height={266}
-            className="w-[50%] aspect-video object-cover object-center rounded-sm"
+            width={544}
+            height={544}
+            className="w-[40%] aspect-video object-cover object-center rounded-sm shrink-0"
           />
-          <div className="px-4 py-2">
+          <div className="px-4 py-2 text-sm md:text-base">
             <p className="font-bold text-lg line-clamp-3 leading-tight">
               {data?.title}
             </p>
             <div className="flex flex-col mt-3">
-              <p className="font-semibold text-sm text-gray-400">
+              <p className="font-semibold text-gray-400">
                 {data?.subtitle?.map((text: string, index: number) => {
-                  return index === 2 ? (
-                    <Link
-                      key={text.split("|")[1]}
-                      className="hover:decoration-wavy hover:underline"
-                      href={`/artist/${text.split("|")[1]}`}
-                    >
-                      {text.split("|")[0]}
-                    </Link>
-                  ) : (
-                    <span key={index}>{text}</span>
-                  );
+                  if (index === 2) {
+                    if (!text?.split("|")[1]) return <span>{text}</span>;
+                    return (
+                      <Link
+                        key={text.split("|")[1]}
+                        className="hover:decoration-wavy hover:underline"
+                        href={`/artist/${text.split("|")[1]}`}
+                      >
+                        {text.split("|")[0]}
+                      </Link>
+                    );
+                  }
                 })}
               </p>
-              <p className="font-semibold text-sm text-gray-400">
+              <p className="font-semibold text-gray-400">
                 {`${data?.albumStat.join().replaceAll(",", " ")} songs`}
               </p>
             </div>
+            <p className="hidden md:block text-gray-400 text-sm line-clamp-[7]">
+              {data?.description}
+            </p>
           </div>
         </div>
         <div className="gap-2 mt-5">
@@ -68,17 +72,16 @@ export default async function page({
                 key={crypto.randomUUID()}
                 id={content?.videoId}
                 artist={data?.subtitle[2]?.split("|")[0]}
-                thumbnail={content?.thumbnail}
+                thumbnail={data?.thumbnail}
                 title={content?.title}
                 trackList={data?.content}
               >
                 <TrackItemAlbum
-                  order={content?.index}
-                  trackId={content?.videoId}
-                  title={content?.title[0]}
-                  artistName={data?.subtitle[2]?.split("|")[0]}
+                  index={content?.index}
+                  videoId={content?.videoId}
+                  title={content?.title}
                   duration={content?.duration!}
-                  playCounter={content?.title[2]}
+                  plays={content?.plays}
                 />
               </ClickElement>
             );
