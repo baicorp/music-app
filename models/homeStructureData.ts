@@ -1,6 +1,6 @@
-import { contentType } from "./searchStructureData";
+import { contentType } from "@/utils/contentType";
 
-export function extractHomeData(data: any) {
+export default function extractHomeData(data: any) {
   const contents =
     data?.contents?.singleColumnBrowseResultsRenderer?.tabs[0]?.tabRenderer
       ?.content?.sectionListRenderer?.contents;
@@ -28,12 +28,37 @@ export function extractHomeData(data: any) {
               )
               ?.flat(100)
               ?.filter((data: any) => data.trim() !== ","),
+            artists: data?.musicResponsiveListItemRenderer?.flexColumns
+              ?.map((data: any) =>
+                data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
+                  (run: any) => {
+                    if (
+                      !run?.navigationEndpoint?.browseEndpoint?.browseId?.startsWith(
+                        "UC"
+                      )
+                    )
+                      return null;
+                    return {
+                      name: run?.text,
+                      browseId:
+                        run?.navigationEndpoint?.browseEndpoint?.browseId,
+                    };
+                  }
+                )
+              )
+              ?.flat(100)
+              ?.filter((data: any) => data !== null),
             videoId:
               data?.musicResponsiveListItemRenderer?.overlay
                 ?.musicItemThumbnailOverlayRenderer?.content
                 ?.musicPlayButtonRenderer?.playNavigationEndpoint?.watchEndpoint
                 ?.videoId,
-            type: "video",
+            type: contentType(
+              data?.musicResponsiveListItemRenderer?.overlay
+                ?.musicItemThumbnailOverlayRenderer?.content
+                ?.musicPlayButtonRenderer?.playNavigationEndpoint?.watchEndpoint
+                ?.videoId
+            ),
           };
         }
         if (data?.musicTwoRowItemRenderer) {
@@ -52,15 +77,12 @@ export function extractHomeData(data: any) {
             browseId:
               data?.musicTwoRowItemRenderer?.navigationEndpoint?.browseEndpoint
                 ?.browseId,
-            type:
-              contentType(
-                data?.musicTwoRowItemRenderer?.navigationEndpoint?.watchEndpoint
-                  ?.videoId
-              ) ||
-              contentType(
+            type: contentType(
+              data?.musicTwoRowItemRenderer?.navigationEndpoint?.watchEndpoint
+                ?.videoId ||
                 data?.musicTwoRowItemRenderer?.navigationEndpoint
                   ?.browseEndpoint?.browseId
-              ),
+            ),
           };
         }
       }),

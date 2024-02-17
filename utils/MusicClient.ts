@@ -1,9 +1,10 @@
-import { extractChannelData } from "@/app/research/channelStructureData";
-import { extractSearchData } from "@/app/research/searchStructureData";
-import { getUrlStream } from "./cipher.js";
-import { extractAlbumData } from "@/app/research/albumStructureData";
-import { extractHomeData } from "@/app/research/homeStructureData";
-import { extractPlaylistData } from "@/app/research/playlistStructureData";
+import {
+  extractChannelData,
+  extractSearchData,
+  extractAlbumData,
+  extractHomeData,
+  extractPlaylistData,
+} from "@/models";
 
 const headers = new Headers();
 headers.append("Host", "music.youtube.com");
@@ -120,47 +121,6 @@ export async function getAlbum(browseId: string) {
   return extractAlbumData(data);
 }
 
-export async function getMusicPlayer(id: string) {
-  const body = {
-    videoId: id,
-    context: {
-      client: {
-        clientName: "WEB_REMIX",
-        clientVersion: "1.20220918",
-      },
-    },
-    racyCheckOk: true,
-    contentCheckOk: true,
-    playbackContext: {
-      contentPlaybackContext: {
-        signatureTimestamp: "19746",
-      },
-    },
-  };
-
-  const response = await fetch(
-    "https://music.youtube.com/youtubei/v1/player?key=AIzaSyA8eiZmM1FaDVjRy-df2KTyQ_vz_yYM39w",
-    {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body),
-    }
-  );
-  const data = await response.json();
-  const signatureCipher =
-    data.streamingData.adaptiveFormats[
-      data.streamingData.adaptiveFormats.length - 1
-    ].signatureCipher;
-  const streamingUrl = getUrlStream(signatureCipher);
-
-  return {
-    title: data.videoDetails.title,
-    thumbnailUrl: data.videoDetails.thumbnail.thumbnails[0].url,
-    uploader: data.videoDetails.author,
-    url: streamingUrl,
-  };
-}
-
 export async function getChannel(browseId: string) {
   const body = {
     browseId: browseId,
@@ -199,5 +159,42 @@ export async function getChannel(browseId: string) {
   } catch (error) {
     console.error("Error:", error);
     return null;
+  }
+}
+
+export async function getVideo(videoId: string) {
+  const body = {
+    context: {
+      client: {
+        clientName: "ANDROID_MUSIC",
+        clientVersion: "5.26.1",
+        androidSdkVersion: 30,
+      },
+    },
+    racyCheckOk: true,
+    contentCheckOk: true,
+    videoId: videoId,
+    params: "2AMBCgIQBg",
+  };
+  const youtubeApiUrl =
+    "https://www.youtube.com/youtubei/v1/player?key=AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI";
+  try {
+    const response = await fetch(youtubeApiUrl, {
+      method: "POST",
+      headers: {
+        accept: "*/*",
+        "X-Goog-Api-Key": "AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI",
+        origin: "https://music.youtube.com",
+        referer: "https://music.youtube.com",
+        DNT: "?1",
+      },
+      cache: "no-store",
+      body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    return;
+  } catch (error) {
+    console.error("Error:", error);
+    return { error: "Internal Server Error" };
   }
 }

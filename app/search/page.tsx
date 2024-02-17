@@ -44,13 +44,13 @@ async function SearchResult({ query }: { query: string }) {
         if (!data) return null;
         return (
           <section key={data?.headerTitle + new Date()}>
-            <h2 className="text-xl font-bold mb-4 px-4">{data?.headerTitle}</h2>
+            <h2 className="text-xl font-bold mb-4">{data?.headerTitle}</h2>
             <div
               className={`${
                 ["video", "song"]?.includes(data?.contents[0]?.type)
                   ? "flex flex-col gap-4"
                   : "overflow-x-auto flex gap-4 last:pr-4"
-              } px-4`}
+              }`}
             >
               {data?.contents?.map((data: any) => {
                 return (

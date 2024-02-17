@@ -9,7 +9,7 @@ import {
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getChannel("UC4X7J9D6VbTIwnFDFNkfQ1A");
+  const data = await getChannel("UCFeCzD2Fqr3jlMcGTt0Jnlg");
 
   return (
     <>

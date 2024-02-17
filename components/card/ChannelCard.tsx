@@ -26,12 +26,12 @@ export default function ChannelCard({
           alt={title}
           width={1000}
           height={1000}
-          className="w-40 h-40 object-cover rounded-full"
+          className="w-36 h-36 object-cover rounded-full"
         />
         <div className="flex flex-col items-center">
           <p className="text-lg font-semibold">{title}</p>
-          <p className="text-gray-400">
-            {subtitle.join().replaceAll(",", " ")}
+          <p className="text-gray-400 text-sm">
+            {subtitle?.join()?.replaceAll(",", " ")}
           </p>
         </div>
       </Link>

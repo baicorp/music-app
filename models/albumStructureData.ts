@@ -1,4 +1,4 @@
-export function extractAlbumData(albumDataObject: any) {
+export default function extractAlbumData(albumDataObject: any) {
   let contents =
     albumDataObject?.contents?.singleColumnBrowseResultsRenderer?.tabs[0]
       ?.tabRenderer?.content?.sectionListRenderer?.contents[0]

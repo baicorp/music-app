@@ -1,9 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import { getPlaylist } from "@/utils/MusicClient";
-import ClickElement from "@/components/ClickElement";
 import Link from "next/link";
-import { SongCard } from "@/components/card";
+import { TrackItemPlaylist } from "@/components/track";
 
 export default async function Playlist({
   params,
@@ -32,14 +31,14 @@ export default async function Playlist({
           alt={`${data?.title} thumbnail`}
           width={544}
           height={544}
-          className="w-[25%] aspect-square object-cover object-center rounded-sm shrink-0"
+          className="w-[50%] md:w-[30%] lg:w-[25%] aspect-square object-cover object-center rounded-sm shrink-0"
         />
         <div className="px-4 py-2 flex flex-col gap-4">
-          <p className="font-bold text-lg line-clamp-2 leading-tight">
+          <p className="font-bold text-lg lg:text-3xl line-clamp-2 leading-tight">
             {data?.title}
           </p>
-          <div className="flex flex-col">
-            <p className="font-semibold text-gray-400 break-words line-clamp-1">
+          <div className="text-sm md:text-base flex flex-col">
+            <p className="font-semibold text-gray-400 line-clamp-2">
               {data?.subtitle?.map((text: string, index: number) => {
                 if (index === 2) {
                   if (text.split("|")[1] === "undefined") {
@@ -58,34 +57,29 @@ export default async function Playlist({
                 return <span key={index}>{text}</span>;
               })}
             </p>
-            <p className="font-semibold text-gray-400 break-words line-clamp-1">
+            <p className="font-semibold text-gray-400 line-clamp-2">
               {`${data?.playlistStat.join().replaceAll(",", " ")} songs`}
             </p>
           </div>
-          <p className="hidden md:block font-semibold text-gray-400 line-clamp-[7]">
-            {data?.description}
-          </p>
+          <div className="hidden md:block">
+            <p className="font-semibold text-gray-400 text-sm line-clamp-[6]">
+              {data?.description}
+            </p>
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-6">
-        {data?.contents?.map((content: any) => {
+        {data?.contents?.map((content: any, index: number) => {
           return (
-            <ClickElement
-              key={crypto.randomUUID()}
-              id={content?.videoId}
-              artist={content?.artist}
+            <TrackItemPlaylist
+              key={index}
               thumbnail={content?.thumbnail}
+              artists={content?.artists}
+              duration={content?.duration}
               title={content?.title}
-              trackList={data?.content}
-            >
-              <SongCard
-                thumbnail={content?.thumbnail}
-                artists={content?.artists}
-                duration={content?.duration}
-                title={content?.title}
-                videoId={content?.videoId}
-              />
-            </ClickElement>
+              views={content?.views}
+              plays={content?.plays}
+            />
           );
         })}
       </div>

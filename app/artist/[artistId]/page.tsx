@@ -1,9 +1,5 @@
-import Album from "@/components/Album";
-import Channels from "@/components/Channels";
+import DynamicComponent from "@/components/DynamicComponent";
 import Loading from "@/components/Loading";
-import Musics from "@/components/Musics";
-import Playlist from "@/components/Playlist";
-import { Content } from "@/types/type";
 import { getChannel } from "@/utils/MusicClient";
 import Image from "next/image";
 import React, { Suspense } from "react";
@@ -49,56 +45,45 @@ async function ChannelData({ channelId }: { channelId: string }) {
         </div>
       </section>
       <section>
-        <div className="lg:px-6 xl:px-10 p-4 pt-10">
-          <ChannelDataList contents={data?.contents} />
+        <div className="p-4 lg:px-6 xl:px-10 pt-10">
+          <ChannelDynamicDataList contents={data?.contents} />
         </div>
       </section>
     </>
   );
 }
 
-function ChannelDataList({ contents }: { contents: Content[] }) {
-  const list = contents?.map((data) => {
-    return (
-      <div className=" mb-5" key={data?.headerTitle}>
-        <h2 className="font-bold text-xl mb-3">{data?.headerTitle}</h2>
-        <div className="flex flex-col gap-3">
-          <div key={data?.headerTitle}>
-            {data?.headerTitle === "Songs" ? (
-              <div className="flex flex-col gap-4">
-                <Musics musicData={data?.contents} />
-              </div>
-            ) : data?.headerTitle === "Albums" ? (
-              <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
-                <Album albumData={data?.contents} />
-              </div>
-            ) : data?.headerTitle === "Fans might also like" ? (
-              <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
-                <Channels channelsData={data?.contents} />
-              </div>
-            ) : data?.headerTitle === "Featured on" ? (
-              <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
-                <Playlist playlistData={data?.contents} />
-              </div>
-            ) : data?.headerTitle === "Singles" ? (
-              <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
-                <Album albumData={data?.contents} />
-              </div>
-            ) : data?.headerTitle === "Videos" ? (
-              <div className="flex flex-col gap-4">
-                <Musics musicData={data?.contents} />
-              </div>
-            ) : data?.headerTitle === "Playlists" ? (
-              <div className="overflow-x-auto gap-2 md:gap-4 flex last:pr-4">
-                <Playlist playlistData={data?.contents} />
-              </div>
-            ) : undefined}
-          </div>
-        </div>
-      </div>
-    );
-  });
-  return list;
+function ChannelDynamicDataList({ contents }: { contents: any[] | undefined }) {
+  if (!contents) return "";
+  return (
+    <div className="flex flex-col gap-8">
+      {contents.map((data) => {
+        if (!data) return null;
+        return (
+          <section key={data?.headerTitle + new Date()}>
+            <h2 className="text-xl font-bold mb-4">{data?.headerTitle}</h2>
+            <div
+              className={`${
+                ["video", "song"]?.includes(data?.contents[0]?.type)
+                  ? "flex flex-col gap-4"
+                  : "overflow-x-auto flex gap-4 last:pr-4"
+              }`}
+            >
+              {data?.contents?.map((data: any) => {
+                return (
+                  <DynamicComponent
+                    key={data?.type + new Date()}
+                    props={data}
+                    type={data.type}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  );
 }
 
 function Avatar({ avatar }: { avatar: string | undefined }) {

@@ -1,6 +1,6 @@
-import { ChannelData } from "@/types/type";
+import { contentType } from "@/utils/contentType";
 
-export function extractChannelData(channelObject: any): ChannelData {
+export default function extractChannelData(channelObject: any) {
   return {
     artistName:
       channelObject?.header?.musicImmersiveHeaderRenderer?.title?.runs[0]
@@ -67,9 +67,7 @@ export function extractChannelData(channelObject: any): ChannelData {
                       )
                     )
                     ?.flat(100)
-                    ?.filter((data: any) => data?.trim() !== ",")
-                    ?.join()
-                    ?.replaceAll(",", "|"),
+                    ?.filter((data: any) => data?.trim() !== ","),
                   artists: data?.musicResponsiveListItemRenderer?.flexColumns
                     ?.map((data: any) =>
                       data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
@@ -107,15 +105,17 @@ export function extractChannelData(channelObject: any): ChannelData {
                       ?.musicItemThumbnailOverlayRenderer?.content
                       ?.musicPlayButtonRenderer?.playNavigationEndpoint
                       ?.watchEndpoint?.videoId,
-                  type: "video",
+                  type: contentType(
+                    data?.musicResponsiveListItemRenderer?.overlay
+                      ?.musicItemThumbnailOverlayRenderer?.content
+                      ?.musicPlayButtonRenderer?.playNavigationEndpoint
+                      ?.watchEndpoint?.videoId
+                  ),
                 };
               }),
             };
           }
           if (data?.musicCarouselShelfRenderer) {
-            const contentTypeTitle =
-              data?.musicCarouselShelfRenderer?.header
-                ?.musicCarouselShelfBasicHeaderRenderer?.title?.runs[0]?.text;
             return {
               headerTitle:
                 data?.musicCarouselShelfRenderer?.header
@@ -127,9 +127,7 @@ export function extractChannelData(channelObject: any): ChannelData {
                     subtitle: data?.musicTwoRowItemRenderer?.subtitle?.runs
                       ?.map((data: any) => data?.text?.trim())
                       .flat(100)
-                      ?.filter((data: any) => data.trim() !== ",")
-                      .join()
-                      ?.replaceAll(",", "|"),
+                      ?.filter((data: any) => data.trim() !== ","),
                     thumbnail:
                       data?.musicTwoRowItemRenderer?.thumbnailRenderer
                         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
@@ -171,20 +169,12 @@ export function extractChannelData(channelObject: any): ChannelData {
                     browseId:
                       data?.musicTwoRowItemRenderer?.navigationEndpoint
                         ?.browseEndpoint?.browseId,
-                    type:
-                      contentTypeTitle?.toLowerCase() === "fans might also like"
-                        ? "artist"
-                        : contentTypeTitle?.toLowerCase() === "songs"
-                        ? "video"
-                        : contentTypeTitle?.toLowerCase() === "albums"
-                        ? "album"
-                        : contentTypeTitle?.toLowerCase() === "singles"
-                        ? "single"
-                        : contentTypeTitle?.toLowerCase() === "videos"
-                        ? "video"
-                        : contentTypeTitle?.toLowerCase() === "featured on"
-                        ? "playlist"
-                        : undefined,
+                    type: contentType(
+                      data?.musicTwoRowItemRenderer?.navigationEndpoint
+                        ?.browseEndpoint?.browseId ||
+                        data?.musicTwoRowItemRenderer?.navigationEndpoint
+                          ?.watchEndpoint?.videoId
+                    ),
                   };
                 }
               ),

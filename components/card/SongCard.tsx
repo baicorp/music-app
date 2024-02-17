@@ -1,6 +1,15 @@
 import React from "react";
-import { Song, Artist } from "@/types/song";
-import Link from "next/link";
+import { Artist } from "@/types/song";
+import { Artists } from "@/components/shared";
+
+type SongCardProps = {
+  thumbnail: string;
+  title: string;
+  artists?: Artist[];
+  duration?: string;
+  plays?: string;
+  views?: string;
+};
 
 export default function SongCard({
   thumbnail,
@@ -9,9 +18,9 @@ export default function SongCard({
   duration,
   plays,
   views,
-}: Song) {
+}: SongCardProps) {
   return (
-    <div className="flex w-[300px] md:w-[384px] rounded-md">
+    <div className="flex w-[90%] md:w-[400px] lg:w-[450px] border-2 rounded-md">
       <img
         src={thumbnail}
         alt={title + "image"}
@@ -19,7 +28,7 @@ export default function SongCard({
       />
       <div className="flex grow flex-col justify-center px-4">
         <p className="font-semibold text-white line-clamp-1">{title}</p>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Artists artists={artists} />
           <Plays plays={plays} />
           <Views views={views} />
@@ -28,22 +37,6 @@ export default function SongCard({
       </div>
     </div>
   );
-}
-
-function Artists({ artists }: { artists: Artist[] }) {
-  if (!artists) return;
-  return artists?.map((artist, index) => {
-    if (!artist) return;
-    return (
-      <Link
-        key={index}
-        href={`/artist/${artist.browseId}`}
-        className="text-sm font-semibold text-gray-400 line-clamp-1 hover:decoration-wavy hover:underline"
-      >
-        {artist.name}
-      </Link>
-    );
-  });
 }
 
 function Duration({ duration }: { duration: string | undefined }) {

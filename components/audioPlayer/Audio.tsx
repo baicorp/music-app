@@ -1,4 +1,5 @@
 "use client";
+
 import useMusic from "@/hooks/useMusic";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";

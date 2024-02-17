@@ -1,4 +1,4 @@
-export function extractPlaylistData(playlistObject: any) {
+export default function extractPlaylistData(playlistObject: any) {
   let contents =
     playlistObject?.contents?.singleColumnBrowseResultsRenderer?.tabs[0]
       ?.tabRenderer?.content?.sectionListRenderer?.contents[0]

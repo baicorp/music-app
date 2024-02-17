@@ -1,32 +1,25 @@
-import { StreamingData } from "@/types/typePipedApi";
-import { SearchResults } from "@/types/pyYtMusic";
-import { AudioStream } from "@/types/typePipedApi";
-
 const SELF_BASE_URL = "https://cyan-rich-abalone.cyclic.app";
 const BASE_URL = "https://pipedapi.kavin.rocks";
 const BASE_URL_ALTERNATIVE = "https://piped.12a.app";
 
 // get streaming from piped api
-export async function getMusicFromPiped(
-  videoId: string
-): Promise<StreamingData> {
+export async function getMusicFromPiped(videoId: string) {
   const res = await fetch(`${BASE_URL}/streams/${videoId}`, {
     cache: "force-cache",
     method: "GET",
   });
   const data = await res.json();
-  const getOnlyAudioSrc = data?.audioStreams?.filter((stream: AudioStream) =>
+  const getOnlyAudioSrc = data?.audioStreams?.filter((stream: any) =>
     stream.mimeType.includes("audio")
   );
-  data!.audioStreamUrl = getOnlyAudioSrc.reduce(
-    (prev: AudioStream, current: AudioStream) =>
-      prev.bitrate > current.bitrate ? prev : current
+  data!.audioStreamUrl = getOnlyAudioSrc.reduce((prev: any, current: any) =>
+    prev.bitrate > current.bitrate ? prev : current
   );
   return data;
 }
 
 // search music
-export async function search(query: string): Promise<SearchResults[]> {
+export async function search(query: string) {
   const res = await fetch(`http://127.0.0.1:5000/search?query=${query}`);
   if (res.status !== 200)
     throw new Error("Please chcek your internet connections");

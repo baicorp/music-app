@@ -1,5 +1,4 @@
-import ClickElement from "@/components/ClickElement";
-import TrackItemAlbum from "@/components/TrackItemAlbum";
+import { TrackItemAlbum } from "@/components/track";
 import { getAlbum } from "@/utils/MusicClient";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,22 +67,12 @@ export default async function page({
         <div className="gap-2 mt-5">
           {data?.contents?.map((content: any) => {
             return (
-              <ClickElement
-                key={crypto.randomUUID()}
-                id={content?.videoId}
-                artist={data?.subtitle[2]?.split("|")[0]}
-                thumbnail={data?.thumbnail}
+              <TrackItemAlbum
+                index={content?.index}
                 title={content?.title}
-                trackList={data?.content}
-              >
-                <TrackItemAlbum
-                  index={content?.index}
-                  videoId={content?.videoId}
-                  title={content?.title}
-                  duration={content?.duration!}
-                  plays={content?.plays}
-                />
-              </ClickElement>
+                duration={content?.duration!}
+                plays={content?.plays}
+              />
             );
           })}
         </div>

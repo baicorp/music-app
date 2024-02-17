@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AudioPlayer from "@/components/AudioPlayer";
+import AudioPlayer from "@/components/audioPlayer/AudioPlayer";
 import MusicProvider from "@/context/MusicProvider";
 import Link from "next/link";
 import ExtraDiv from "@/components/ExtraDiv";
@@ -50,7 +50,7 @@ export default function RootLayout({
                     className="text-lg flex items-center gap-2"
                     title="Research"
                   >
-                    <span>🥼</span>
+                    <span>🧪</span>
                     <span>Research</span>
                   </Link>
                 </li>
@@ -70,7 +70,7 @@ export default function RootLayout({
                   🔍
                 </Link>
                 <Link href={"/research"} className="text-2xl" title="Research">
-                  🥼
+                  🧪
                 </Link>
               </div>
             </div>

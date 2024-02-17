@@ -2,10 +2,9 @@ import {
   AlbumCard,
   ChannelCard,
   PlaylistCard,
-  SongCard,
-  VideoCard,
   SingleCard,
 } from "@/components/card";
+import { TrackItemPlaylist } from "./track";
 
 export default function DynamicComponent({
   type,
@@ -16,9 +15,7 @@ export default function DynamicComponent({
 }) {
   switch (type) {
     case "song":
-      return <SongCard {...props} />;
-    case "video":
-      return <VideoCard {...props} />;
+      return <TrackItemPlaylist {...props} />;
     case "single":
       return <SingleCard {...props} />;
     case "album":

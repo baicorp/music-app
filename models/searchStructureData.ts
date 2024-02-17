@@ -1,4 +1,6 @@
-export function extractSearchData(searchDataObject: any) {
+import { contentType } from "@/utils/contentType";
+
+export default function extractSearchData(searchDataObject: any) {
   let contents: any[];
   contents =
     searchDataObject?.contents?.tabbedSearchResultsRenderer?.tabs[0]
@@ -15,7 +17,7 @@ export function extractSearchData(searchDataObject: any) {
             title: content?.musicCardShelfRenderer?.title?.runs[0]?.text,
             thumbnail:
               content?.musicCardShelfRenderer?.thumbnail?.musicThumbnailRenderer
-                ?.thumbnail?.thumbnails[0]?.url,
+                ?.thumbnail?.thumbnails[1]?.url,
             subtitle: content?.musicCardShelfRenderer?.subtitle?.runs
               ?.map((run: any) => run?.text?.trim())
               ?.flat(100)
@@ -61,7 +63,6 @@ export function extractSearchData(searchDataObject: any) {
             browseId:
               content?.musicCardShelfRenderer?.title?.runs[0]
                 ?.navigationEndpoint?.browseEndpoint?.browseId,
-            // type: content?.musicCardShelfRenderer?.subtitle?.runs[0]?.text?.toLowerCase(),
             type: contentType(
               content?.musicCardShelfRenderer?.title?.runs[0]
                 ?.navigationEndpoint?.watchEndpoint?.videoId ||
@@ -186,19 +187,6 @@ export function extractSearchData(searchDataObject: any) {
     }
     return undefined;
   });
-}
-
-export function contentType(id: string) {
-  if (!id) return null;
-  if (id?.startsWith("MPREb_")) {
-    return "album";
-  } else if (id?.startsWith("VLRDCLAK5uy_") || id?.startsWith("VLPL")) {
-    return "playlist";
-  } else if (id?.startsWith("UC")) {
-    return "artist";
-  } else {
-    return "song";
-  }
 }
 
 export const timeRegex =
