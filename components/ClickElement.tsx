@@ -1,34 +1,34 @@
 "use client";
 import useMusic from "@/hooks/useMusic";
+import { Artist, Song } from "@/types/song";
 import React, { ReactElement } from "react";
-import { TrackProps } from "@/app/research/searchResult";
 
 type ClickElementProps = {
   children: ReactElement | ReactElement[];
-  id: string;
-  artist: string;
+  videoId: string;
+  artists: Artist[];
   thumbnail: string;
   title: string;
-  trackList: TrackProps[] | [];
+  listSong: Song[];
 };
 
 export default function ClickElement({
   children,
-  id,
-  artist,
+  videoId,
+  artists,
   thumbnail,
   title,
-  trackList,
+  listSong,
 }: ClickElementProps) {
   const { listTrackData, setListTrackData, setTrackData } = useMusic();
 
   function handleClick() {
-    if (JSON.stringify(listTrackData) !== JSON.stringify(trackList)) {
-      setListTrackData(trackList);
+    if (JSON.stringify(listTrackData) !== JSON.stringify(listSong)) {
+      setListTrackData(listSong || []);
     }
     setTrackData({
-      videoId: id,
-      artist: artist,
+      videoId: videoId,
+      artists: artists,
       title: title,
       thumbnail: thumbnail,
     });

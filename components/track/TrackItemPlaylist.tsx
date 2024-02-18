@@ -1,34 +1,47 @@
 import React from "react";
-import { Artist } from "@/types/song";
-import { Artists } from "@/components/shared";
+import { Artist, Song } from "@/types/song";
+import { Artists, PlayFromTitle } from "@/components/shared";
+import Image from "next/image";
 
 type TrackItemPlaylistProps = {
+  videoId: string;
   thumbnail: string;
   title: string;
   artists?: Artist[];
   duration?: string;
   plays?: string;
   views?: string;
+  listSong: Song[];
 };
 
 export default function TrackItemPlaylist({
+  videoId,
   thumbnail,
   title,
   artists,
   duration,
   plays,
   views,
+  listSong,
 }: TrackItemPlaylistProps) {
   return (
     <div className="flex rounded-md">
-      <img
+      <Image
         src={thumbnail}
         alt={title + "image"}
+        width={400}
+        height={400}
         className="w-16 h-16 shrink-0 object-center object-cover rounded-md"
       />
       <div className="w-full flex justify-between items-center px-4">
         <div className="flex grow flex-col justify-center">
-          <p className="font-semibold text-white line-clamp-1">{title}</p>
+          <PlayFromTitle
+            listSong={listSong}
+            thumbnail={thumbnail}
+            title={title}
+            artists={artists}
+            videoId={videoId}
+          />
           <div className="flex items-center gap-2 line-clamp-1">
             <Artists artists={artists} />
             <Plays plays={plays} />

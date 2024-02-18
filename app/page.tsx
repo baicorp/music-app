@@ -1,5 +1,6 @@
 import { getHome } from "@/utils/MusicClient";
 import DynamicComponent from "@/components/DynamicComponent";
+import { SongCard } from "@/components/card";
 
 export default async function Home() {
   return (
@@ -29,9 +30,16 @@ async function HomeResult() {
         <div key={index} className="flex flex-col gap-5">
           <h1 className="font-bold text-lg">{data?.headerTitle}</h1>
           <div className="overflow-x-auto gap-2 md:gap-4 flex flex-col flex-wrap h-[230px] md:h-[250px] empty:hidden">
-            {data?.contents?.map((data: any, index: number) => {
+            {data?.contents?.map((content: any, index: number) => {
               return (
-                <DynamicComponent key={index} type={data?.type} props={data} />
+                <SongCard
+                  videoId={content?.videoId}
+                  key={index}
+                  title={content?.title}
+                  thumbnail={content?.thumbnail}
+                  artists={content?.artists}
+                  listSong={data?.contents || []}
+                />
               );
             })}
           </div>

@@ -1,33 +1,46 @@
 import React from "react";
-import { Artist } from "@/types/song";
-import { Artists } from "@/components/shared";
+import { Artist, Song } from "@/types/song";
+import { Artists, PlayFromTitle, PlayFromImage } from "@/components/shared";
+import Image from "next/image";
 
-type SongCardProps = {
+export type SongCardProps = {
+  videoId: string;
   thumbnail: string;
   title: string;
   artists?: Artist[];
   duration?: string;
   plays?: string;
   views?: string;
+  listSong: Song[];
 };
 
 export default function SongCard({
+  videoId,
   thumbnail,
   title,
   artists,
   duration,
   plays,
   views,
+  listSong,
 }: SongCardProps) {
   return (
-    <div className="flex w-[90%] md:w-[400px] lg:w-[450px] border-2 rounded-md">
-      <img
+    <div className="flex w-[90%] md:w-[400px] lg:w-[450px] rounded-md">
+      <Image
         src={thumbnail}
+        width={400}
+        height={400}
         alt={title + "image"}
         className="w-16 h-16 shrink-0 object-center object-cover rounded-md"
       />
       <div className="flex grow flex-col justify-center px-4">
-        <p className="font-semibold text-white line-clamp-1">{title}</p>
+        <PlayFromTitle
+          listSong={listSong}
+          thumbnail={thumbnail}
+          title={title}
+          artists={artists}
+          videoId={videoId}
+        />
         <div className="flex items-center gap-2">
           <Artists artists={artists} />
           <Plays plays={plays} />

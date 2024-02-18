@@ -71,9 +71,13 @@ export default async function Album({
             return (
               <TrackItemAlbum
                 key={index}
+                videoId={content?.videoId}
                 index={content?.index}
                 title={content?.title}
-                duration={content?.duration!}
+                artists={data?.artists}
+                thumbnail={data?.thumbnail}
+                listSong={data?.contents}
+                duration={content?.duration}
                 plays={content?.plays}
               />
             );

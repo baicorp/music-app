@@ -1,7 +1,7 @@
 import React from "react";
 import {
   getHome,
-  getMusicPlayer,
+  getVideo,
   getPlaylist,
   getChannel,
   search,
@@ -9,7 +9,9 @@ import {
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getChannel("UCFeCzD2Fqr3jlMcGTt0Jnlg");
+  const data = await getPlaylist(
+    "VLRDCLAK5uy_ntmEO6TGBtDZrVD26XvJa6Y3FHYDx40II"
+  );
 
   return (
     <>

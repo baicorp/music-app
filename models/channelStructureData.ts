@@ -13,7 +13,7 @@ export default function extractChannelData(channelObject: any) {
       channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
         channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
-          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 2
       ]?.url ||
       channelObject?.header?.musicVisualHeaderRenderer?.thumbnail
         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
@@ -24,7 +24,7 @@ export default function extractChannelData(channelObject: any) {
       channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
         channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
-          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 2
       ]?.width ||
       channelObject?.header?.musicVisualHeaderRenderer?.thumbnail
         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
@@ -35,7 +35,7 @@ export default function extractChannelData(channelObject: any) {
       channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
         channelObject?.header?.musicImmersiveHeaderRenderer?.thumbnail
-          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 1
+          ?.musicThumbnailRenderer?.thumbnail?.thumbnails?.length - 2
       ]?.height ||
       channelObject?.header?.musicVisualHeaderRenderer?.thumbnail
         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[

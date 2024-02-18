@@ -1,20 +1,20 @@
 "use client";
 
-import { TrackProps } from "@/app/research/searchResult";
+import { Artist, Song } from "@/types/song";
 import React, { ReactElement, ReactNode, createContext, useState } from "react";
 
 export type MusicData = {
   videoId: string;
   title: string;
-  thumbnail: string;
-  artist: string;
+  thumbnail?: string;
+  artists: Artist[];
 };
 
 type CurrentMusicContextValue = {
   trackData: MusicData | undefined;
   setTrackData: React.Dispatch<React.SetStateAction<MusicData | undefined>>;
-  listTrackData: TrackProps[] | undefined;
-  setListTrackData: React.Dispatch<React.SetStateAction<TrackProps[] | []>>;
+  listTrackData: Song[] | undefined;
+  setListTrackData: React.Dispatch<React.SetStateAction<Song[] | []>>;
 };
 
 export const CurrentMusicContext = createContext<
@@ -27,7 +27,7 @@ export default function MusicProvider({
   children: ReactElement | ReactElement[] | ReactNode;
 }) {
   const [trackData, setTrackData] = useState<MusicData | undefined>(undefined);
-  const [listTrackData, setListTrackData] = useState<TrackProps[] | []>([]);
+  const [listTrackData, setListTrackData] = useState<Song[] | []>([]);
 
   return (
     <CurrentMusicContext.Provider

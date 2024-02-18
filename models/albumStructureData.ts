@@ -13,6 +13,17 @@ export default function extractAlbumData(albumDataObject: any) {
             ? `${data?.text}|${data?.navigationEndpoint?.browseEndpoint?.browseId}`
             : data?.text
       ),
+    artists: albumDataObject?.header?.musicDetailHeaderRenderer?.subtitle?.runs
+      ?.map((run: any) => {
+        if (run?.navigationEndpoint?.browseEndpoint) {
+          return {
+            name: run?.text,
+            browseId: run?.navigationEndpoint?.browseEndpoint?.browseId,
+          };
+        }
+        return null;
+      })
+      ?.filter((data: any) => data !== null),
     thumbnail:
       albumDataObject?.header?.musicDetailHeaderRenderer?.thumbnail
         ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[3].url,

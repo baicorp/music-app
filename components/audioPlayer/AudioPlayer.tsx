@@ -3,6 +3,8 @@
 import useMusic from "@/hooks/useMusic";
 import React from "react";
 import Audio from "./Audio";
+import { Artists } from "../shared";
+import Image from "next/image";
 
 export default function AudioPlayer() {
   const { trackData } = useMusic();
@@ -11,19 +13,19 @@ export default function AudioPlayer() {
   return (
     <div className={`${trackData ? "" : "hidden"}`}>
       <div className="bg-[#1f1f1f] flex overflow-hidden relative">
-        <img
-          src={trackData?.thumbnail}
+        <Image
+          src={trackData?.thumbnail as string}
+          width={400}
+          height={400}
           alt={trackData?.title + " image"}
-          className="w-24 object-cover object-center rounded-md py-3 pl-4"
+          className="w-20 h-20 aspect-square object-cover object-center rounded-md py-3 pl-4"
         />
         <div className="grow relative flex justify-between items-center">
           <div className="pl-5">
             <p className="font-semibold text-white line-clamp-1">
               {trackData?.title}
             </p>
-            <p className="text-sm font-semibold text-gray-400 line-clamp-1">
-              {trackData?.artist}
-            </p>
+            <Artists artists={trackData?.artists || []} />
           </div>
           <div className="pr-4">
             <Audio videoId={trackData.videoId} />

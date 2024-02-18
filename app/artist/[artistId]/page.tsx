@@ -69,12 +69,12 @@ function ChannelDynamicDataList({ contents }: { contents: any[] | undefined }) {
                   : "overflow-x-auto flex gap-4 last:pr-4"
               }`}
             >
-              {data?.contents?.map((data: any) => {
+              {data?.contents?.map((content: any, index: number) => {
                 return (
                   <DynamicComponent
-                    key={data?.type + new Date()}
-                    props={data}
-                    type={data.type}
+                    key={index}
+                    props={content}
+                    type={content.type}
                   />
                 );
               })}

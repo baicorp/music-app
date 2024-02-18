@@ -73,12 +73,14 @@ export default async function Playlist({
           return (
             <TrackItemPlaylist
               key={index}
+              videoId={content?.videoId}
+              title={content?.title}
               thumbnail={content?.thumbnail}
               artists={content?.artists}
               duration={content?.duration}
-              title={content?.title}
               views={content?.views}
               plays={content?.plays}
+              listSong={data?.contents || []}
             />
           );
         })}
