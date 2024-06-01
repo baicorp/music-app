@@ -1,6 +1,5 @@
-import BackButton from "@/components/BackButton";
-import Link from "next/link";
 import React, { ReactElement, ReactNode } from "react";
+import BackButton from "@/components/BackButton";
 
 export default function layout({
   children,
@@ -8,7 +7,7 @@ export default function layout({
   children: ReactElement | ReactElement[] | ReactNode;
 }) {
   return (
-    <div>
+    <div className="relative h-svh overflow-y-auto flex-grow">
       <BackButton />
       {children}
     </div>

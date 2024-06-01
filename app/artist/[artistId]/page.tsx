@@ -24,7 +24,7 @@ async function ChannelData({ channelId }: { channelId: string }) {
       <section className="relative">
         <div>
           <Image
-            className="object-cover object-center w-full h-full"
+            className="object-cover object-center w-full h-1/4"
             src={data?.thumbnail}
             alt={data?.artistName}
             width={data?.thumbnailWidth}

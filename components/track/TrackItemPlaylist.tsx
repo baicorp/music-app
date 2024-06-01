@@ -54,7 +54,7 @@ export default function TrackItemPlaylist({
   );
 }
 
-function Duration({ duration }: { duration: string | undefined }) {
+export function Duration({ duration }: { duration: string | undefined }) {
   if (!duration) return;
   return (
     <p className="text-sm font-semibold text-gray-400 line-clamp-1 shrink-0">

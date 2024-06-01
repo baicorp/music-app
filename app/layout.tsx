@@ -5,6 +5,7 @@ import AudioPlayer from "@/components/audioPlayer/AudioPlayer";
 import MusicProvider from "@/context/MusicProvider";
 import Link from "next/link";
 import ExtraDiv from "@/components/ExtraDiv";
+import { QueueList } from "@/components/audioPlayer/Queue";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body className={`${inter.className} relative`}>
         <MusicProvider>
           <div className="flex">
-            <nav className="hidden sticky top-0 lg:block py-3 lg:py-10 bg-[#1c1e1f] w-56 xl:w-64 2xl:w-72 h-svh shrink-0">
+            <nav className="hidden sticky top-0 bottom-0 lg:block py-3 lg:py-10 bg-[#1c1e1f] w-56 xl:w-64 2xl:w-72 h-svh shrink-0">
               <ul className="hidden lg:flex flex-col gap-6 px-4">
                 <li>
                   <Link
@@ -80,10 +81,9 @@ export default function RootLayout({
                 </li>
               </ul>
             </nav>
-            <div className="overflow-hidden grow">
-              {children}
-              <ExtraDiv />
-            </div>
+            {children}
+            {/* <ExtraDiv /> */}
+            <QueueList />
             <div className="fixed z-10 bottom-0 right-0 left-0">
               <AudioPlayer />
               <div className="flex lg:hidden justify-center items-center py-3 gap-10 bg-[#1c1e1f]">

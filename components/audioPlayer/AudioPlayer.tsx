@@ -5,6 +5,7 @@ import React from "react";
 import Audio from "./Audio";
 import { Artists } from "../shared";
 import Image from "next/image";
+import Queue from "./Queue";
 
 export default function AudioPlayer() {
   const { trackData } = useMusic();
@@ -32,7 +33,9 @@ export default function AudioPlayer() {
           <div className="flex-1 flex justify-center items-center">
             <Audio videoId={trackData.videoId} />
           </div>
-          <div className="flex-1"></div>
+          <div className="flex-1 flex justify-end pr-4">
+            <Queue />
+          </div>
         </div>
       </div>
     </div>
