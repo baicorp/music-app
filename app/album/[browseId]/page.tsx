@@ -4,6 +4,8 @@ import { TrackItemAlbum } from "@/components/track";
 import { getAlbum } from "@/utils/MusicClient";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function Album({
   params,
 }: {

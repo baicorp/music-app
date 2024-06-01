@@ -4,6 +4,8 @@ import { getPlaylist } from "@/utils/MusicClient";
 import Link from "next/link";
 import { TrackItemPlaylist } from "@/components/track";
 
+export const dynamic = "force-dynamic";
+
 export default async function Playlist({
   params,
 }: {
