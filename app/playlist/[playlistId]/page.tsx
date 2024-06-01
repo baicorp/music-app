@@ -42,7 +42,7 @@ export default async function Playlist({
               {data?.subtitle?.map((text: string, index: number) => {
                 if (index === 2) {
                   if (text.split("|")[1] === "undefined") {
-                    return <span key={index}>{text.split("|")[0]}</span>;
+                    return <span key={index}>{text?.split("|")[0]}</span>;
                   }
                   return (
                     <Link
@@ -50,7 +50,7 @@ export default async function Playlist({
                       className="hover:decoration-wavy hover:underline"
                       href={`/artist/${text.split("|")[1]}`}
                     >
-                      {text.split("|")[0]}
+                      {text?.split("|")[0]}
                     </Link>
                   );
                 }
@@ -58,7 +58,7 @@ export default async function Playlist({
               })}
             </p>
             <p className="font-semibold text-gray-400 line-clamp-2">
-              {`${data?.playlistStat.join().replaceAll(",", " ")} songs`}
+              {`${data?.playlistStat?.join()?.replaceAll(",", " ")} songs`}
             </p>
           </div>
           <div className="hidden md:block">
