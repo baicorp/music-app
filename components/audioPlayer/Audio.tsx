@@ -1,7 +1,9 @@
 "use client";
 
 import { BASE_URL } from "@/constant/constant";
+import { MusicData } from "@/context/MusicProvider";
 import useMusic from "@/hooks/useMusic";
+import { Song } from "@/types/song";
 import wait from "@/utils/wait";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
@@ -88,13 +90,21 @@ export default function Audio({ videoId }: { videoId: string }) {
         onEnded={handleEnded}
       />
       <div className="flex items-center gap-8">
-        <PreviouseTrack />
+        <PreviouseTrack
+          onSetTrack={setTrackData}
+          listTrackData={listTrackData}
+          videoId={videoId}
+        />
         <TogglePlayPause
           isPaused={isPaused}
           isLoading={isLoading}
           togglePlay={togglePlay}
         />
-        <NextTrack />
+        <NextTrack
+          onSetTrack={setTrackData}
+          listTrackData={listTrackData}
+          videoId={videoId}
+        />
       </div>
       <Progress audioElement={audioElement} />
     </>
@@ -168,9 +178,30 @@ function TogglePlayPause({ isPaused, isLoading, togglePlay }: TogglePlayProps) {
   );
 }
 
-function PreviouseTrack() {
+function PreviouseTrack({
+  listTrackData,
+  videoId,
+  onSetTrack,
+}: {
+  listTrackData: Song[] | undefined;
+  videoId: string;
+  onSetTrack: React.Dispatch<React.SetStateAction<MusicData | undefined>>;
+}) {
+  function handlePreviousTrack() {
+    if (!listTrackData) {
+      return;
+    }
+    const currentIndex = listTrackData.findIndex(
+      (track) => track.videoId === videoId
+    );
+    const nextIndex = currentIndex - 1;
+    if (0 < nextIndex) {
+      onSetTrack(listTrackData[nextIndex]);
+    }
+  }
+
   return (
-    <button>
+    <button onClick={handlePreviousTrack}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"
@@ -184,9 +215,29 @@ function PreviouseTrack() {
   );
 }
 
-function NextTrack() {
+function NextTrack({
+  listTrackData,
+  videoId,
+  onSetTrack,
+}: {
+  listTrackData: Song[] | undefined;
+  videoId: string;
+  onSetTrack: React.Dispatch<React.SetStateAction<MusicData | undefined>>;
+}) {
+  function handleNextTrack() {
+    if (!listTrackData) {
+      return;
+    }
+    const currentIndex = listTrackData.findIndex(
+      (track) => track.videoId === videoId
+    );
+    const nextIndex = currentIndex + 1;
+    if (nextIndex < listTrackData.length) {
+      onSetTrack(listTrackData[nextIndex]);
+    }
+  }
   return (
-    <button>
+    <button onClick={handleNextTrack}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"
