@@ -2,6 +2,7 @@
 
 import { BASE_URL } from "@/constant/constant";
 import useMusic from "@/hooks/useMusic";
+import wait from "@/utils/wait";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 
@@ -25,6 +26,7 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
     method: "POST",
   });
   const data = await res.json();
+  wait(3000);
   return { ...data, url: [data?.url] };
 }
 
@@ -43,10 +45,6 @@ export default function Audio({ videoId }: { videoId: string }) {
 
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const audioElement = useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    setIsPaused(audioElement.current?.paused || false);
-  }, [audioElement.current?.paused]);
 
   async function handleError() {
     const nextUrl = data?.url?.[1];
@@ -123,7 +121,7 @@ function TogglePlayPause({ isPaused, isLoading, togglePlay }: TogglePlayProps) {
           x="0px"
           y="0px"
           viewBox="0 0 100 100"
-          enable-background="new 0 0 0 0"
+          enableBackground="new 0 0 0 0"
           xmlSpace="preserve"
         >
           <path
@@ -224,7 +222,7 @@ function Progress({
     return () => {
       audioElement.current?.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, [audioElement.current]);
+  }, [audioElement]);
 
   return (
     <div className="h-[2px] rounded-sm absolute bottom-0 right-0 left-0">

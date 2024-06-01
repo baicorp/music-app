@@ -9,7 +9,7 @@ export default function SearchBox() {
   const pathname = usePathname();
   const { push } = useRouter();
 
-  async function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
     params.set("query", input!);
@@ -18,7 +18,7 @@ export default function SearchBox() {
 
   useEffect(() => {
     setInput(searchParams.get("query"));
-  }, [searchParams.get("query")]);
+  }, [searchParams]);
 
   return (
     <div>
