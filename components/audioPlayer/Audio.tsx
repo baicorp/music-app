@@ -1,12 +1,13 @@
 "use client";
 
+import { BASE_URL } from "@/constant/constant";
 import useMusic from "@/hooks/useMusic";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 
 async function fetcher(id: string): Promise<MusicPlayerProps> {
   const [resData, resPipedData] = await Promise.all([
-    fetch(`http://localhost:3000/api/stream?videoId=${id}`, {
+    fetch(`${BASE_URL}/api/stream?videoId=${id}`, {
       method: "POST",
     }),
     fetch(`https://pipedapi.kavin.rocks/streams/${id}`),
@@ -20,7 +21,7 @@ async function fetcher(id: string): Promise<MusicPlayerProps> {
 }
 
 async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
-  const res = await fetch(`http://localhost:3000/api/stream?videoId=${id}`, {
+  const res = await fetch(`${BASE_URL}/api/stream?videoId=${id}`, {
     method: "POST",
   });
   const data = await res.json();
@@ -35,155 +36,8 @@ type MusicPlayerProps = {
   url: string[];
 };
 
-// export default function Audio({ videoId }: { videoId: string }) {
-//   const { data } = useSWRImmutable(videoId, fetcherSingel);
-
-//   const { listTrackData, setTrackData } = useMusic();
-
-//   const [playerLoad, setPlayerLoad] = useState(true);
-//   const audioElement = useRef<HTMLAudioElement>(null);
-
-//   useEffect(() => {
-//     setPlayerLoad(true);
-//   }, [videoId]);
-
-//   async function handleError(e: React.SyntheticEvent<HTMLAudioElement, Event>) {
-//     console.log("trying another source url ");
-//     e.currentTarget.src = data?.url[1]!;
-//   }
-
-//   return (
-//     <>
-//       <audio
-//         src={data?.url[0]}
-//         ref={audioElement}
-//         onError={(e) => handleError(e)}
-//         autoPlay
-//         onPlay={() => setPlayerLoad(false)}
-//         onEnded={() => {
-//           if (!listTrackData) {
-//             return;
-//           }
-//           let cuurrentIndexVideoId = listTrackData?.findIndex(
-//             (data) => data.videoId === videoId
-//           );
-//           cuurrentIndexVideoId++;
-//           if (cuurrentIndexVideoId > listTrackData.length - 1) {
-//             return;
-//           }
-//           setTrackData(listTrackData[cuurrentIndexVideoId]);
-//         }}
-//       ></audio>
-//       <TogglePlay audioElement={audioElement} isLoading={playerLoad} />
-//       <Progress audioElement={audioElement} trackData={data} />
-//     </>
-//   );
-// }
-
-// type AudioProps = {
-//   audioElement: RefObject<HTMLAudioElement>;
-//   isLoading?: boolean;
-//   trackData?: MusicPlayerProps;
-// };
-
-// function TogglePlay({ audioElement, isLoading }: AudioProps) {
-//   const [paused, setIsPaused] = useState<boolean>();
-
-//   function toggle() {
-//     if (audioElement.current?.paused) {
-//       audioElement.current?.play();
-//       setIsPaused(false);
-//     } else if (!audioElement.current?.paused) {
-//       audioElement.current?.pause();
-//       setIsPaused(true);
-//     }
-//   }
-
-//   useEffect(() => {
-//     audioElement.current?.addEventListener("ended", () => {
-//       setIsPaused(true);
-//     });
-//   }, [audioElement.current]);
-
-//   return (
-//     <div className="relative">
-//       <button className="text-3xl" disabled={isLoading} onClick={toggle}>
-//         {isLoading ? <PlayerLoading /> : paused ? "▶️" : "⏸️"}
-//       </button>
-//     </div>
-//   );
-// }
-
-// function Progress({ audioElement, trackData }: AudioProps) {
-//   const [timeStamp, setTimeStamp] = useState(0);
-
-//   const progresRef = useRef<HTMLDivElement>(null);
-//   useEffect(() => {
-//     setTimeStamp(0);
-//     const handleTimeUpdate = () => {
-//       const progress =
-//         ((audioElement?.current?.currentTime || 1) /
-//           (audioElement?.current?.duration || 0)) *
-//         100;
-//       setTimeStamp(progress);
-//     };
-
-//     audioElement.current?.addEventListener("timeupdate", handleTimeUpdate);
-
-//     // Cleanup function
-//     return () => {
-//       audioElement.current?.removeEventListener("timeupdate", handleTimeUpdate);
-//     };
-//   }, [audioElement?.current, trackData]);
-
-//   return (
-//     <div className="h-[2px] rounded-sm absolute bottom-0 right-0 left-0">
-//       <div
-//         ref={progresRef}
-//         className="h-full bg-slate-300"
-//         style={{ width: `${timeStamp || 0}%` }}
-//       ></div>
-//     </div>
-//   );
-// }
-
-// function PlayerLoading() {
-//   return (
-//     <svg
-//       width="24"
-//       height="24"
-//       viewBox="0 0 24 24"
-//       xmlns="http://www.w3.org/2000/svg"
-//     >
-//       <style>
-//         {`
-//         .spinner_z9k8 {
-//           transform-origin: center;
-//           animation: spinner_StKS .75s infinite linear;
-//           fill: white; /* Change color to white */
-//         }
-
-//         @keyframes spinner_StKS {
-//           100% {
-//             transform: rotate(360deg);
-//           }
-//         }
-//       `}
-//       </style>
-//       <path
-//         d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
-//         opacity=".25"
-//       />
-//       <path
-//         d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"
-//         className="spinner_z9k8"
-//       />
-//     </svg>
-//   );
-// }
-
 export default function Audio({ videoId }: { videoId: string }) {
-  const { data } = useSWRImmutable(videoId, fetcher);
+  const { data, isLoading } = useSWRImmutable(videoId, fetcherSingel);
 
   const { listTrackData, setTrackData } = useMusic();
 
@@ -235,7 +89,15 @@ export default function Audio({ videoId }: { videoId: string }) {
         autoPlay
         onEnded={handleEnded}
       />
-      <TogglePlay isPaused={isPaused} togglePlay={togglePlay} />
+      <div className="flex items-center gap-8">
+        <PreviouseTrack />
+        <TogglePlayPause
+          isPaused={isPaused}
+          isLoading={isLoading}
+          togglePlay={togglePlay}
+        />
+        <NextTrack />
+      </div>
       <Progress audioElement={audioElement} />
     </>
   );
@@ -243,16 +105,100 @@ export default function Audio({ videoId }: { videoId: string }) {
 
 type TogglePlayProps = {
   isPaused: boolean;
+  isLoading: boolean;
   togglePlay: () => void;
 };
 
-function TogglePlay({ isPaused, togglePlay }: TogglePlayProps) {
+function TogglePlayPause({ isPaused, isLoading, togglePlay }: TogglePlayProps) {
   return (
     <div className="relative">
-      <button className="text-3xl" onClick={togglePlay}>
-        {isPaused ? "▶️" : "⏸️"}
-      </button>
+      {isLoading ? (
+        <svg
+          version="1.1"
+          id="L9"
+          width="50px"
+          height="50px"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 100 100"
+          enable-background="new 0 0 0 0"
+          xmlSpace="preserve"
+        >
+          <path
+            fill="#fff"
+            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+          >
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="rotate"
+              dur="1s"
+              from="0 50 50"
+              to="360 50 50"
+              repeatCount="indefinite"
+            />
+          </path>
+        </svg>
+      ) : (
+        <button onClick={togglePlay}>
+          {isPaused ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="50px"
+              viewBox="0 -960 960 960"
+              width="50px"
+              fill="#e8eaed"
+            >
+              <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="50px"
+              viewBox="0 -960 960 960"
+              width="50px"
+              fill="#e8eaed"
+            >
+              <path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z" />
+            </svg>
+          )}
+        </button>
+      )}
     </div>
+  );
+}
+
+function PreviouseTrack() {
+  return (
+    <button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#e8eaed"
+      >
+        <path d="M220-240v-480h80v480h-80Zm520 0L380-480l360-240v480Zm-80-240Zm0 90v-180l-136 90 136 90Z" />
+      </svg>
+    </button>
+  );
+}
+
+function NextTrack() {
+  return (
+    <button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#e8eaed"
+      >
+        <path d="M660-240v-480h80v480h-80Zm-440 0v-480l360 240-360 240Zm80-240Zm0 90 136-90-136-90v180Z" />
+      </svg>
+    </button>
   );
 }
 

@@ -13,6 +13,7 @@ export default function DynamicComponent({
   type: string;
   props: any;
 }) {
+  if (!type) return null;
   switch (type) {
     case "song":
       return <TrackItemPlaylist {...props} />;
