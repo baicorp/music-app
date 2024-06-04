@@ -28,7 +28,6 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
     method: "POST",
   });
   const data = await res.json();
-  wait(3000);
   return { ...data, url: [data?.url] };
 }
 

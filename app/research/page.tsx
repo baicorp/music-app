@@ -1,7 +1,6 @@
 import React from "react";
 import {
   getHome,
-  getVideo,
   getPlaylist,
   getChannel,
   search,
