@@ -6,6 +6,7 @@ import useMusic from "@/hooks/useMusic";
 import { Song } from "@/types/song";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
+import { Next, Previous, Play, Pause, Loading } from "../svg";
 
 async function fetcher(id: string): Promise<MusicPlayerProps> {
   const [resData, resPipedData] = await Promise.all([
@@ -73,6 +74,7 @@ export type MusicPlayerProps = {
 export default function Audio({ videoId }: { videoId: string }) {
   const { data, isLoading } = useSWRImmutable(videoId, fetcherSingelFresh);
 
+  console.log("new track");
   const { listTrackData, setTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
@@ -150,58 +152,9 @@ function TogglePlayPause({ isPaused, isLoading, togglePlay }: TogglePlayProps) {
   return (
     <div className="relative">
       {isLoading ? (
-        <svg
-          version="1.1"
-          id="L9"
-          width="50px"
-          height="50px"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="0 0 100 100"
-          enableBackground="new 0 0 0 0"
-          xmlSpace="preserve"
-        >
-          <path
-            fill="#fff"
-            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
-          >
-            <animateTransform
-              attributeName="transform"
-              attributeType="XML"
-              type="rotate"
-              dur="1s"
-              from="0 50 50"
-              to="360 50 50"
-              repeatCount="indefinite"
-            />
-          </path>
-        </svg>
+        <Loading />
       ) : (
-        <button onClick={togglePlay}>
-          {isPaused ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="50px"
-              viewBox="0 -960 960 960"
-              width="50px"
-              fill="#e8eaed"
-            >
-              <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="50px"
-              viewBox="0 -960 960 960"
-              width="50px"
-              fill="#e8eaed"
-            >
-              <path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z" />
-            </svg>
-          )}
-        </button>
+        <button onClick={togglePlay}>{isPaused ? <Play /> : <Pause />}</button>
       )}
     </div>
   );
@@ -231,15 +184,7 @@ function PreviouseTrack({
 
   return (
     <button onClick={handlePreviousTrack}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="24px"
-        viewBox="0 -960 960 960"
-        width="24px"
-        fill="#e8eaed"
-      >
-        <path d="M220-240v-480h80v480h-80Zm520 0L380-480l360-240v480Zm-80-240Zm0 90v-180l-136 90 136 90Z" />
-      </svg>
+      <Previous />
     </button>
   );
 }
@@ -267,15 +212,7 @@ function NextTrack({
   }
   return (
     <button onClick={handleNextTrack}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="24px"
-        viewBox="0 -960 960 960"
-        width="24px"
-        fill="#e8eaed"
-      >
-        <path d="M660-240v-480h80v480h-80Zm-440 0v-480l360 240-360 240Zm80-240Zm0 90 136-90-136-90v180Z" />
-      </svg>
+      <Next />
     </button>
   );
 }
