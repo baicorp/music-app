@@ -182,6 +182,7 @@ export async function getVideo(videoId: string): Promise<MusicPlayerProps> {
   try {
     const response = await fetch(youtubeApiUrl, {
       method: "POST",
+      mode: "no-cors",
       headers: {
         accept: "*/*",
         "X-Goog-Api-Key": "AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI",
