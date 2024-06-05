@@ -27,7 +27,7 @@ export default function extractHomeData(data: any) {
                 )
               )
               ?.flat(100)
-              ?.filter((data: any) => data.trim() !== ","),
+              ?.filter((data: any) => data?.trim() !== ","),
             artists: data?.musicResponsiveListItemRenderer?.flexColumns
               ?.map((data: any) =>
                 data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
@@ -67,7 +67,7 @@ export default function extractHomeData(data: any) {
             subtitle: data?.musicTwoRowItemRenderer?.subtitle?.runs
               ?.map((data: any) => data?.text?.trim())
               .flat(100)
-              ?.filter((data: any) => data.trim() !== ","),
+              ?.filter((data: any) => data?.trim() !== ","),
             thumbnail:
               data?.musicTwoRowItemRenderer?.thumbnailRenderer
                 ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
