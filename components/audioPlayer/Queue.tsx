@@ -43,7 +43,7 @@ export function QueueList() {
     <div
       className={`${
         isQueueOpen ? "" : "hidden"
-      } flex flex-col relative h-svh overflow-y-auto min-w-[25%]`}
+      } flex flex-col relative h-svh overflow-y-auto min-w-[25%] bg-[#161616]`}
     >
       <p className="px-6 py-4 sticky top-0 font-extrabold bg-[#1c1c1c] z-50">
         {trackList ? "Queue" : "No Data"}
@@ -74,7 +74,7 @@ function TrackQueueList({
   const { setTrackData, trackData } = useMusic();
   return (
     <div className="flex rounded-md">
-      <div className="relative">
+      <div className="relative overflow-hidden w-20 h-16">
         <Image
           src={thumbnail}
           alt={title + "image"}

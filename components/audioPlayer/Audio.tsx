@@ -4,8 +4,6 @@ import { BASE_URL } from "@/constant/constant";
 import { MusicData } from "@/context/MusicProvider";
 import useMusic from "@/hooks/useMusic";
 import { Song } from "@/types/song";
-import { getVideo } from "@/utils/MusicClient";
-import wait from "@/utils/wait";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 
