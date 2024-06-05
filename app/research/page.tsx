@@ -9,7 +9,7 @@ import {
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getVideo("aBTAXo-6g9w");
+  const data = await getHome();
 
   return (
     <>
