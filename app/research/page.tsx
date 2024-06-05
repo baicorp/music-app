@@ -7,9 +7,10 @@ import {
   search,
   getAlbum,
 } from "@/utils/MusicClient";
+import { BASE_URL } from "@/constant/constant";
 
 export default async function Page() {
-  const res = await fetch("http://localhost:3000/api/media", {
+  const res = await fetch(`${BASE_URL}/api/media`, {
     // Use http://
     method: "POST",
     headers: {
