@@ -33,7 +33,6 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
 
 async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
   const res = await fetch(`${BASE_URL}/api/media`, {
-    // Use http://
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -54,7 +53,7 @@ async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
       },
       racyCheckOk: true,
       contentCheckOk: true,
-      videoId: id, // Replace with actual video ID
+      videoId: id,
       params: "2AMBCgIQBg",
     }),
   });
@@ -74,28 +73,12 @@ export type MusicPlayerProps = {
 export default function Audio({ videoId }: { videoId: string }) {
   const { data, isLoading } = useSWRImmutable(videoId, fetcherSingelFresh);
 
-  console.log("new track");
   const { listTrackData, setTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
 
   async function handleError() {
-    const nextUrl = data?.url?.[1];
-    if (nextUrl) {
-      audioElement.current?.setAttribute("src", nextUrl);
-      audioElement.current?.load();
-    }
-  }
-
-  function togglePlay() {
-    if (audioElement.current) {
-      if (audioElement.current.paused) {
-        audioElement.current.play();
-      } else {
-        audioElement.current.pause();
-      }
-      setIsPaused(audioElement.current.paused);
-    }
+    console.log("cannot play this song :(");
   }
 
   function handleEnded() {
@@ -119,6 +102,8 @@ export default function Audio({ videoId }: { videoId: string }) {
         onError={handleError}
         autoPlay
         onEnded={handleEnded}
+        onPlay={() => setIsPaused(false)}
+        onPause={() => setIsPaused(true)}
       />
       <div className="flex items-center gap-8">
         <PreviouseTrack
@@ -129,7 +114,7 @@ export default function Audio({ videoId }: { videoId: string }) {
         <TogglePlayPause
           isPaused={isPaused}
           isLoading={isLoading}
-          togglePlay={togglePlay}
+          audioRef={audioElement}
         />
         <NextTrack
           onSetTrack={setTrackData}
@@ -137,18 +122,28 @@ export default function Audio({ videoId }: { videoId: string }) {
           videoId={videoId}
         />
       </div>
-      <Progress audioElement={audioElement} />
+      <Progress audioRef={audioElement} isLoading={isLoading} />
     </>
   );
 }
 
-type TogglePlayProps = {
+function TogglePlayPause({
+  isPaused,
+  isLoading,
+  audioRef,
+}: {
   isPaused: boolean;
   isLoading: boolean;
-  togglePlay: () => void;
-};
+  audioRef: React.RefObject<HTMLAudioElement>;
+}) {
+  const togglePlay = () => {
+    if (audioRef?.current) {
+      audioRef.current.paused
+        ? audioRef.current.play()
+        : audioRef.current.pause();
+    }
+  };
 
-function TogglePlayPause({ isPaused, isLoading, togglePlay }: TogglePlayProps) {
   return (
     <div className="relative">
       {isLoading ? (
@@ -218,28 +213,38 @@ function NextTrack({
 }
 
 function Progress({
-  audioElement,
+  audioRef,
+  isLoading,
 }: {
-  audioElement: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement>;
+  isLoading: boolean;
 }) {
   const [progress, setProgress] = useState<number>(0);
 
   useEffect(() => {
     const handleTimeUpdate = () => {
-      if (audioElement.current && audioElement.current.duration) {
-        const newProgress =
-          (audioElement.current.currentTime / audioElement.current.duration) *
-          100;
-        setProgress(newProgress);
+      const audio = audioRef.current;
+      if (audio?.duration) {
+        setProgress((audio.currentTime / audio.duration) * 100);
       }
     };
 
-    audioElement.current?.addEventListener("timeupdate", handleTimeUpdate);
+    const audio = audioRef.current;
+
+    if (!isLoading && audio) {
+      audio.addEventListener("timeupdate", handleTimeUpdate);
+    }
+
+    if (isLoading) {
+      setProgress(0);
+    }
 
     return () => {
-      audioElement.current?.removeEventListener("timeupdate", handleTimeUpdate);
+      if (audio) {
+        audio.removeEventListener("timeupdate", handleTimeUpdate);
+      }
     };
-  }, [audioElement]);
+  }, [audioRef, isLoading]);
 
   return (
     <div className="h-[2px] rounded-sm absolute bottom-0 right-0 left-0">
