@@ -16,10 +16,11 @@ async function HomeResult() {
   let data;
   try {
     const datas = await getHome();
+    console.log(datas);
     data = datas;
   } catch (error) {
     return (
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center grow">
         <p>Try again later 🛠️</p>
       </div>
     );

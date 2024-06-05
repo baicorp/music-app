@@ -4,6 +4,7 @@ import { BASE_URL } from "@/constant/constant";
 import { MusicData } from "@/context/MusicProvider";
 import useMusic from "@/hooks/useMusic";
 import { Song } from "@/types/song";
+import { getVideo } from "@/utils/MusicClient";
 import wait from "@/utils/wait";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
@@ -31,7 +32,7 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
   return { ...data, url: [data?.url] };
 }
 
-type MusicPlayerProps = {
+export type MusicPlayerProps = {
   videoId: string;
   title: string;
   thumbnailUrl: string;
@@ -43,8 +44,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   const { data, isLoading } = useSWRImmutable(videoId, fetcherSingel);
 
   const { listTrackData, setTrackData } = useMusic();
-
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
 
   async function handleError() {

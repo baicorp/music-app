@@ -2,22 +2,21 @@ import React from "react";
 import {
   getHome,
   getPlaylist,
+  getVideo,
   getChannel,
   search,
   getAlbum,
 } from "@/utils/MusicClient";
 
 export default async function page() {
-  const data = await getPlaylist(
-    "VLRDCLAK5uy_ntmEO6TGBtDZrVD26XvJa6Y3FHYDx40II"
-  );
+  const data = await getVideo("aBTAXo-6g9w");
 
   return (
     <>
-      {/* <pre>
+      <pre>
         <code>{JSON.stringify(data, null, 2)}</code>
-      </pre> */}
-      <div className="flex font-extrabold flex-grow">
+      </pre>
+      {/* <div className="flex font-extrabold flex-grow">
         <div className="h-svh bg-green-400 grow">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint,
           provident perspiciatis praesentium nemo error inventore minus iste
@@ -35,7 +34,7 @@ export default async function page() {
           maiores doloremque.
         </div>
         <div className="h-svh bg-orange-400 grow w-[400px]">hello world 2</div>
-      </div>
+      </div> */}
     </>
   );
 }
