@@ -33,7 +33,7 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
 }
 
 async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
-  const res = await fetch("http://localhost:3000/api/media", {
+  const res = await fetch(`${BASE_URL}/api/media`, {
     // Use http://
     method: "POST",
     headers: {
