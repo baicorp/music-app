@@ -1,3 +1,4 @@
+import { MusicPlayerProps } from "@/components/audioPlayer/Audio";
 import {
   extractChannelData,
   extractSearchData,
@@ -159,5 +160,61 @@ export async function getChannel(browseId: string) {
   } catch (error) {
     console.error("Error:", error);
     return null;
+  }
+}
+
+export async function getVideo(videoId: string): Promise<MusicPlayerProps> {
+  const body = {
+    context: {
+      client: {
+        clientName: "ANDROID_MUSIC",
+        clientVersion: "5.26.1",
+        androidSdkVersion: 30,
+      },
+    },
+    racyCheckOk: true,
+    contentCheckOk: true,
+    videoId: videoId,
+    params: "2AMBCgIQBg",
+  };
+  const youtubeApiUrl =
+    "https://www.youtube.com/youtubei/v1/player?key=AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI";
+  try {
+    const response = await fetch(youtubeApiUrl, {
+      method: "POST",
+      headers: {
+        accept: "*/*",
+        "X-Goog-Api-Key": "AIzaSyAOghZGza2MQSZkY_zfZ370N-PUdXEo8AI",
+        origin: "https://music.youtube.com",
+        referer: "https://music.youtube.com",
+        DNT: "?1",
+      },
+      cache: "no-store",
+      body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    const thumbnails = data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
+    return {
+      videoId: data?.videoDetails?.videoId,
+      title: data?.videoDetails?.title,
+      thumbnailUrl: thumbnails,
+      // channelId: data?.videoDetails?.channelId,
+      uploader: data?.videoDetails?.author,
+      // videoDetails: { ...data?.videoDetails, thumbnail: thumbnails },
+      url: data.streamingData?.adaptiveFormats[
+        data.streamingData?.adaptiveFormats?.length - 1
+      ]?.url,
+    };
+  } catch (error) {
+    console.error("Error:", error);
+    return {
+      videoId: "error",
+      title: "error",
+      thumbnailUrl: "error",
+      // channelId: "hello",
+      uploader: "error",
+      // videoDetails: { ...data?.videoDetails, thumbnail: thumbnails },
+      url: ["error", "error 2"],
+    };
   }
 }
