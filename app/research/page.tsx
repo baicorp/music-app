@@ -8,33 +8,41 @@ import {
   getAlbum,
 } from "@/utils/MusicClient";
 
-export default async function page() {
-  const data = await getHome();
+export default async function Page() {
+  const res = await fetch("http://localhost:3000/api/media", {
+    // Use http://
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      context: {
+        client: {
+          clientName: "ANDROID_MUSIC",
+          clientVersion: "5.26.1",
+          androidSdkVersion: 30,
+        },
+        thirdParty: {
+          embedUrl: "https://music.youtube.com",
+        },
+      },
+      attestationRequest: {
+        omitBotguardData: true,
+      },
+      racyCheckOk: true,
+      contentCheckOk: true,
+      videoId: "SfLfO8vBQk4", // Replace with actual video ID
+      params: "2AMBCgIQBg",
+    }),
+  });
+
+  const data = await res.json();
 
   return (
     <>
       <pre>
         <code>{JSON.stringify(data, null, 2)}</code>
       </pre>
-      {/* <div className="flex font-extrabold flex-grow">
-        <div className="h-svh bg-green-400 grow">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint,
-          provident perspiciatis praesentium nemo error inventore minus iste
-          rerum quibusdam voluptatum facilis delectus fugiat, autem blanditiis.
-          Corporis, libero veritatis? Ad, quisquam. Lorem ipsum dolor sit amet,
-          consectetur adipisicing elit. Ullam delectus nulla mollitia velit
-          commodi voluptatibus optio? Dolore debitis, aut, obcaecati molestiae
-          ad nulla dolores excepturi sunt et qui quia a! Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Facilis eaque quasi iure, sed
-          veniam nostrum atque amet impedit voluptatum tenetur sequi eos a
-          reiciendis! Corrupti dolore molestias fuga voluptas laboriosam? Lorem
-          ipsum dolor, sit amet consectetur adipisicing elit. Deserunt facere
-          eius eveniet. Deleniti quos delectus distinctio voluptates libero odio
-          repudiandae possimus eius, officia ad fugit est impedit. Eveniet,
-          maiores doloremque.
-        </div>
-        <div className="h-svh bg-orange-400 grow w-[400px]">hello world 2</div>
-      </div> */}
     </>
   );
 }

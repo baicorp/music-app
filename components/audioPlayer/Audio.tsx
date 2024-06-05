@@ -32,6 +32,38 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
   return { ...data, url: [data?.url] };
 }
 
+async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
+  const res = await fetch("http://localhost:3000/api/media", {
+    // Use http://
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      context: {
+        client: {
+          clientName: "ANDROID_MUSIC",
+          clientVersion: "5.26.1",
+          androidSdkVersion: 30,
+        },
+        thirdParty: {
+          embedUrl: "https://music.youtube.com",
+        },
+      },
+      attestationRequest: {
+        omitBotguardData: true,
+      },
+      racyCheckOk: true,
+      contentCheckOk: true,
+      videoId: id, // Replace with actual video ID
+      params: "2AMBCgIQBg",
+    }),
+  });
+
+  const data = await res.json();
+  return { ...data, url: [data?.url] };
+}
+
 export type MusicPlayerProps = {
   videoId: string;
   title: string;
@@ -41,7 +73,7 @@ export type MusicPlayerProps = {
 };
 
 export default function Audio({ videoId }: { videoId: string }) {
-  const { data, isLoading } = useSWRImmutable(videoId, fetcherSingel);
+  const { data, isLoading } = useSWRImmutable(videoId, fetcherSingelFresh);
 
   const { listTrackData, setTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
