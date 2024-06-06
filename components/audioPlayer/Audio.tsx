@@ -105,7 +105,7 @@ export default function Audio({ videoId }: { videoId: string }) {
         onPlay={() => setIsPaused(false)}
         onPause={() => setIsPaused(true)}
       />
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-2 md:gap-8">
         <PreviouseTrack
           onSetTrack={setTrackData}
           listTrackData={listTrackData}
@@ -145,13 +145,13 @@ function TogglePlayPause({
   };
 
   return (
-    <div className="relative">
+    <>
       {isLoading ? (
         <Loading />
       ) : (
         <button onClick={togglePlay}>{isPaused ? <Play /> : <Pause />}</button>
       )}
-    </div>
+    </>
   );
 }
 
@@ -178,7 +178,7 @@ function PreviouseTrack({
   }
 
   return (
-    <button onClick={handlePreviousTrack}>
+    <button onClick={handlePreviousTrack} className="hidden md:block">
       <Previous />
     </button>
   );

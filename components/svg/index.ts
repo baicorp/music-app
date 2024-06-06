@@ -7,6 +7,8 @@ import Pause from "./Pause";
 import Next from "./Next";
 import Previous from "./Previous";
 import Loading from "./Loading";
+import BrokenImage from "./BrokenImage";
+import QueueListButton from "./QueueListButton";
 
 export {
   Home,
@@ -18,4 +20,6 @@ export {
   Next,
   Previous,
   Loading,
+  BrokenImage,
+  QueueListButton,
 };
