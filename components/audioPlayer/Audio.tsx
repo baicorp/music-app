@@ -32,34 +32,43 @@ async function fetcherSingel(id: string): Promise<MusicPlayerProps> {
 }
 
 async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
-  const res = await fetch(`${BASE_URL}/api/media`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      context: {
-        client: {
-          clientName: "ANDROID_MUSIC",
-          clientVersion: "5.26.1",
-          androidSdkVersion: 30,
-        },
-        thirdParty: {
-          embedUrl: "https://music.youtube.com",
-        },
+  try {
+    const res = await fetch(`${BASE_URL}/api/stream`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      attestationRequest: {
-        omitBotguardData: true,
-      },
-      racyCheckOk: true,
-      contentCheckOk: true,
-      videoId: id,
-      params: "2AMBCgIQBg",
-    }),
-  });
+      body: JSON.stringify({
+        context: {
+          client: {
+            clientName: "ANDROID_MUSIC",
+            clientVersion: "5.26.1",
+            androidSdkVersion: 30,
+          },
+          thirdParty: {
+            embedUrl: "https://music.youtube.com",
+          },
+        },
+        attestationRequest: {
+          omitBotguardData: true,
+        },
+        racyCheckOk: true,
+        contentCheckOk: true,
+        videoId: id,
+        params: "2AMBCgIQBg",
+      }),
+    });
 
-  const data = await res.json();
-  return { ...data, url: [data?.url] };
+    if (!res.ok) {
+      throw new Error(`Server error: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return { ...data, url: [data?.url] };
+  } catch (error) {
+    console.error("Error fetching YouTube data:", error);
+    throw error;
+  }
 }
 
 export type MusicPlayerProps = {
