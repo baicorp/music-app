@@ -44,7 +44,9 @@ async function fetchWeb(id: string): Promise<{ url: string[] }> {
 
 async function fetchTvhtml5(id: string): Promise<{ url: string[] }> {
   try {
-    const res = await fetch(`${BASE_URL}/api/tvhtml5?id=${id}`);
+    const res = await fetch(`${BASE_URL}/api/tvhtml5?id=${id}`, {
+      method: "POST",
+    });
 
     if (!res.ok) {
       throw new Error(`Server error: ${res.statusText}`);
