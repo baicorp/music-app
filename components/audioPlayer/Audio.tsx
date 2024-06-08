@@ -35,7 +35,7 @@ async function fetchWeb(id: string): Promise<{ url: string[] }> {
     }
 
     const data = await res.json();
-    return { url: [data?.formats?.[0]?.url, data?.formats?.[1]?.url] };
+    return { url: [data?.url] };
   } catch (error) {
     console.error("Error fetching YouTube data:", error);
     throw error;
@@ -59,6 +59,10 @@ export default function Audio({ videoId }: { videoId: string }) {
 
   async function handleError() {
     console.log("cannot play this song :(");
+    const data = await fetchWeb(videoId);
+    if (audioElement.current !== null) {
+      audioElement.current.src = data.url[0];
+    }
   }
 
   function handleEnded() {
