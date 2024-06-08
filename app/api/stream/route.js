@@ -15,31 +15,21 @@ export async function POST(request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Goog-Api-Format-Version": "1",
-        "X-YouTube-Client-Name": "ANDROID_MUSIC",
-        "X-YouTube-Client-Version": "5.01",
-        Origin: "https://music.youtube.com",
         "User-Agent":
-          "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Mobile Safari/537.36",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "de,de-DE;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+          "com.google.android.youtube/17.36.4 (Linux; U; Android 12; GB) gzip",
       },
       body: JSON.stringify({
+        videoId: id,
         context: {
           client: {
-            clientName: "ANDROID_MUSIC",
-            clientVersion: "5.01",
+            clientName: "ANDROID_TESTSUITE",
+            clientVersion: "1.9",
             androidSdkVersion: 30,
+            hl: "en",
+            gl: "US",
+            utcOffsetMinutes: 0,
           },
         },
-        attestationRequest: {
-          omitBotguardData: true,
-        },
-        racyCheckOk: true,
-        contentCheckOk: true,
-        videoId: id,
-        params: "2AMBCgIQBg",
       }),
     });
 
