@@ -69,7 +69,7 @@ async function fetchYoutube(id: string): Promise<{ url: string[] }> {
     }
 
     const data = await res.json();
-    return { url: [data?.formats?.[0]?.url, data?.formats?.[1]?.url] };
+    return data;
   } catch (error) {
     console.error("Error fetching YouTube data:", error);
     throw error;
@@ -91,6 +91,8 @@ export default function Audio({ videoId }: { videoId: string }) {
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
 
+  console.log("data : ", data?.url);
+
   async function handleError() {
     console.log("cannot play this song :(");
   }
@@ -111,7 +113,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url?.[0]}
+        src={data?.url[0]}
         ref={audioElement}
         onError={handleError}
         autoPlay

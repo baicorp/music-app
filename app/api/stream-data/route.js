@@ -124,13 +124,13 @@ async function getInfo(videoId) {
       }
     }
 
-    let result = {
-      // videoDetails: parsedResponse.videoDetails || {},
-      // formats: formats.filter((format: any) => format.url),
-      url: [formats[0].url, formats[1].url],
-    };
+    // let result = {
+    // videoDetails: parsedResponse.videoDetails || {},
+    // formats: formats.filter((format: any) => format.url),
+    // url: [formats[0].url, formats[1].url],
+    // };
 
-    return NextResponse.json(result);
+    return NextResponse.json({ url: [formats[0].url, formats[1].url] });
   } catch (error) {
     return null;
   }
