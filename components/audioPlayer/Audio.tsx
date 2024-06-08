@@ -42,6 +42,22 @@ async function fetchWeb(id: string): Promise<{ url: string[] }> {
   }
 }
 
+async function fetchTvhtml5(id: string): Promise<{ url: string[] }> {
+  try {
+    const res = await fetch(`${BASE_URL}/api/tvhtml5?id=${id}`);
+
+    if (!res.ok) {
+      throw new Error(`Server error: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return { url: [data] };
+  } catch (error) {
+    console.error("Error fetching YouTube data:", error);
+    throw error;
+  }
+}
+
 export type MusicPlayerProps = {
   videoId: string;
   title: string;
@@ -59,7 +75,7 @@ export default function Audio({ videoId }: { videoId: string }) {
 
   async function handleError() {
     console.log("cannot play this song :(");
-    const data = await fetchWeb(videoId);
+    const data = await fetchTvhtml5(videoId);
     if (audioElement.current !== null) {
       audioElement.current.src = data.url[0];
     }
