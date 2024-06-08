@@ -73,10 +73,12 @@ export default function Audio({ videoId }: { videoId: string }) {
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
 
+  console.log("1: ", data?.url[0]);
   async function handleError() {
     console.log("cannot play this song :(");
     const data = await fetchTvhtml5(videoId);
     if (audioElement.current !== null) {
+      console.log("2: ", data?.url[0]);
       audioElement.current.src = data.url[0];
     }
   }
