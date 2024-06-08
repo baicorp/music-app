@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "utils/decipher.ts",
     "app/api/stream/route.js",
-    "utils/dataStructure.ts"
+    "utils/dataStructure.ts",
+    "app/api/yt/route.js"
   ],
   "exclude": ["node_modules"]
 }
