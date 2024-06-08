@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY;
-const YOUTUBE_API_URL = `https://www.youtube.com/youtubei/v1/player?key=${YOUTUBE_API_KEY}`;
+const YOUTUBE_API_URL = `https://music.youtube.com/youtubei/v1/player?key=${YOUTUBE_API_KEY}`;
 const SCRAPER_API_URL = `http://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(
   YOUTUBE_API_URL
 )}`;
