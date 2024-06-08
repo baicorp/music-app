@@ -8,44 +8,10 @@ import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { Next, Previous, Play, Pause, Loading } from "../svg";
 
-async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
+async function fetchMobile(id: string): Promise<MusicPlayerProps> {
   try {
-    const res = await fetch(`${BASE_URL}/api/stream`, {
+    const res = await fetch(`${BASE_URL}/api/stream?id=${id}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        context: {
-          client: {
-            hl: "en",
-            clientName: "WEB",
-            clientVersion: "2.20210721.00.00",
-            clientFormFactor: "UNKNOWN_FORM_FACTOR",
-            clientScreen: "WATCH",
-            mainAppWebInfo: { graftUrl: `/watch?v=${id}` },
-          },
-          user: { lockedSafetyMode: false },
-          request: {
-            useSsl: true,
-            internalExperimentFlags: [],
-            consistencyTokenJars: [],
-          },
-        },
-        videoId: id,
-        playbackContext: {
-          contentPlaybackContext: {
-            vis: 0,
-            splay: false,
-            autoCaptionsDefaultOn: false,
-            autonavState: "STATE_NONE",
-            html5Preference: "HTML5_PREF_WANTS",
-            lactMilliseconds: "-1",
-          },
-        },
-        racyCheckOk: false,
-        contentCheckOk: false,
-      }),
     });
 
     if (!res.ok) {
@@ -60,7 +26,7 @@ async function fetcherSingelFresh(id: string): Promise<MusicPlayerProps> {
   }
 }
 
-async function fetchYoutube(id: string): Promise<{ url: string[] }> {
+async function fetchWeb(id: string): Promise<{ url: string[] }> {
   try {
     const res = await fetch(`${BASE_URL}/api/stream-data?videoId=${id}`);
 
@@ -69,7 +35,7 @@ async function fetchYoutube(id: string): Promise<{ url: string[] }> {
     }
 
     const data = await res.json();
-    return data;
+    return { url: [data?.formats?.[0]?.url, data?.formats?.[1]?.url] };
   } catch (error) {
     console.error("Error fetching YouTube data:", error);
     throw error;
@@ -81,17 +47,15 @@ export type MusicPlayerProps = {
   title: string;
   thumbnailUrl: string;
   uploader: string;
-  url: string[];
+  url: string;
 };
 
 export default function Audio({ videoId }: { videoId: string }) {
-  const { data, isLoading } = useSWRImmutable(videoId, fetchYoutube);
+  const { data, isLoading } = useSWRImmutable(videoId, fetchMobile);
 
   const { listTrackData, setTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
-
-  console.log("data : ", data?.url);
 
   async function handleError() {
     console.log("cannot play this song :(");
@@ -113,7 +77,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url[0]}
+        src={data?.url}
         ref={audioElement}
         onError={handleError}
         autoPlay

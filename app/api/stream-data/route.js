@@ -130,7 +130,7 @@ async function getInfo(videoId) {
     // url: [formats[0].url, formats[1].url],
     // };
 
-    return NextResponse.json({ url: [formats[0].url, formats[1].url] });
+    return NextResponse.json({ url: formats[0].url });
   } catch (error) {
     return null;
   }
