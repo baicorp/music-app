@@ -81,7 +81,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url}
+        src={data?.url[0]}
         ref={audioElement}
         onError={handleError}
         autoPlay
