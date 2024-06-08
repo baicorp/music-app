@@ -215,7 +215,7 @@ export async function getVideo(videoId: string): Promise<MusicPlayerProps> {
       // channelId: "hello",
       uploader: "error",
       // videoDetails: { ...data?.videoDetails, thumbnail: thumbnails },
-      url: ["error", "error 2"],
+      url: "error",
     };
   }
 }
