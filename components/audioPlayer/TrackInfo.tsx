@@ -1,5 +1,4 @@
 import { Artist } from "@/types/song";
-import Image from "next/image";
 import React from "react";
 import { Artists } from "../shared";
 import { BrokenImage } from "../svg";
@@ -16,7 +15,7 @@ export default function TrackInfo({
   return (
     <div className="flex items-center">
       {thumbnail ? (
-        <Image
+        <img
           src={thumbnail as string}
           width={400}
           height={400}

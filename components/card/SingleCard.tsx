@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Play from "../Play";
@@ -20,7 +19,7 @@ export default function SingleCard({
     <div className="shrink-0 w-[160px] h-full">
       <Link href={`/album/${browseId}`}>
         <div className="relative">
-          <Image
+          <img
             src={thumbnail}
             alt={`${title}-thumbnail`}
             width={226}

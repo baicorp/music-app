@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -21,7 +20,7 @@ export default function ChannelCard({
         href={`/artist/${browseId}`}
         className="flex flex-col items-center gap-3"
       >
-        <Image
+        <img
           src={thumbnail}
           alt={title}
           width={1000}

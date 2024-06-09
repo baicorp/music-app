@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Artist } from "@/types/song";
 import { Artists } from "@/components/shared";
@@ -22,7 +21,7 @@ export default function PlaylistCard({
   return (
     <div className="shrink-0 w-[160px]">
       <Link href={`/playlist/${browseId}`}>
-        <Image
+        <img
           src={thumbnail}
           alt={title}
           width={226}

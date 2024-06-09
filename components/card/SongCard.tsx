@@ -1,7 +1,6 @@
 import React from "react";
 import { Artist, Song } from "@/types/song";
 import { Artists, PlayFromTitle, PlayFromImage } from "@/components/shared";
-import Image from "next/image";
 
 export type SongCardProps = {
   videoId: string;
@@ -26,7 +25,7 @@ export default function SongCard({
 }: SongCardProps) {
   return (
     <div className="flex w-[90%] md:w-[400px] lg:w-[450px] rounded-md">
-      <Image
+      <img
         src={thumbnail}
         width={400}
         height={400}

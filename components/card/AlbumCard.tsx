@@ -1,5 +1,4 @@
 import { Artist } from "@/types/song";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Artists } from "@/components/shared";
@@ -22,7 +21,7 @@ export default function AlbumCard({
   return (
     <div className="shrink-0 w-[160px] h-full">
       <Link href={`/album/${browseId}`}>
-        <Image
+        <img
           src={thumbnail}
           alt={`${title}-thumbnail`}
           width={226}

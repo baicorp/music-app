@@ -1,7 +1,6 @@
 import React from "react";
 import { Artist, Song } from "@/types/song";
 import { Artists, PlayFromTitle } from "@/components/shared";
-import Image from "next/image";
 
 type TrackItemPlaylistProps = {
   videoId: string;
@@ -26,7 +25,7 @@ export default function TrackItemPlaylist({
 }: TrackItemPlaylistProps) {
   return (
     <div className="flex rounded-md">
-      <Image
+      <img
         src={thumbnail}
         alt={title + "image"}
         width={400}

@@ -3,7 +3,6 @@
 import useMusic from "@/hooks/useMusic";
 import { Artist, Song } from "@/types/song";
 import React from "react";
-import Image from "next/image";
 import { Artists } from "../shared";
 import { QueueListButton } from "../svg";
 
@@ -71,7 +70,7 @@ function TrackQueueList({
   return (
     <div className="flex rounded-md">
       <div className="relative overflow-hidden w-20 h-16">
-        <Image
+        <img
           src={thumbnail}
           alt={title + "image"}
           width={400}
