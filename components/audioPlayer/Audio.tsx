@@ -251,7 +251,7 @@ function Progress({
   }, [audioRef, isLoading]);
 
   return (
-    <div className="h-[2px] rounded-sm absolute bottom-0 right-0 left-0">
+    <div className="h-[3px] rounded-sm absolute bottom-0 right-0 left-0">
       <div className="h-full bg-slate-300" style={{ width: `${progress}%` }} />
     </div>
   );

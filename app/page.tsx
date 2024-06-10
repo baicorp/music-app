@@ -4,8 +4,8 @@ import { SongCard } from "@/components/card";
 
 export default async function Home() {
   return (
-    <main className="overflow-hidden p-4 lg:px-6 xl:px-10">
-      <div className="flex flex-col gap-5">
+    <main className="bg-[#232323] border border-[#343434] overflow-x-hidden p-4 lg:px-6 xl:px-10 rounded-lg">
+      <div className="flex flex-col gap-5 overflow-y-auto rounded-md">
         <HomeResult />
       </div>
     </main>
@@ -19,11 +19,20 @@ async function HomeResult() {
     data = datas;
   } catch (error) {
     return (
-      <div className="h-screen flex justify-center items-center grow">
-        <p>Try again later 🛠️</p>
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
       </div>
     );
   }
+
+  if (!!!data) {
+    return (
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
+      </div>
+    );
+  }
+
   const list = data?.map((data: any, index: number) => {
     if (data?.headerTitle === "Quick picks") {
       return (

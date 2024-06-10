@@ -32,8 +32,16 @@ async function SearchResult({ query }: { query: string }) {
     data = datas;
   } catch (error) {
     return (
-      <div className="h-screen flex justify-center items-center">
-        <p>Sorry try again later 🛠️</p>
+      <div className="flex justify-center items-center">
+        <p>Sorry, something wrong</p>
+      </div>
+    );
+  }
+
+  if (!!!data) {
+    return (
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
       </div>
     );
   }

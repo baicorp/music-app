@@ -32,7 +32,7 @@ export default function TrackItemPlaylist({
         height={400}
         className="w-16 h-16 shrink-0 object-center object-cover rounded-md"
       />
-      <div className="w-full flex justify-between items-center px-4">
+      <div className="flex justify-between grow items-center px-4">
         <div className="flex grow flex-col justify-center">
           <PlayFromTitle
             listSong={listSong}

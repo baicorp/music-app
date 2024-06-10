@@ -21,6 +21,7 @@ export default function Queue() {
 
 export function QueueList() {
   const { listTrackData, isQueueOpen } = useMusic();
+
   const trackList = listTrackData?.map((content: Song, index: number) => {
     return (
       <TrackQueueList
@@ -34,20 +35,17 @@ export function QueueList() {
     );
   });
 
-  return (
-    <div
-      className={`${
-        isQueueOpen ? "" : "hidden"
-      } flex flex-col relative h-svh overflow-y-auto min-w-[25%] bg-[#161616]`}
-    >
-      <p className="px-6 py-4 sticky top-0 font-extrabold bg-[#1c1c1c] z-50">
+  return isQueueOpen ? (
+    <div className="bg-[#232323] border border-[#343434] w-[300px] xl:w-[350px] shrink-0 flex flex-col overflow-y-auto rounded-lg relative">
+      <p className="px-6 py-4 sticky top-0 font-extrabold backdrop-blur-sm z-30">
         {trackList ? "Queue" : "No Data"}
       </p>
       <div className="flex flex-col gap-2 px-6 py-4">
-        <p className="font-semibold mb-2">{trackList ? "Now Playing" : ""}</p>
         {trackList || "No data"}
       </div>
     </div>
+  ) : (
+    ""
   );
 }
 

@@ -1,23 +1,76 @@
 import DynamicComponent from "@/components/DynamicComponent";
-import Loading from "@/components/Loading";
 import { getChannel } from "@/utils/MusicClient";
 import Image from "next/image";
-import React, { Suspense } from "react";
+import React from "react";
 
-export default function page({ params }: { params: { artistId: string } }) {
+export default async function page({
+  params,
+}: {
+  params: { artistId: string };
+}) {
+  let data: any;
+  try {
+    const datas = await getChannel(params?.artistId);
+    data = datas;
+  } catch (error) {
+    return (
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
+      </div>
+    );
+  }
+
+  if (!!!data) {
+    return (
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <Suspense key={params.artistId} fallback={<Loading />}>
-        <ChannelData channelId={params.artistId} />
-      </Suspense>
-    </div>
+    <>
+      <section className="relative">
+        <div>
+          <Image
+            className="object-cover object-center w-full h-1/4"
+            src={data?.thumbnail}
+            alt={data?.artistName}
+            width={data?.thumbnailWidth}
+            height={data?.thumbnailHeight}
+          />
+          <div className="bg-gradient-to-b from-[#191919] via-transparent to-[#0f0f0f] absolute inset-0"></div>
+          <div className="absolute flex flex-col justify-end items-center lg:items-start inset-0 lg:px-6 xl:px-10 p-4">
+            <div className="flex gap-4 items-center justify-end">
+              <Avatar avatar={data?.avatar} />
+              <h1 className="font-bold lg:font-black text-4xl lg:text-6xl lg:mb-2">
+                {data?.artistName}
+              </h1>
+            </div>
+            <div className="hidden lg:block">
+              <p className="w-1/2 text-sm line-clamp-4">{data?.description}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="p-4 lg:px-6 xl:px-10 pt-10">
+          <ChannelDynamicDataList contents={data?.contents} />
+        </div>
+      </section>
+    </>
   );
 }
 
 async function ChannelData({ channelId }: { channelId: string }) {
   const data = await getChannel(channelId);
 
-  if (!data) return <p>sorry</p>;
+  if (!data)
+    return (
+      <div className="flex justify-center">
+        <p>sorry, something wrong</p>
+      </div>
+    );
 
   return (
     <>

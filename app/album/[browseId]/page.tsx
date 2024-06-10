@@ -17,10 +17,16 @@ export default async function Album({
     data = datas;
   } catch (err) {
     return (
-      <div className="h-screen flex justify-center items-center">
-        <p className="font-semibold text-lg">
-          Failed to fetch data, try another one dah
-        </p>
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
+      </div>
+    );
+  }
+
+  if (!!!data) {
+    return (
+      <div className="flex justify-center">
+        <p>Sorry, something wrong</p>
       </div>
     );
   }
