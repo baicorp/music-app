@@ -25,18 +25,19 @@ export default function SearchBox() {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="overflow-hidden flex gap-4 bg-transparent border-2 border-gray-400 rounded-md"
+        className="overflow-hidden flex gap-2 md:gap-4 p-3 bg-transparent border-2 border-gray-400 rounded-md"
       >
         <input
           type="text"
-          className="outline-none bg-transparent grow p-3 font-semibold"
+          className="outline-none bg-transparent grow font-semibold"
           placeholder="Search music"
           value={input || ""}
           onChange={(e) => {
             setInput(e.target.value);
           }}
+          onBlur={(e) => e.currentTarget.blur()}
         />
-        <button type="submit" className="p-3">
+        <button type="submit">
           <Search />
         </button>
       </form>

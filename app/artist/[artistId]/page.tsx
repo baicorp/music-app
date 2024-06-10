@@ -1,6 +1,5 @@
 import DynamicComponent from "@/components/DynamicComponent";
 import { getChannel } from "@/utils/MusicClient";
-import Image from "next/image";
 import React from "react";
 
 export default async function page({
@@ -32,7 +31,7 @@ export default async function page({
     <>
       <section className="relative">
         <div>
-          <Image
+          <img
             className="object-cover object-center w-full h-1/4"
             src={data?.thumbnail}
             alt={data?.artistName}
@@ -76,7 +75,7 @@ async function ChannelData({ channelId }: { channelId: string }) {
     <>
       <section className="relative">
         <div>
-          <Image
+          <img
             className="object-cover object-center w-full h-1/4"
             src={data?.thumbnail}
             alt={data?.artistName}
@@ -142,7 +141,7 @@ function ChannelDynamicDataList({ contents }: { contents: any[] | undefined }) {
 function Avatar({ avatar }: { avatar: string | undefined }) {
   if (!avatar) return "";
   return (
-    <Image
+    <img
       className="object-cover object-center rounded-full w-32 h-32 md:w-48 md:h-48"
       src={avatar}
       alt={"avatar"}

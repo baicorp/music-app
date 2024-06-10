@@ -10,16 +10,18 @@ export default function page({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   return (
-    <div className="mt-5 flex flex-col gap-2 p-4 lg:px-6 xl:px-10">
-      <div className="mb-10">
-        <SearchBox />
+    <div>
+      <div className="mt-5 flex flex-col gap-2 p-4 lg:px-6 xl:px-10">
+        <div className="mb-10">
+          <SearchBox />
+        </div>
+        <Suspense
+          key={(searchParams.query as string) || ""}
+          fallback={<Loading />}
+        >
+          <SearchResult query={(searchParams.query as string) || ""} />
+        </Suspense>
       </div>
-      <Suspense
-        key={(searchParams.query as string) || ""}
-        fallback={<Loading />}
-      >
-        <SearchResult query={(searchParams.query as string) || ""} />
-      </Suspense>
     </div>
   );
 }

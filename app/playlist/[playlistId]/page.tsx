@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { getPlaylist } from "@/utils/MusicClient";
 import Link from "next/link";
@@ -35,7 +34,7 @@ export default async function Playlist({
     <div>
       <div className="p-4 lg:px-6 xl:px-10">
         <div className="flex">
-          <Image
+          <img
             src={data?.thumbnail}
             alt={`${data?.title} thumbnail`}
             width={544}

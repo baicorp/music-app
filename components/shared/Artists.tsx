@@ -8,7 +8,7 @@ export default function Artists({
 }) {
   if (!artists) return;
   return (
-    <ul className="flex gap-2 line-clamp-1">
+    <ul className="flex gap-2 w-1/3 line-clamp-1">
       {artists?.map((artist, index) => {
         if (!artist) return;
         return (
