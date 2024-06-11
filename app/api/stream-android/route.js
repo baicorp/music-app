@@ -32,7 +32,7 @@ export async function POST(request) {
             client: {
               clientName: ANDROID.clientName,
               clientVersion: ANDROID.clientVersion,
-              androidSdkVersion: 30,
+              androidSdkVersion: 31,
               hl: "en",
               gl: "US",
               utcOffsetMinutes: 0,
@@ -45,21 +45,25 @@ export async function POST(request) {
       throw new Error(response.text());
     }
     const data = await response.json();
-    const thumbnails = data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
+    // const thumbnails = data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
 
-    const result = {
-      videoId: data?.videoDetails?.videoId,
-      title: data?.videoDetails?.title,
-      thumbnailUrl: thumbnails,
-      channelId: data?.videoDetails?.channelId,
-      uploader: data?.videoDetails?.author,
-      videoDetails: { ...data?.videoDetails, thumbnail: thumbnails },
-      url: data.streamingData?.adaptiveFormats[
-        data.streamingData?.adaptiveFormats?.length - 1
-      ]?.url,
-    };
+    // const result = {
+    //   videoId: data?.videoDetails?.videoId,
+    //   title: data?.videoDetails?.title,
+    //   thumbnailUrl: thumbnails,
+    //   channelId: data?.videoDetails?.channelId,
+    //   uploader: data?.videoDetails?.author,
+    //   videoDetails: { ...data?.videoDetails, thumbnail: thumbnails },
+    //   url: data.streamingData?.adaptiveFormats[
+    //     data.streamingData?.adaptiveFormats?.length - 1
+    //   ]?.url,
+    // };
 
-    return NextResponse.json(result);
+    const urlArray = data?.streamingData?.adaptiveFormats?.map((item) => {
+      return item?.url;
+    });
+
+    return NextResponse.json(urlArray);
   } catch (error) {
     return new Response(JSON.stringify({ error: error }));
   }

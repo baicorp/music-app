@@ -1,4 +1,5 @@
 import React from "react";
+import Audios from "../research/Audio";
 
 const tagNameList = [
   { id: 1, name: "FULL TIME" },
@@ -31,6 +32,9 @@ export default async function Page() {
             POSTED 3 DAY AGO
           </p>
         </div>
+      </div>
+      <div>
+        <Audios videoId="UgpIk0v8Z2g" />
       </div>
     </div>
   );
