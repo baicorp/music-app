@@ -104,13 +104,17 @@ export default function Audio({ videoId }: { videoId: string }) {
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
 
+  if (!isLoading) {
+    console.log("1: ", data?.url[1]);
+  }
+
   async function handleError() {
     if (audioElement.current !== null) {
       if (!!!data) {
         console.log("cannot play this song data :(");
         return;
       }
-      console.log("2: ", data.url[0]);
+      console.log("2: ", data.url[1]);
       audioElement.current.src = data.url[1];
     } else {
       console.log("cannot play this song :(");
@@ -133,7 +137,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url[0] + "1"}
+        src={data?.url[0]}
         ref={audioElement}
         onError={handleError}
         autoPlay

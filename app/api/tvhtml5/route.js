@@ -1,17 +1,6 @@
 import { NextResponse } from "next/server";
 
 const YOUTUBE_API_URL = `https://www.youtube.com/youtubei/v1/player?key=AIzaSyA8eiZmM1FaDVjRy-df2KTyQ_vz_yYM39w`;
-export async function GET() {
-  const res = await fetch("https://www.youtube.com/iframe_api");
-  const watchHtml = await res.text();
-
-  let jsFileUrlMatches = watchHtml.match(
-    /\/s\/player\/[A-Za-z0-9]+\/[A-Za-z0-9_.]+\/[A-Za-z0-9_]+\/base\.js/
-  );
-
-  return NextResponse.json({ jsFile: watchHtml });
-}
-
 const signatureTimeStamp = 19884;
 
 let TO = {
@@ -41,32 +30,6 @@ function APa(a) {
   TO.Ud(a, 54);
   return a.join("");
 }
-
-var fta = function (a) {
-  a = a.split("");
-  hD.mL(a, 79);
-  hD.L5(a, 2);
-  hD.mL(a, 24);
-  hD.L5(a, 3);
-  return a.join("");
-};
-
-var hD = {
-  // Swap transform
-  i1: function (a, b) {
-    var c = a[0];
-    a[0] = a[b % a.length];
-    a[b % a.length] = c;
-  },
-  // Splice transform
-  L5: function (a, b) {
-    a.splice(0, b);
-  },
-  // Reverse transform
-  mL: function (a) {
-    a.reverse();
-  },
-};
 
 export async function POST(request) {
   const url = new URL(request.url);
