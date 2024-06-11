@@ -64,7 +64,7 @@ async function fetchTvhtml5(id: string): Promise<{ url: string[] }> {
 async function fetchStreamData(id: string): Promise<MusicPlayerProps> {
   try {
     const mobileUrl = `${BASE_URL}/api/stream?id=${id}`;
-    const tvhtml5Url = `${BASE_URL}/api/tvhtml5?id=${id}`;
+    const tvhtml5Url = `${BASE_URL}/api/stream-android?id=${id}`;
 
     const [mobileRes, tvhtml5Res] = await Promise.all([
       fetch(mobileUrl, { method: "POST" }),
@@ -82,7 +82,7 @@ async function fetchStreamData(id: string): Promise<MusicPlayerProps> {
       tvhtml5Res.json(),
     ]);
 
-    return { ...mobileData, url: [mobileData?.url, tvhtml5Data] };
+    return { ...mobileData, url: [mobileData?.url, tvhtml5Data?.url] };
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
