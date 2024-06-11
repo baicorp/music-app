@@ -12,30 +12,35 @@ export async function GET() {
   return NextResponse.json({ jsFile: watchHtml });
 }
 
-var xPa = function (a) {
-  a = a.split("");
-  WO.xX(a, 62);
-  WO.lp(a, 2);
-  WO.FW(a, 50);
-  WO.xX(a, 1);
-  WO.FW(a, 26);
-  WO.xX(a, 11);
-  return a.join("");
-};
+const signatureTimeStamp = 19884;
 
-var WO = {
-  lp: function (a, b) {
+let TO = {
+  nE: function (a, b) {
     a.splice(0, b);
   },
-  FW: function (a) {
-    a.reverse();
-  },
-  xX: function (a, b) {
+  te: function (a, b) {
     var c = a[0];
     a[0] = a[b % a.length];
     a[b % a.length] = c;
   },
+  Ud: function (a) {
+    a.reverse();
+  },
 };
+
+function APa(a) {
+  // nE, Ud,te
+  a = a.split("");
+  TO.nE(a, 2);
+  TO.Ud(a, 46);
+  TO.te(a, 62);
+  TO.nE(a, 1);
+  TO.te(a, 61);
+  TO.Ud(a, 40);
+  TO.te(a, 65);
+  TO.Ud(a, 54);
+  return a.join("");
+}
 
 var fta = function (a) {
   a = a.split("");
@@ -63,110 +68,62 @@ var hD = {
   },
 };
 
-// export async function POST(request) {
-//   const url = new URL(request.url);
-//   const id = url.searchParams.get("id");
-//   try {
-//     const response = await fetch(YOUTUBE_API_URL, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         videoId: id,
-//         context: {
-//           client: {
-//             clientName: "TVHTML5_SIMPLY_EMBEDDED_PLAYER",
-//             clientVersion: "2.0",
-//           },
-//           thirdParty: {
-//             embedUrl: `https://www.youtube.com`,
-//           },
-//         },
-//         playbackContext: {
-//           contentPlaybackContext: {
-//             signatureTimestamp: "19369",
-//           },
-//         },
-//       }),
-//     });
-
-//     if (!response.ok) {
-//       const errorData = await response.json();
-//       throw new Error(`YouTube API Error: ${errorData.error.message}`);
-//     }
-
-//     const data = await response.json();
-//     const signatureCipher =
-//       data?.streamingData?.adaptiveFormats?.[0]?.signatureCipher;
-//     const urlSearchParams = new URLSearchParams(signatureCipher);
-
-//     let s = urlSearchParams.get("s");
-//     const sp = urlSearchParams.get("sp");
-//     let url = urlSearchParams.get("url");
-
-//     s = fta(s);
-//     url = `${url}&sig=${s}`;
-
-//     const thumbnails = data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
-
-//     return NextResponse.json(url);
-//   } catch (error) {
-//     console.error("Error fetching YouTube data:", error.message);
-//     return NextResponse.json({ error: error.message }, { status: 500 });
-//   }
-// }
-
-// pages/api/getPlayerResponse.js
-
 export async function POST(request) {
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
 
-  const payload = {
-    videoId: id,
-    context: {
-      client: {
-        clientName: "ANDROID_TESTSUITE",
-        clientVersion: "1.9",
-        androidSdkVersion: 30,
-        hl: "en",
-        gl: "US",
-        utcOffsetMinutes: 0,
-      },
-    },
-  };
-
   const headers = {
     "Content-Type": "application/json",
-    "User-Agent":
-      "com.google.android.youtube/17.36.4 (Linux; U; Android 12; GB) gzip",
   };
 
   try {
     const response = await fetch(YOUTUBE_API_URL, {
       method: "POST",
       headers: headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        videoId: id,
+        context: {
+          client: {
+            clientName: "TVHTML5_SIMPLY_EMBEDDED_PLAYER",
+            clientVersion: "2.0",
+          },
+          thirdParty: {
+            embedUrl: `https://www.youtube.com`,
+          },
+        },
+        playbackContext: {
+          contentPlaybackContext: {
+            signatureTimestamp: signatureTimeStamp,
+          },
+        },
+      }),
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const responseBody = await response.json();
+    const data = await response.json();
 
-    if (!responseBody) {
-      return NextResponse.status(404).json({
+    if (!data) {
+      return NextResponse.json({
         error: `Video '${videoId}' is not available.`,
       });
     }
 
-    return NextResponse.json(
-      responseBody?.streamingData?.adaptiveFormats[
-        responseBody.streamingData?.adaptiveFormats?.length - 1
-      ]?.url
-    );
+    const signatureCipher =
+      data?.streamingData?.adaptiveFormats?.[
+        data?.streamingData?.adaptiveFormats?.length - 1
+      ]?.signatureCipher;
+    const urlSearchParams = new URLSearchParams(signatureCipher);
+
+    let s = urlSearchParams.get("s");
+    let url = urlSearchParams.get("url");
+
+    s = APa(s);
+    url = `${url}&sig=${s}`;
+
+    return NextResponse.json(url);
   } catch (error) {
     if (error.name === "AbortError") {
       return NextResponse.json({ error: "Request was aborted" });

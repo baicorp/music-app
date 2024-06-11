@@ -7,6 +7,7 @@ import { Song } from "@/types/song";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { Next, Previous, Play, Pause, Loading } from "../svg";
+import wait from "@/utils/wait";
 
 async function fetchMobile(id: string): Promise<MusicPlayerProps> {
   try {
@@ -60,6 +61,34 @@ async function fetchTvhtml5(id: string): Promise<{ url: string[] }> {
   }
 }
 
+async function fetchStreamData(id: string): Promise<MusicPlayerProps> {
+  try {
+    const mobileUrl = `${BASE_URL}/api/stream?id=${id}`;
+    const tvhtml5Url = `${BASE_URL}/api/tvhtml5?id=${id}`;
+
+    const [mobileRes, tvhtml5Res] = await Promise.all([
+      fetch(mobileUrl, { method: "POST" }),
+      fetch(tvhtml5Url, { method: "POST" }),
+    ]);
+
+    if (!mobileRes.ok || !tvhtml5Res.ok) {
+      throw new Error(
+        `Server error: ${mobileRes.statusText} / ${tvhtml5Res.statusText}`
+      );
+    }
+
+    const [mobileData, tvhtml5Data] = await Promise.all([
+      mobileRes.json(),
+      tvhtml5Res.json(),
+    ]);
+
+    return { ...mobileData, url: [mobileData?.url, tvhtml5Data] };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
+
 export type MusicPlayerProps = {
   videoId: string;
   title: string;
@@ -69,19 +98,22 @@ export type MusicPlayerProps = {
 };
 
 export default function Audio({ videoId }: { videoId: string }) {
-  const { data, isLoading } = useSWRImmutable(videoId, fetchMobile);
+  const { data, isLoading } = useSWRImmutable(videoId, fetchStreamData);
 
   const { listTrackData, setTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
 
-  console.log("1: ", data?.url[0]);
   async function handleError() {
-    console.log("cannot play this song :(");
-    const data = await fetchTvhtml5(videoId);
     if (audioElement.current !== null) {
-      console.log("2: ", data?.url[0]);
-      audioElement.current.src = data.url[0];
+      if (!!!data) {
+        console.log("cannot play this song data :(");
+        return;
+      }
+      console.log("2: ", data.url[0]);
+      audioElement.current.src = data.url[1];
+    } else {
+      console.log("cannot play this song :(");
     }
   }
 
@@ -101,7 +133,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url[0]}
+        src={data?.url[0] + "1"}
         ref={audioElement}
         onError={handleError}
         autoPlay
