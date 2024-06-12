@@ -45,17 +45,22 @@ export async function POST(request) {
       headers: headers,
       body: JSON.stringify({
         videoId: id,
+        visitorData: "CgtqTGdZdzQyLVQ5TSi396azBjIKCgJJRBIEGgAgYw%3D%3D",
         context: {
           client: {
-            clientName: "TVHTML5_SIMPLY_EMBEDDED_PLAYER",
-            clientVersion: "2.0",
+            // clientName: "TVHTML5_SIMPLY_EMBEDDED_PLAYER",
+            // clientVersion: "2.0",
+            clientName: "WEB_REMIX",
+            clientVersion: "1.20240605.01.00",
+            originalUrl: `https://music.youtube.com/watch?v=${id}`,
           },
-          thirdParty: {
-            embedUrl: `https://www.youtube.com`,
-          },
+          // thirdParty: {
+          //   embedUrl: `https://www.youtube.com`,
+          // },
         },
         playbackContext: {
           contentPlaybackContext: {
+            referer: `https://music.youtube.com/watch?v=${id}`,
             signatureTimestamp: signatureTimeStamp,
           },
         },
