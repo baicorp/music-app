@@ -38,7 +38,7 @@ export default function SearchBox() {
           onBlur={(e) => e.currentTarget.blur()}
         />
         <button type="submit">
-          <Search />
+          <Search active />
         </button>
       </form>
     </div>

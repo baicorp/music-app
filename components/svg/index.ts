@@ -1,6 +1,6 @@
 import Home from "./Home";
 import Search from "./Search";
-import Experiment from "./Experiment";
+import About from "./About";
 import ArrowBack from "./ArrowBack";
 import Play from "./Play";
 import Pause from "./Pause";
@@ -9,14 +9,18 @@ import Previous from "./Previous";
 import Loading from "./Loading";
 import BrokenImage from "./BrokenImage";
 import QueueListButton from "./QueueListButton";
+import Speaker from "./Speaker";
+import Lost from "./Lost";
 
 export {
   Home,
   Search,
-  Experiment,
+  About,
   ArrowBack,
   Play,
+  Speaker,
   Pause,
+  Lost,
   Next,
   Previous,
   Loading,

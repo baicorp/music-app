@@ -29,10 +29,10 @@ export default async function page({
 
   return (
     <>
-      <section className="relative">
-        <div>
+      <section className="relative -top-14">
+        <div className="relative">
           <img
-            className="object-cover object-center w-full h-1/4"
+            className="object-cover object-center w-full h-1/3 md:h-1/4"
             src={data?.thumbnail}
             alt={data?.artistName}
             width={data?.thumbnailWidth}
@@ -53,7 +53,7 @@ export default async function page({
         </div>
       </section>
       <section>
-        <div className="p-4 lg:px-6 xl:px-10 pt-10">
+        <div className="pr-4 pl-4 pb-4 lg:px-6 xl:px-10">
           <ChannelDynamicDataList contents={data?.contents} />
         </div>
       </section>

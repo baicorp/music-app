@@ -35,7 +35,7 @@ async function SearchResult({ query }: { query: string }) {
   } catch (error) {
     return (
       <div className="flex justify-center items-center">
-        <p>Sorry, something wrong</p>
+        <p>Sorry, something wrong 😢</p>
       </div>
     );
   }
@@ -43,7 +43,7 @@ async function SearchResult({ query }: { query: string }) {
   if (!!!data) {
     return (
       <div className="flex justify-center">
-        <p>Sorry, something wrong</p>
+        <p>Sorry, something wrong 😢</p>
       </div>
     );
   }

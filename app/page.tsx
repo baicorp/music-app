@@ -4,8 +4,8 @@ import { SongCard } from "@/components/card";
 
 export default async function Home() {
   return (
-    <main className="bg-[#232323] border border-[#343434] overflow-x-hidden p-4 lg:px-6 xl:px-10 rounded-lg">
-      <div className="flex flex-col gap-5 overflow-y-auto rounded-md">
+    <main className="bg-secondary border border-secondary overflow-x-hidden p-4 lg:px-6 xl:px-10 rounded-lg grow">
+      <div className="flex flex-col gap-5 overflow-y-auto rounded-md h-full">
         <HomeResult />
       </div>
     </main>
@@ -19,8 +19,8 @@ async function HomeResult() {
     data = datas;
   } catch (error) {
     return (
-      <div className="flex justify-center">
-        <p>Sorry, something wrong</p>
+      <div className="flex justify-center items-center h-full">
+        <p>Sorry, something wrong 😢 </p>
       </div>
     );
   }

@@ -7,8 +7,7 @@ export default function layout({
   children: ReactElement | ReactElement[] | ReactNode;
 }) {
   return (
-    <div className="bg-[#232323] relative overflow-y-auto grow rounded-lg border border-[#343434]">
-      <BackButton />
+    <div className="bg-secondary relative overflow-y-auto grow rounded-lg border border-secondary">
       {children}
     </div>
   );
