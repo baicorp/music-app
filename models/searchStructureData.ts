@@ -17,7 +17,9 @@ export default function extractSearchData(searchDataObject: any) {
             title: content?.musicCardShelfRenderer?.title?.runs[0]?.text,
             thumbnail:
               content?.musicCardShelfRenderer?.thumbnail?.musicThumbnailRenderer
-                ?.thumbnail?.thumbnails[1]?.url,
+                ?.thumbnail?.thumbnails[1]?.url ||
+              content?.musicCardShelfRenderer?.thumbnail?.musicThumbnailRenderer
+                ?.thumbnail?.thumbnails[0]?.url,
             subtitle: content?.musicCardShelfRenderer?.subtitle?.runs
               ?.map((run: any) => run?.text?.trim())
               ?.flat(100)

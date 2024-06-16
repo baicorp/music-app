@@ -63,26 +63,26 @@ async function fetchTvhtml5(id: string): Promise<{ url: string[] }> {
 
 async function fetchStreamData(id: string): Promise<MusicPlayerProps> {
   try {
-    const mobileUrl = `${BASE_URL}/api/stream?id=${id}`;
-    const tvhtml5Url = `${BASE_URL}/api/stream-android?id=${id}`;
+    const androidTestSuite = `${BASE_URL}/api/stream?id=${id}`;
+    const piped = `${BASE_URL}/api/stream?id=${id}`;
 
-    const [mobileRes, tvhtml5Res] = await Promise.all([
-      fetch(mobileUrl, { method: "POST" }),
-      fetch(tvhtml5Url, { method: "POST" }),
+    const [androidRes, pipedRes] = await Promise.all([
+      fetch(androidTestSuite, { method: "POST" }),
+      fetch(piped),
     ]);
 
-    if (!mobileRes.ok || !tvhtml5Res.ok) {
+    if (!androidRes.ok || !pipedRes.ok) {
       throw new Error(
-        `Server error: ${mobileRes.statusText} / ${tvhtml5Res.statusText}`
+        `Server error: ${androidRes.statusText} / ${pipedRes.statusText}`
       );
     }
 
-    const [mobileData, tvhtml5Data] = await Promise.all([
-      mobileRes.json(),
-      tvhtml5Res.json(),
+    const [androidData, pipedData] = await Promise.all([
+      androidRes.json(),
+      pipedRes.json(),
     ]);
 
-    return { ...mobileData, url: [mobileData?.url, tvhtml5Data?.url] };
+    return { ...androidData, url: [androidData?.url, pipedData] };
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
@@ -105,7 +105,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   const audioElement = useRef<HTMLAudioElement>(null);
 
   if (!isLoading) {
-    console.log("1: ", data?.url[1]);
+    console.log("1: ", data?.url[0]);
   }
 
   async function handleError() {
@@ -137,7 +137,7 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url[0]}
+        src={data?.url[0] + ""}
         ref={audioElement}
         onError={handleError}
         autoPlay

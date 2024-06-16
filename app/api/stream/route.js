@@ -63,13 +63,15 @@ export async function POST(request) {
 export async function GET(request) {
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
-  if (!id) return NextResponse.json({ error: response.status });
+  if (!id) return NextResponse.json({ error: "no id given" });
 
-  const response = await fetch(`https://pipedapi.kavin.rocks/streams/${id}`);
+  const response = await fetch(`https://pipedapi.reallyaweso.me/streams/${id}`);
   if (!response.ok) {
     return NextResponse.json({ error: response.status });
   }
 
   const data = await response.json();
-  return NextResponse.json(data?.audioStreams[0]?.url);
+  if (!data) return NextResponse.json({ error: response.status });
+  const stream = data?.audioStreams?.filter((data) => data?.itag === 251);
+  return NextResponse.json(stream[0]?.url);
 }
