@@ -103,10 +103,9 @@ export default function Audio({ videoId }: { videoId: string }) {
   const { listTrackData, setTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!isLoading) {
-    console.log("1: ", data?.url[0]);
-  }
+  console.log(videoId);
 
   async function handleError() {
     if (audioElement.current !== null) {
@@ -114,7 +113,6 @@ export default function Audio({ videoId }: { videoId: string }) {
         console.log("cannot play this song data :(");
         return;
       }
-      console.log("2: ", data.url[1]);
       audioElement.current.src = data.url[1];
     } else {
       console.log("cannot play this song :(");
@@ -137,13 +135,15 @@ export default function Audio({ videoId }: { videoId: string }) {
   return (
     <>
       <audio
-        src={data?.url[0] + ""}
+        src={data?.url[0]}
         ref={audioElement}
         onError={handleError}
         autoPlay
         onEnded={handleEnded}
         onPlay={() => setIsPaused(false)}
         onPause={() => setIsPaused(true)}
+        onWaiting={() => setLoading(true)}
+        onPlaying={() => setLoading(false)}
       />
       <div className="flex items-center gap-6 md:gap-8">
         <PreviouseTrack
@@ -153,7 +153,7 @@ export default function Audio({ videoId }: { videoId: string }) {
         />
         <TogglePlayPause
           isPaused={isPaused}
-          isLoading={isLoading}
+          isLoading={loading || isLoading}
           audioRef={audioElement}
         />
         <NextTrack
