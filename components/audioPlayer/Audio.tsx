@@ -113,6 +113,9 @@ export default function Audio({ videoId }: { videoId: string }) {
         console.log("cannot play this song data :(");
         return;
       }
+      console.log(
+        "cannot play this song data :(, trying to use another source..."
+      );
       audioElement.current.src = data.url[1];
     } else {
       console.log("cannot play this song :(");
