@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} relative`}>
         <MusicProvider>
-          <div className="flex flex-col gap-2 h-svh p-2 overflow-hidden">
+          <div className="flex flex-col h-dvh p-2 overflow-hidden">
             <Wrapper>
               <SideNavbar />
               {children}

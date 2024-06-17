@@ -12,7 +12,7 @@ export default function AudioPlayer() {
   if (!trackData) return "";
 
   return trackData ? (
-    <div className="bg-[#1c1c1c] grow relative flex justify-between items-center md:px-4 overflow-hidden h-[76px]">
+    <div className="bg-[#1c1c1c] grow relative flex justify-between items-center md:px-4 overflow-hidden h-[65px] md:h-[76px] border-b-[1px] border-[#111] md:border-none">
       <div className="flex-1 flex item-center ">
         <TrackInfo
           thumbnail={trackData?.thumbnail || ""}

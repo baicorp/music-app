@@ -18,11 +18,11 @@ export default function Wrapper({
     <div
       className={`flex ${
         path.includes(pathname) && trackData
-          ? "h-[calc(100%-134px)] md:h-[calc(100%-84px)]"
+          ? "h-[calc(100%-105px)] md:h-[calc(100%-76px)]"
           : path.includes(pathname)
-          ? "h-[calc(100%-58px)] md:h-full"
+          ? "h-[calc(100%-40px)] md:h-full"
           : trackData
-          ? "h-[calc(100%-84px)]"
+          ? "h-[calc(100%-65px)] md:h-[calc(100%-76px)]"
           : "h-full"
       } gap-2`}
     >
