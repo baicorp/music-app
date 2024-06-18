@@ -2,8 +2,9 @@ export type Song = {
   videoId: string;
   title: string;
   artists: Artist[];
-  type?: string;
   thumbnail?: string;
+  playlistId?: string;
+  type?: string;
   duration?: string;
   plays?: string;
   views?: string;

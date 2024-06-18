@@ -83,7 +83,9 @@ export default function extractSearchData(searchDataObject: any) {
         content?.musicShelfRenderer?.title?.runs[0]?.text?.toLowerCase() ===
           "episodes" ||
         content?.musicShelfRenderer?.title?.runs[0]?.text?.toLowerCase() ===
-          "profiles"
+          "profiles" ||
+        content?.musicShelfRenderer?.title?.runs[0]?.text?.toLowerCase() ===
+          "last episodes"
       ) {
         return undefined;
       }
