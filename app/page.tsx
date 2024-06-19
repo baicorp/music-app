@@ -4,8 +4,8 @@ import { SongCard } from "@/components/card";
 
 export default async function Home() {
   return (
-    <main className="bg-secondary border border-secondary overflow-x-hidden p-4 lg:px-6 xl:px-10 rounded-lg grow">
-      <div className="flex flex-col gap-5 overflow-y-auto rounded-md h-full">
+    <main className="bg-secondary border border-secondary overflow-x-hidden px-4 lg:px-6 xl:px-10 rounded-lg grow">
+      <div className="flex flex-col gap-5 overflow-y-auto rounded-md h-full py-4">
         <HomeResult />
       </div>
     </main>
@@ -41,13 +41,10 @@ async function HomeResult() {
           <div className="overflow-x-auto gap-2 md:gap-4 flex flex-col flex-wrap h-[230px] md:h-[250px] empty:hidden">
             {data?.contents?.map((content: any, index: number) => {
               return (
-                <SongCard
-                  videoId={content?.videoId}
+                <DynamicComponent
                   key={index}
-                  title={content?.title}
-                  thumbnail={content?.thumbnail}
-                  artists={content?.artists}
-                  listSong={data?.contents || []}
+                  type={content?.type}
+                  props={content}
                 />
               );
             })}

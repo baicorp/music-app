@@ -22,16 +22,16 @@ export default function ClickElement({
 }: ClickElementProps) {
   const { listTrackData, setListTrackData, setTrackData } = useMusic();
 
-  function handleClick() {
-    if (JSON.stringify(listTrackData) !== JSON.stringify(listSong)) {
-      setListTrackData(listSong || []);
-    }
+  async function handleClick() {
     setTrackData({
       videoId: videoId,
       artists: artists,
       title: title,
       thumbnail: thumbnail,
     });
+    if (JSON.stringify(listTrackData) !== JSON.stringify(listSong)) {
+      setListTrackData(listSong || []);
+    }
   }
 
   return (

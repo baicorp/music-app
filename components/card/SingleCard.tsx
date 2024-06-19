@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Play from "../Play";
+import { Play } from "../svg";
 
 type VideoCardProps = {
   browseId: string;

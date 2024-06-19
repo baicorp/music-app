@@ -1,7 +1,13 @@
 import { Song } from "@/types/song";
 
 export default function extractNextData(nextData: any): Song[] | [] {
-  return nextData?.map((next: any) => {
+  nextData =
+    nextData?.contents?.singleColumnMusicWatchNextResultsRenderer
+      ?.tabbedRenderer?.watchNextTabbedResultsRenderer?.tabs[0]?.tabRenderer
+      ?.content?.musicQueueRenderer?.content?.playlistPanelRenderer?.contents;
+
+  //remove first element of array because it's the same as the current played song
+  return nextData?.slice(1)?.map((next: any) => {
     next = next?.playlistPanelVideoRenderer;
     return {
       videoId: next?.navigationEndpoint?.watchEndpoint?.videoId,
@@ -25,7 +31,6 @@ export default function extractNextData(nextData: any): Song[] | [] {
         next?.thumbnail?.thumbnails[0]?.url,
       playlistId: next?.navigationEndpoint?.watchEndpoint?.playlistId,
       duration: next?.lengthText?.runs[0]?.text,
-      type: "song",
     };
   });
 }

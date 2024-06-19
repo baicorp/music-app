@@ -28,9 +28,12 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "utils/decipher.ts",
-    "app/api/stream/route.js",
+    "app/api/stream/android/route.js",
     "utils/dataStructure.ts",
-    "app/api/yt/route.js"
+    "app/api/yt/route.js",
+    "app/api/tvhtml5/route.js",
+    "app/api/tvhtml5/route.js",
+    "app/api/stream/piped/route.js"
   ],
   "exclude": ["node_modules"]
 }

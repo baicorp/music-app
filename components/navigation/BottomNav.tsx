@@ -10,7 +10,7 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return path.includes(pathname) ? (
-    <div className="flex md:hidden justify-evenly items-center pb-1 py-3 bg-[#1c1c1c]">
+    <div className="flex md:hidden justify-evenly items-center pb-1 py-3 bg-[#1c1c1c] border-t-[1px] border-[#111] md:border-none">
       <Link href={"/"} className="text-2xl" title="Home">
         <Home active={pathname === "/"} />
       </Link>

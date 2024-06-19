@@ -39,6 +39,9 @@ export default function extractAlbumData(albumDataObject: any) {
       return {
         index: dataItem?.index?.runs[0]?.text,
         videoId: dataItem?.playlistItemData?.videoId,
+        thumbnail:
+          albumDataObject?.header?.musicDetailHeaderRenderer?.thumbnail
+            ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[0].url,
         title:
           dataItem?.flexColumns[0]?.musicResponsiveListItemFlexColumnRenderer
             ?.text?.runs[0]?.text,

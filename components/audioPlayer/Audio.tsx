@@ -7,70 +7,21 @@ import { Song } from "@/types/song";
 import React, { useEffect, useRef, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { Next, Previous, Play, Pause, Loading } from "../svg";
-import wait from "@/utils/wait";
 
-async function fetchMobile(id: string): Promise<MusicPlayerProps> {
+async function fetchStreamData(videoId: string): Promise<MusicPlayerProps> {
   try {
-    const res = await fetch(`${BASE_URL}/api/stream?id=${id}`, {
-      method: "POST",
-    });
+    const androidTestSuite = `${BASE_URL}/api/stream/android?videoId=${videoId}`;
+    const piped = `${BASE_URL}/api/stream/piped?videoId=${videoId}`;
+    // const tvhtml5 = `${BASE_URL}/api/stream/tvhtml5?videoId=${videoId}`;
 
-    if (!res.ok) {
-      throw new Error(`Server error: ${res.statusText}`);
-    }
-
-    const data = await res.json();
-    return { ...data, url: [data?.url] };
-  } catch (error) {
-    console.error("Error fetching YouTube data:", error);
-    throw error;
-  }
-}
-
-async function fetchWeb(id: string): Promise<{ url: string[] }> {
-  try {
-    const res = await fetch(`${BASE_URL}/api/stream-data?videoId=${id}`);
-
-    if (!res.ok) {
-      throw new Error(`Server error: ${res.statusText}`);
-    }
-
-    const data = await res.json();
-    return { url: [data?.url] };
-  } catch (error) {
-    console.error("Error fetching YouTube data:", error);
-    throw error;
-  }
-}
-
-async function fetchTvhtml5(id: string): Promise<{ url: string[] }> {
-  try {
-    const res = await fetch(`${BASE_URL}/api/tvhtml5?id=${id}`, {
-      method: "POST",
-    });
-
-    if (!res.ok) {
-      throw new Error(`Server error: ${res.statusText}`);
-    }
-
-    const data = await res.json();
-    return { url: [data] };
-  } catch (error) {
-    console.error("Error fetching YouTube data:", error);
-    throw error;
-  }
-}
-
-async function fetchStreamData(id: string): Promise<MusicPlayerProps> {
-  try {
-    const androidTestSuite = `${BASE_URL}/api/stream?id=${id}`;
-    const piped = `${BASE_URL}/api/stream?id=${id}`;
-
+    // const [androidRes, pipedRes, tvhtml5res] = await Promise.all([
     const [androidRes, pipedRes] = await Promise.all([
       fetch(androidTestSuite, { method: "POST" }),
       fetch(piped),
+      // fetch(tvhtml5, { method: "POST" }),
     ]);
 
+    // if (!androidRes.ok || !tvhtml5res.ok) {
     if (!androidRes.ok || !pipedRes.ok) {
       throw new Error(
         `Server error: ${androidRes.statusText} / ${pipedRes.statusText}`
@@ -100,12 +51,29 @@ export type MusicPlayerProps = {
 export default function Audio({ videoId }: { videoId: string }) {
   const { data, isLoading } = useSWRImmutable(videoId, fetchStreamData);
 
-  const { listTrackData, setTrackData } = useMusic();
+  const { listTrackData, setTrackData, setListTrackData } = useMusic();
   const [isPaused, setIsPaused] = useState(false);
   const audioElement = useRef<HTMLAudioElement>(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(videoId);
+  useEffect(() => {
+    // check if current videoId is the latest videoId in listTrackData, then fetch new new list from /api/next
+    if (
+      !listTrackData ||
+      listTrackData[listTrackData.length - 1]?.videoId !== videoId
+    ) {
+      return;
+    }
+
+    async function getContinuation() {
+      const response = await fetch(`${BASE_URL}/api/next?videoId=${videoId}`, {
+        method: "POST",
+      });
+      const data = await response.json();
+      setListTrackData((prev) => [...prev, ...data]);
+    }
+    getContinuation();
+  }, [videoId]);
 
   async function handleError() {
     if (audioElement.current !== null) {
@@ -179,13 +147,14 @@ function TogglePlayPause({
   isLoading: boolean;
   audioRef: React.RefObject<HTMLAudioElement>;
 }) {
-  const togglePlay = () => {
+  function togglePlay(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
     if (audioRef?.current) {
       audioRef.current.paused
         ? audioRef.current.play()
         : audioRef.current.pause();
     }
-  };
+  }
 
   return (
     <>
@@ -207,7 +176,10 @@ function PreviouseTrack({
   videoId: string;
   onSetTrack: React.Dispatch<React.SetStateAction<MusicData | undefined>>;
 }) {
-  function handlePreviousTrack() {
+  function handlePreviousTrack(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    e.stopPropagation();
     if (!listTrackData) {
       return;
     }
@@ -236,7 +208,8 @@ function NextTrack({
   videoId: string;
   onSetTrack: React.Dispatch<React.SetStateAction<MusicData | undefined>>;
 }) {
-  function handleNextTrack() {
+  function handleNextTrack(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
     if (!listTrackData) {
       return;
     }

@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
-const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY;
 const YOUTUBE_API_URL = `https://music.youtube.com/youtubei/v1/player?key=${YOUTUBE_API_KEY}`;
-const SCRAPER_API_URL = `http://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(
-  YOUTUBE_API_URL
-)}`;
 
 export async function POST(request) {
   const url = new URL(request.url);
-  const id = url.searchParams.get("id");
+  const videoId = url.searchParams.get("videoId");
   try {
     const response = await fetch(YOUTUBE_API_URL, {
       method: "POST",
@@ -19,7 +15,7 @@ export async function POST(request) {
           "com.google.android.youtube/17.36.4 (Linux; U; Android 12; GB) gzip",
       },
       body: JSON.stringify({
-        videoId: id,
+        videoId,
         context: {
           client: {
             clientName: "ANDROID_TESTSUITE",
@@ -58,20 +54,4 @@ export async function POST(request) {
     console.error("Error fetching YouTube data POST:", error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-}
-
-export async function GET(request) {
-  const url = new URL(request.url);
-  const id = url.searchParams.get("id");
-  if (!id) return NextResponse.json({ error: "no id given" });
-
-  const response = await fetch(`https://pipedapi.reallyaweso.me/streams/${id}`);
-  if (!response.ok) {
-    return NextResponse.json({ error: response.status });
-  }
-
-  const data = await response.json();
-  if (!data) return NextResponse.json({ error: response.status });
-  const stream = data?.audioStreams?.filter((data) => data?.itag === 251);
-  return NextResponse.json(stream[0]?.url);
 }

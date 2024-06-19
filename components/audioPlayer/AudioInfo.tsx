@@ -3,7 +3,7 @@ import React from "react";
 import { Artists } from "../shared";
 import { BrokenImage } from "../svg";
 
-export default function TrackInfo({
+export default function AudioInfo({
   thumbnail,
   title,
   artists,

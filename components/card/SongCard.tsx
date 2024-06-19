@@ -1,6 +1,6 @@
 import React from "react";
 import { Artist, Song } from "@/types/song";
-import { Artists, PlayFromTitle, PlayFromImage } from "@/components/shared";
+import { Artists, PlayFromTitle, SongImage } from "@/components/shared";
 
 export type SongCardProps = {
   videoId: string;
@@ -24,37 +24,43 @@ export default function SongCard({
   listSong,
 }: SongCardProps) {
   return (
-    <div className="flex w-[90%] md:w-[400px] lg:w-[450px] rounded-md">
-      <img
-        src={thumbnail}
-        width={400}
-        height={400}
-        alt={title + "image"}
-        className="w-16 h-16 shrink-0 object-center object-cover rounded-md"
+    <div className="flex rounded-md">
+      <SongImage
+        videoId={videoId}
+        title={title}
+        thumbnail={thumbnail}
+        variant="default"
       />
-      <div className="flex grow flex-col justify-center px-4">
-        <PlayFromTitle
-          listSong={listSong}
-          thumbnail={thumbnail}
-          title={title}
-          artists={artists}
-          videoId={videoId}
-        />
-        <div className="flex items-center gap-2">
-          <Artists artists={artists} />
-          <Plays plays={plays} />
-          <Views views={views} />
-          <Duration duration={duration} />
+      <div className="flex justify-between grow items-center px-4">
+        <div className="flex grow flex-col justify-center">
+          <PlayFromTitle
+            variant="default"
+            listSong={
+              listSong || [
+                { videoId, thumbnail, title, artists: artists!, duration },
+              ]
+            }
+            thumbnail={thumbnail}
+            title={title}
+            artists={artists ? artists : []}
+            videoId={videoId}
+          />
+          <div className="flex items-center gap-2 line-clamp-1">
+            <Artists artists={artists} />
+            <Plays plays={plays} />
+            <Views views={views} />
+          </div>
         </div>
+        <Duration duration={duration} />
       </div>
     </div>
   );
 }
 
-function Duration({ duration }: { duration: string | undefined }) {
+export function Duration({ duration }: { duration: string | undefined }) {
   if (!duration) return;
   return (
-    <p className="text-sm font-semibold text-gray-400 line-clamp-1">
+    <p className="text-sm font-semibold text-gray-400 line-clamp-1 shrink-0">
       {duration}
     </p>
   );
@@ -63,13 +69,17 @@ function Duration({ duration }: { duration: string | undefined }) {
 function Plays({ plays }: { plays: string | undefined }) {
   if (!plays) return;
   return (
-    <p className="text-sm font-semibold text-gray-400 line-clamp-1">{plays}</p>
+    <p className="text-sm font-semibold text-gray-400 line-clamp- shrink-0">
+      {plays}
+    </p>
   );
 }
 
 function Views({ views }: { views: string | undefined }) {
   if (!views) return;
   return (
-    <p className="text-sm font-semibold text-gray-400 line-clamp-1">{views}</p>
+    <p className="text-sm font-semibold text-gray-400 line-clamp-1 shrink-0">
+      {views}
+    </p>
   );
 }

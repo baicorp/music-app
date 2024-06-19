@@ -61,50 +61,6 @@ export default async function page({
   );
 }
 
-async function ChannelData({ channelId }: { channelId: string }) {
-  const data = await getChannel(channelId);
-
-  if (!data)
-    return (
-      <div className="flex justify-center">
-        <p>sorry, something wrong</p>
-      </div>
-    );
-
-  return (
-    <>
-      <section className="relative">
-        <div>
-          <img
-            className="object-cover object-center w-full h-1/4"
-            src={data?.thumbnail}
-            alt={data?.artistName}
-            width={data?.thumbnailWidth}
-            height={data?.thumbnailHeight}
-          />
-          <div className="bg-gradient-to-b from-[#191919] via-transparent to-[#0f0f0f] absolute inset-0"></div>
-          <div className="absolute flex flex-col justify-end items-center lg:items-start inset-0 lg:px-6 xl:px-10 p-4">
-            <div className="flex gap-4 items-center justify-end">
-              <Avatar avatar={data?.avatar} />
-              <h1 className="font-bold lg:font-black text-4xl lg:text-6xl lg:mb-2">
-                {data?.artistName}
-              </h1>
-            </div>
-            <div className="hidden lg:block">
-              <p className="w-1/2 text-sm line-clamp-4">{data?.description}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div className="p-4 lg:px-6 xl:px-10 pt-10">
-          <ChannelDynamicDataList contents={data?.contents} />
-        </div>
-      </section>
-    </>
-  );
-}
-
 function ChannelDynamicDataList({ contents }: { contents: any[] | undefined }) {
   if (!contents) return "";
   return (

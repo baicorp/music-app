@@ -1,5 +1,5 @@
 import Artists from "./Artists";
 import PlayFromTitle from "./PlayFromTitle";
-import PlayFromImage from "./PlayFromImage";
+import SongImage from "./SongImage";
 
-export { Artists, PlayFromTitle, PlayFromImage };
+export { Artists, PlayFromTitle, SongImage };

@@ -1,7 +1,7 @@
 import React from "react";
 import { getPlaylist } from "@/utils/MusicClient";
 import Link from "next/link";
-import { TrackItemPlaylist } from "@/components/track";
+import { SongCard } from "@/components/card";
 
 export const dynamic = "force-dynamic";
 
@@ -33,19 +33,19 @@ export default async function Playlist({
   return (
     <div>
       <div className="p-4 lg:px-6 xl:px-10">
-        <div className="flex">
+        <div className="flex flex-col md:flex-row items-center md:items-start">
           <img
             src={data?.thumbnail}
             alt={`${data?.title} thumbnail`}
             width={544}
             height={544}
-            className="w-[50%] md:w-[30%] lg:w-[25%] aspect-square object-cover object-center rounded-sm shrink-0"
+            className="w-[70%] md:w-[30%] lg:w-[25%] aspect-square object-cover object-center rounded-sm shrink-0"
           />
-          <div className="px-4 py-2 flex flex-col gap-4">
-            <p className="font-bold text-lg lg:text-3xl line-clamp-2 leading-tight">
+          <div className="px-4 py-6 md:py-2 flex flex-col gap-4">
+            <p className="text-center md:text-start font-extrabold md:font-bold text-3xl md:text-lg lg:text-3xl line-clamp-3 leading-tight">
               {data?.title}
             </p>
-            <div className="text-sm md:text-base flex flex-col">
+            <div className="hidden text-sm md:text-base md:flex flex-col">
               <p className="font-semibold text-gray-400 line-clamp-2">
                 {data?.subtitle?.map((text: string, index: number) => {
                   if (index === 2) {
@@ -79,7 +79,7 @@ export default async function Playlist({
         <div className="flex flex-col gap-3 mt-6">
           {data?.contents?.map((content: any, index: number) => {
             return (
-              <TrackItemPlaylist
+              <SongCard
                 key={index}
                 videoId={content?.videoId}
                 title={content?.title}
