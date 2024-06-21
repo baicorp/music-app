@@ -2,7 +2,7 @@
 
 import React, { ReactElement } from "react";
 import { usePathname } from "next/navigation";
-import useMusic from "@/hooks/useMusic";
+import { useMusic } from "@/hooks";
 
 export const path = ["/", "/search", "/about"];
 

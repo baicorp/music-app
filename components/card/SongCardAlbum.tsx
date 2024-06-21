@@ -5,7 +5,7 @@ import { PlayFromTitle, SongImage } from "../shared";
 type SongCardPropsAlbum = {
   index: string;
   videoId: string;
-  thumbnail: string;
+  thumbnail: string[];
   title: string;
   artists: Artist[];
   duration?: string;
@@ -29,7 +29,7 @@ export default function SongCardAlbum({
       <SongImage
         videoId={videoId}
         title={title}
-        thumbnail={thumbnail}
+        thumbnail={thumbnail[0]}
         variant="album"
         index={index}
       />

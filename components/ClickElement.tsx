@@ -7,7 +7,7 @@ type ClickElementProps = {
   children: ReactElement | ReactElement[];
   videoId: string;
   artists: Artist[];
-  thumbnail: string;
+  thumbnail: string[];
   title: string;
   listSong: Song[];
 };
@@ -27,7 +27,7 @@ export default function ClickElement({
       videoId: videoId,
       artists: artists,
       title: title,
-      thumbnail: thumbnail,
+      thumbnail: [...thumbnail],
     });
     if (JSON.stringify(listTrackData) !== JSON.stringify(listSong)) {
       setListTrackData(listSong || []);

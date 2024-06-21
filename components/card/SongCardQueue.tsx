@@ -14,7 +14,7 @@ export default function SongCardQueue({
       <SongImage
         videoId={videoId}
         title={title}
-        thumbnail={thumbnail}
+        thumbnail={thumbnail[0]}
         variant="queue"
       />
       <div className="flex justify-between grow items-center px-4">

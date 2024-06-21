@@ -46,6 +46,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.gstatic.com",
       },
+      {
+        protocol: "https",
+        hostname: "https://images.unsplash.com/",
+      },
     ],
   },
 };

@@ -8,7 +8,7 @@ type playFromTitleProps = {
   variant: "default" | "queue";
   artists: Artist[] | [];
   listSong: Song[] | [];
-  thumbnail: string;
+  thumbnail: string[];
   title: string;
   videoId: string;
 };
@@ -18,7 +18,7 @@ export default function PlayFromTitle(props: playFromTitleProps) {
     <ClickElement
       artists={props.artists || []}
       listSong={props.listSong}
-      thumbnail={props.thumbnail}
+      thumbnail={[...props.thumbnail]}
       title={props.title}
       videoId={props.videoId}
     >

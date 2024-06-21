@@ -26,9 +26,10 @@ export default function extractNextData(nextData: any): Song[] | [] {
             browseId: data?.navigationEndpoint?.browseEndpoint?.browseId,
           };
         }),
-      thumbnail:
+      thumbnail: [
         next?.thumbnail?.thumbnails[1]?.url ||
-        next?.thumbnail?.thumbnails[0]?.url,
+          next?.thumbnail?.thumbnails[0]?.url,
+      ],
       playlistId: next?.navigationEndpoint?.watchEndpoint?.playlistId,
       duration: next?.lengthText?.runs[0]?.text,
     };

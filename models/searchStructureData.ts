@@ -15,11 +15,12 @@ export default function extractSearchData(searchDataObject: any) {
         contents: [
           {
             title: content?.musicCardShelfRenderer?.title?.runs[0]?.text,
-            thumbnail:
+            thumbnail: [
               content?.musicCardShelfRenderer?.thumbnail?.musicThumbnailRenderer
                 ?.thumbnail?.thumbnails[1]?.url ||
-              content?.musicCardShelfRenderer?.thumbnail?.musicThumbnailRenderer
-                ?.thumbnail?.thumbnails[0]?.url,
+                content?.musicCardShelfRenderer?.thumbnail
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+            ],
             subtitle: content?.musicCardShelfRenderer?.subtitle?.runs
               ?.map((run: any) => run?.text?.trim())
               ?.flat(100)
@@ -106,12 +107,16 @@ export default function extractSearchData(searchDataObject: any) {
             title:
               content?.musicResponsiveListItemRenderer?.flexColumns[0]
                 .musicResponsiveListItemFlexColumnRenderer?.text?.runs[0]?.text,
-            thumbnail:
+            thumbnail: [
               content?.musicResponsiveListItemRenderer?.thumbnail
-                ?.musicThumbnailRenderer?.thumbnail?.thumbnails[
+                ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+              content?.musicResponsiveListItemRenderer?.thumbnail
+                ?.musicThumbnailRenderer?.thumbnail?.thumbnails[3]?.url ||
                 content?.musicResponsiveListItemRenderer?.thumbnail
-                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails.length - 1
-              ]?.url,
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[2]?.url ||
+                content?.musicResponsiveListItemRenderer?.thumbnail
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]?.url,
+            ],
             subtitle: subtitle,
             artists: content?.musicResponsiveListItemRenderer?.flexColumns
               ?.map((flexColumn: any) =>

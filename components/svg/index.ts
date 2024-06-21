@@ -11,6 +11,9 @@ import BrokenImage from "./BrokenImage";
 import QueueListButton from "./QueueListButton";
 import Speaker from "./Speaker";
 import Lost from "./Lost";
+import ArrowDown from "./ArrowDown";
+import ThreeDot from "./ThreeDot";
+import Lyrics from "./Lyrics";
 
 export {
   Home,
@@ -26,4 +29,7 @@ export {
   Loading,
   BrokenImage,
   QueueListButton,
+  ArrowDown,
+  ThreeDot,
+  Lyrics,
 };

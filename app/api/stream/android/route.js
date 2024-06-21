@@ -1,3 +1,4 @@
+import formatTime from "@/utils/timeConverter";
 import { NextResponse } from "next/server";
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
@@ -36,14 +37,20 @@ export async function POST(request) {
 
     const data = await response.json();
 
-    const thumbnails = data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
+    const thumbnail =
+      data?.videoDetails?.thumbnail?.thumbnails[1]?.url ||
+      data?.videoDetails?.thumbnail?.thumbnails[0]?.url;
     const result = {
       videoId: data?.videoDetails?.videoId,
       title: data?.videoDetails?.title,
-      thumbnailUrl: thumbnails,
-      channelId: data?.videoDetails?.channelId,
-      uploader: data?.videoDetails?.author,
-      videoDetails: { ...data?.videoDetails, thumbnail: thumbnails },
+      thumbnail: [thumbnail, thumbnail],
+      artists: [
+        {
+          name: data?.videoDetails?.author,
+          browseId: data?.videoDetails?.channelId,
+        },
+      ],
+      duration: formatTime(data?.videoDetails?.lengthSeconds),
       url: data.streamingData?.adaptiveFormats[
         data.streamingData?.adaptiveFormats?.length - 1
       ]?.url,

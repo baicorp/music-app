@@ -57,9 +57,12 @@ export default function extractChannelData(channelObject: any) {
                     data?.musicResponsiveListItemRenderer?.flexColumns[0]
                       ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs[0]
                       ?.text,
-                  thumbnail:
+                  thumbnail: [
                     data?.musicResponsiveListItemRenderer?.thumbnail
-                      ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+                      ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]?.url ||
+                      data?.musicResponsiveListItemRenderer?.thumbnail
+                        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+                  ],
                   subtitle: data?.musicResponsiveListItemRenderer?.flexColumns
                     ?.map((data: any) =>
                       data.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.map(
@@ -128,9 +131,16 @@ export default function extractChannelData(channelObject: any) {
                       ?.map((data: any) => data?.text?.trim())
                       .flat(100)
                       ?.filter((data: any) => data.trim() !== ","),
-                    thumbnail:
+                    thumbnail: [
                       data?.musicTwoRowItemRenderer?.thumbnailRenderer
                         ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
+                      data?.musicTwoRowItemRenderer?.thumbnailRenderer
+                        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[2]
+                        ?.url ||
+                        data?.musicTwoRowItemRenderer?.thumbnailRenderer
+                          ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]
+                          ?.url,
+                    ],
                     videoId:
                       data?.musicTwoRowItemRenderer?.navigationEndpoint
                         ?.watchEndpoint?.videoId,

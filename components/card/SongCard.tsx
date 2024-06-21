@@ -4,7 +4,7 @@ import { Artists, PlayFromTitle, SongImage } from "@/components/shared";
 
 export type SongCardProps = {
   videoId: string;
-  thumbnail: string;
+  thumbnail: string[];
   title: string;
   artists?: Artist[];
   duration?: string;
@@ -28,7 +28,7 @@ export default function SongCard({
       <SongImage
         videoId={videoId}
         title={title}
-        thumbnail={thumbnail}
+        thumbnail={thumbnail[0]}
         variant="default"
       />
       <div className="flex justify-between grow items-center px-4">

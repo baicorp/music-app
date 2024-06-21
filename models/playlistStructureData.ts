@@ -51,9 +51,12 @@ export default function extractPlaylistData(playlistObject: any) {
           )
           ?.flat(100)
           ?.filter((data: any) => data !== null),
-        thumbnail:
-          dataItem?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]
-            ?.url,
+        thumbnail: [
+          dataItem?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]
+            ?.url ||
+            dataItem?.thumbnail?.musicThumbnailRenderer?.thumbnail
+              ?.thumbnails[0]?.url,
+        ],
         duration:
           dataItem?.fixedColumns[0]?.musicResponsiveListItemFixedColumnRenderer
             ?.text?.runs[0]?.text,

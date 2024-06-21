@@ -39,12 +39,25 @@ export default function extractAlbumData(albumDataObject: any) {
       return {
         index: dataItem?.index?.runs[0]?.text,
         videoId: dataItem?.playlistItemData?.videoId,
-        thumbnail:
+        thumbnail: [
           albumDataObject?.header?.musicDetailHeaderRenderer?.thumbnail
             ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[0].url,
+        ],
         title:
           dataItem?.flexColumns[0]?.musicResponsiveListItemFlexColumnRenderer
             ?.text?.runs[0]?.text,
+        artists:
+          albumDataObject?.header?.musicDetailHeaderRenderer?.subtitle?.runs
+            ?.map((run: any) => {
+              if (run?.navigationEndpoint?.browseEndpoint) {
+                return {
+                  name: run?.text,
+                  browseId: run?.navigationEndpoint?.browseEndpoint?.browseId,
+                };
+              }
+              return null;
+            })
+            ?.filter((data: any) => data !== null),
         plays:
           dataItem?.flexColumns[
             dataItem?.flexColumns?.length - 1
