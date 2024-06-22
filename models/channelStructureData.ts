@@ -133,12 +133,10 @@ export default function extractChannelData(channelObject: any) {
                       ?.filter((data: any) => data.trim() !== ","),
                     thumbnail: [
                       data?.musicTwoRowItemRenderer?.thumbnailRenderer
-                        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
-                      data?.musicTwoRowItemRenderer?.thumbnailRenderer
-                        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[2]
+                        ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]
                         ?.url ||
                         data?.musicTwoRowItemRenderer?.thumbnailRenderer
-                          ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]
+                          ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]
                           ?.url,
                     ],
                     videoId:

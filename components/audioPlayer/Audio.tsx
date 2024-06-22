@@ -186,8 +186,8 @@ export default function Audio({
       {/* full player for mobile */}
       <div
         className={`fixed ${
-          isOpen ? "top-2" : "top-[1000px]"
-        } left-2 right-2 bottom-2 flex flex-col justify-between bg-transparent backdrop-blur-3xl shadow-[#00000005] shadow-[0_0_3px] p-6 rounded-lg z-40 transition-all duration-200 md:hidden`}
+          isOpen ? "top-2" : "top-[2000px]"
+        } left-2 right-2 bottom-2 flex flex-col justify-between bg-gradient-to-br from-[#2F2F2F] to-black shadow-[#ffffff1a] shadow-[0_0_3px] p-6 rounded-lg z-40 transition-all duration-200 md:hidden`}
       >
         <div className="flex justify-between mb-10">
           <button
@@ -257,6 +257,7 @@ export default function Audio({
             isPaused={isPaused}
             isLoading={loading || isLoading}
             audioRef={audioElement}
+            variant="mobile"
           >
             <div className="p-2 bg-[#ffffff33] rounded-full">
               {isPaused ? (
@@ -300,11 +301,13 @@ export function TogglePlayPause({
   isLoading,
   audioRef,
   children,
+  variant = "default",
 }: {
   isPaused: boolean;
   isLoading: boolean;
   audioRef: React.RefObject<HTMLAudioElement>;
   children: ReactNode;
+  variant?: "default" | "mobile";
 }) {
   function togglePlay(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
@@ -318,9 +321,13 @@ export function TogglePlayPause({
   return (
     <>
       {isLoading ? (
-        <div className="p-2 bg-[#ffffff33] rounded-full w-[56px] h-[56px] flex justify-center items-center">
+        variant === "mobile" ? (
+          <div className="p-2 bg-[#ffffff33] rounded-full w-[56px] h-[56px] flex justify-center items-center">
+            <Loading />
+          </div>
+        ) : (
           <Loading />
-        </div>
+        )
       ) : (
         <button onClick={togglePlay}>{children}</button>
       )}
@@ -491,17 +498,17 @@ const QueueList = memo(function QueueList({
   return (
     <div
       className={`${
-        isQueueOpen ? "inset-2" : "top-[900px]"
+        isQueueOpen ? "inset-2" : "top-[2000px]"
       } transition-all duration-200 md:hidden fixed z-50 bg-secondary border border-secondary rounded-lg overflow-y-auto flex flex-col`}
     >
-      <p className="px-4 py-2 sticky top-0 font-extrabold backdrop-blur-sm z-50 text-center">
+      <p className="px-4 py-2 sticky top-0 font-extrabold bg-secondary z-50 text-center">
         {trackList.length ? "Queue" : "No Data"}
       </p>
       <div className="flex flex-col gap-2 px-4 py-2">
         {trackList.length ? trackList : "No data"}
       </div>
       {isQueueOpen ? (
-        <div className="backdrop-blur-3xl fixed bottom-2 right-2 left-2 flex justify-center items-center py-2 rounded-bl-lg rounded-br-lg">
+        <div className="bg-secondary fixed bottom-2 right-2 left-2 flex justify-center items-center py-2 rounded-bl-lg rounded-br-lg">
           <button
             onClick={() => {
               setIsQueueOpen(false);

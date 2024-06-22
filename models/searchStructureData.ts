@@ -109,13 +109,9 @@ export default function extractSearchData(searchDataObject: any) {
                 .musicResponsiveListItemFlexColumnRenderer?.text?.runs[0]?.text,
             thumbnail: [
               content?.musicResponsiveListItemRenderer?.thumbnail
-                ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
-              content?.musicResponsiveListItemRenderer?.thumbnail
-                ?.musicThumbnailRenderer?.thumbnail?.thumbnails[3]?.url ||
+                ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]?.url ||
                 content?.musicResponsiveListItemRenderer?.thumbnail
-                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[2]?.url ||
-                content?.musicResponsiveListItemRenderer?.thumbnail
-                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]?.url,
+                  ?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]?.url,
             ],
             subtitle: subtitle,
             artists: content?.musicResponsiveListItemRenderer?.flexColumns

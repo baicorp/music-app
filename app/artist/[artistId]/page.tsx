@@ -29,31 +29,29 @@ export default async function page({
 
   return (
     <>
-      <section className="relative -top-14">
-        <div className="relative">
-          <img
-            className="object-cover object-center w-full h-1/3 md:h-1/4"
-            src={data?.thumbnail}
-            alt={data?.artistName}
-            width={data?.thumbnailWidth}
-            height={data?.thumbnailHeight}
-          />
-          <div className="bg-gradient-to-b from-[#191919] via-transparent to-[#0f0f0f] absolute inset-0"></div>
-          <div className="absolute flex flex-col justify-end items-center lg:items-start inset-0 lg:px-6 xl:px-10 p-4">
-            <div className="flex gap-4 items-center justify-end">
-              <Avatar avatar={data?.avatar} />
-              <h1 className="font-bold lg:font-black text-4xl lg:text-6xl lg:mb-2">
-                {data?.artistName}
-              </h1>
-            </div>
-            <div className="hidden lg:block">
-              <p className="w-1/2 text-sm line-clamp-4">{data?.description}</p>
-            </div>
+      <section className="relative">
+        <img
+          className="object-cover object-center w-full h-[35dvh]"
+          src={data?.thumbnail}
+          alt={data?.artistName}
+          width={data?.thumbnailWidth}
+          height={data?.thumbnailHeight}
+        />
+        <div className="bg-gradient-to-b from-transparent to-[#000] absolute inset-0"></div>
+        <div className="absolute flex flex-col justify-end items-center lg:items-start inset-0 lg:px-6 xl:px-10 p-4">
+          <div className="flex gap-4 items-center justify-end">
+            <Avatar avatar={data?.avatar} />
+            <h1 className="font-bold lg:font-black text-4xl lg:text-6xl lg:mb-2">
+              {data?.artistName}
+            </h1>
+          </div>
+          <div className="hidden lg:block">
+            <p className="w-1/2 text-sm line-clamp-4">{data?.description}</p>
           </div>
         </div>
       </section>
       <section>
-        <div className="pr-4 pl-4 pb-4 lg:px-6 xl:px-10">
+        <div className="p-4 md:p-8 lg:px-6 xl:px-10">
           <ChannelDynamicDataList contents={data?.contents} />
         </div>
       </section>

@@ -7,7 +7,7 @@ export default function layout({
   children: ReactElement | ReactElement[] | ReactNode;
 }) {
   return (
-    <div className="bg-secondary relative overflow-y-auto grow rounded-lg border border-secondary">
+    <div className="relative bg-secondary border border-secondary rounded-lg overflow-y-auto grow">
       {children}
     </div>
   );

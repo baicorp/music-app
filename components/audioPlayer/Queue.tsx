@@ -46,7 +46,7 @@ export const QueueList = memo(function QueueList() {
 
   return isQueueOpen ? (
     <div className="hidden bg-secondary border border-secondary w-[300px] xl:w-[350px] shrink-0 md:flex flex-col overflow-y-auto rounded-lg relative">
-      <p className="px-6 py-4 sticky top-0 font-extrabold backdrop-blur-sm z-30">
+      <p className="bg-secondary border border-secondary rounded-t-lg px-6 py-4 sticky top-0 font-extrabold z-10">
         {trackList.length ? "Queue" : "No Data"}
       </p>
       <div className="flex flex-col gap-2 px-6 py-4">
