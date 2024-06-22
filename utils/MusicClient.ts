@@ -84,7 +84,6 @@ export async function getPlaylist(browseId: string) {
 export async function getAlbum(browseId: string) {
   const res = await fetch(url("browse"), {
     method: "POST",
-    cache: "no-store",
     headers,
     body: JSON.stringify({
       browseId: browseId,

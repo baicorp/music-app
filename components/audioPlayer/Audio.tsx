@@ -13,8 +13,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import useSWRImmutable from "swr/immutable";
-import Link from "next/link";
 import {
   Next,
   Previous,
@@ -26,6 +24,8 @@ import {
   ArrowDown,
   Lyrics,
 } from "../svg";
+import useSWRImmutable from "swr/immutable";
+import Link from "next/link";
 import formatTime from "@/utils/timeConverter";
 import SongCardQueue from "../card/SongCardQueue";
 

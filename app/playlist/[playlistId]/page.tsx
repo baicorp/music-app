@@ -39,38 +39,22 @@ export default async function Playlist({
             alt={`${data?.title} thumbnail`}
             width={544}
             height={544}
-            className="w-[70%] md:w-[30%] lg:w-[25%] aspect-square object-cover object-center rounded-sm shrink-0"
+            className="w-[70%] md:w-[37%] lg:w-[34%] aspect-square object-cover object-center rounded-sm shrink-0"
           />
-          <div className="px-4 py-6 md:py-2 flex flex-col gap-4">
-            <p className="text-center md:text-start font-extrabold md:font-bold text-3xl md:text-lg lg:text-3xl line-clamp-3 leading-tight">
+          <div className="px-4 py-6 md:py-2 flex items-center md:items-start flex-col gap-4">
+            <p className="font-extrabold md:font-bold text-3xl md:text-lg lg:text-3xl line-clamp-3 leading-tight text-center md:text-start">
               {data?.title}
             </p>
-            <div className="hidden text-sm md:text-base md:flex flex-col">
+            <div className="text-xs md:text-base md:flex flex-col items-center text-center md:text-start md:items-start gap-1">
               <p className="font-semibold text-gray-400 line-clamp-2">
-                {data?.subtitle?.map((text: string, index: number) => {
-                  if (index === 2) {
-                    if (text.split("|")[1] === "undefined") {
-                      return <span key={index}>{text?.split("|")[0]}</span>;
-                    }
-                    return (
-                      <Link
-                        key={index}
-                        className="hover:decoration-wavy hover:underline"
-                        href={`/artist/${text.split("|")[1]}`}
-                      >
-                        {text?.split("|")[0]}
-                      </Link>
-                    );
-                  }
-                  return <span key={index}>{text}</span>;
-                })}
+                {data?.subtitle}
               </p>
-              <p className="font-semibold text-gray-400 line-clamp-2">
-                {`${data?.playlistStat?.join()?.replaceAll(",", " ")} songs`}
+              <p className="font-semibold text-gray-400 line-clamp-2 text-center md:text-start">
+                {data?.playlistStat}
               </p>
             </div>
-            <div className="hidden md:block">
-              <p className="font-semibold text-gray-400 text-sm line-clamp-[6]">
+            <div>
+              <p className="font-semibold text-gray-400 text-sm line-clamp-[2] md:line-clamp-6">
                 {data?.description}
               </p>
             </div>

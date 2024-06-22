@@ -1,29 +1,30 @@
 export default function extractPlaylistData(playlistObject: any) {
-  let contents =
-    playlistObject?.contents?.singleColumnBrowseResultsRenderer?.tabs[0]
+  const playlist =
+    playlistObject?.contents?.twoColumnBrowseResultsRenderer?.tabs[0]
       ?.tabRenderer?.content?.sectionListRenderer?.contents[0]
-      ?.musicPlaylistShelfRenderer?.contents;
+      ?.musicResponsiveHeaderRenderer;
+  let contents =
+    playlistObject?.contents?.twoColumnBrowseResultsRenderer?.secondaryContents
+      ?.sectionListRenderer?.contents[0]?.musicPlaylistShelfRenderer?.contents;
   return {
-    title:
-      playlistObject?.header?.musicDetailHeaderRenderer?.title?.runs[0]?.text,
-    subtitle:
-      playlistObject?.header?.musicDetailHeaderRenderer?.subtitle?.runs?.map(
-        (data: any, index: number) =>
-          index === 2
-            ? `${data?.text}|${data?.navigationEndpoint?.browseEndpoint?.browseId}`
-            : data?.text
-      ),
+    title: playlist?.title?.runs[0]?.text,
+    subtitle: playlist?.subtitle?.runs
+      ?.map((data: any) => data?.text)
+      ?.join(""),
     thumbnail:
-      playlistObject?.header?.musicDetailHeaderRenderer?.thumbnail
-        ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[3]?.url ||
-      playlistObject?.header?.musicDetailHeaderRenderer?.thumbnail
-        ?.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails[2]?.url,
-    playlistStat:
-      playlistObject?.header?.musicDetailHeaderRenderer?.secondSubtitle?.runs?.map(
-        (data: any) => data?.text
-      ),
+      playlist?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[3]
+        ?.url ||
+      playlist?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[2]
+        ?.url ||
+      playlist?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[1]
+        ?.url ||
+      playlist?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails[0]
+        ?.url,
+    playlistStat: playlist?.secondSubtitle?.runs
+      ?.map((data: any) => data?.text)
+      ?.join(""),
     description:
-      playlistObject?.header?.musicDetailHeaderRenderer?.description?.runs[0]
+      playlist?.description?.musicDescriptionShelfRenderer?.description?.runs[0]
         ?.text,
     contents: contents?.map((data: any) => {
       const dataItem = data?.musicResponsiveListItemRenderer;
