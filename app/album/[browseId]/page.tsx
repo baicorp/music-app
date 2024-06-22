@@ -81,7 +81,7 @@ export default async function Album({
                 index={content?.index}
                 title={content?.title}
                 artists={data?.artists}
-                thumbnail={data?.thumbnail}
+                thumbnail={content?.thumbnail}
                 listSong={data?.contents}
                 duration={content?.duration}
                 plays={content?.plays}
