@@ -39,18 +39,18 @@ export default function AlbumCard({
         <div className="flex gap-2">
           <p
             className={`${
-              artists.length === 0 ? "block" : "hidden"
+              artists?.length === 0 ? "block" : "hidden"
             } text-sm font-semibold text-gray-400 line-clamp-1`}
           >
             {subtitle}
           </p>
           <div
             className={`${
-              artists.length === 0 ? "hidden" : "block"
+              artists?.length === 0 ? "hidden" : "block"
             } flex gap-2 line-clamp-1`}
           >
             <Artists artists={artists} />
-            <Year year={subtitle[subtitle.length - 1]} />
+            <Year year={subtitle?.[subtitle?.length - 1]} />
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function AlbumCard({
 
 function Year({ year }: { year: string | undefined }) {
   if (!year) return "";
-  if (year.length !== 4) return "";
+  if (year?.length !== 4) return "";
   return (
     <p className="text-sm font-semibold text-gray-400 line-clamp-1">{year}</p>
   );

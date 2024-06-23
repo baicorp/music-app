@@ -34,6 +34,7 @@ async function HomeResult() {
   }
 
   const list = data?.map((data: any, index: number) => {
+    if (!!!data?.headerTitle) return null;
     if (data?.headerTitle === "Quick picks") {
       return (
         <div key={index} className="flex flex-col gap-5">
@@ -41,11 +42,12 @@ async function HomeResult() {
           <div className="overflow-x-auto gap-2 md:gap-4 flex flex-col flex-wrap h-[230px] md:h-[250px] empty:hidden">
             {data?.contents?.map((content: any, index: number) => {
               return (
-                <DynamicComponent
+                <div
                   key={index}
-                  type={content?.type}
-                  props={content}
-                />
+                  className="w-[70dvw] md:w-[calc(70dvw)] lg:w-[calc(70dvw-223px)] xl:w-[calc(55dvw-223px)]"
+                >
+                  <DynamicComponent type={content?.type} props={content} />
+                </div>
               );
             })}
           </div>

@@ -54,18 +54,29 @@ export async function search(query: string) {
 }
 
 export async function getHome() {
-  const res = await fetch(url("browse"), {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
-      browseId: "FEmusic_home",
-      params:
-        "ggM8SgQICBADSgQIBxABSgQICRABSgQIDRABSgQIAxABSgQIChABSgQIBRABSgQIBBABSgQIDhABSgQIBhAB",
-      ...payload,
-    }),
+  const fetchData = async (browseId: string, additionalPayload = {}) => {
+    return await fetch(url("browse"), {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        browseId,
+        ...payload,
+        ...additionalPayload,
+      }),
+    });
+  };
+
+  const res1 = fetchData("FEmusic_home");
+  const res2 = fetchData("FEmusic_home", {
+    params:
+      "ggM8SgQICBABSgQIBxABSgQIAxABSgQICRABSgQIChABSgQIDRABSgQIDhABSgQIBBABSgQIBRABSgQIBhAD",
   });
-  const data = await res.json();
-  return extractHomeData(data);
+
+  const [a, b] = await Promise.all([res1, res2]);
+  let [dataA, dataB] = await Promise.all([a.json(), b.json()]);
+  dataA = extractHomeData(dataA);
+  dataB = extractHomeData(dataB);
+  return [...dataA, ...dataB];
 }
 
 export async function getPlaylist(browseId: string) {
