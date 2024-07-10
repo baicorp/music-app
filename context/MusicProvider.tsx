@@ -8,6 +8,10 @@ type CurrentMusicContextValue = {
   setTrackData: React.Dispatch<React.SetStateAction<Song | undefined>>;
   listTrackData: Song[] | undefined;
   setListTrackData: React.Dispatch<React.SetStateAction<Song[] | []>>;
+  isListOpen: boolean;
+  setIsListOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isPlayerOpen: boolean;
+  setPlayerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const CurrentMusicContext = createContext<
@@ -21,6 +25,8 @@ export default function MusicProvider({
 }) {
   const [trackData, setTrackData] = useState<Song | undefined>(undefined);
   const [listTrackData, setListTrackData] = useState<Song[] | []>([]);
+  const [isListOpen, setIsListOpen] = useState(false);
+  const [isPlayerOpen, setPlayerOpen] = useState(false);
 
   return (
     <CurrentMusicContext.Provider
@@ -29,6 +35,10 @@ export default function MusicProvider({
         setTrackData,
         listTrackData,
         setListTrackData,
+        isListOpen,
+        setIsListOpen,
+        isPlayerOpen,
+        setPlayerOpen,
       }}
     >
       {children}

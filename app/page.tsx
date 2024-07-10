@@ -1,6 +1,5 @@
 import { getHome } from "@/utils/MusicClient";
 import DynamicComponent from "@/components/DynamicComponent";
-import { SongCard } from "@/components/card";
 
 export default async function Home() {
   return (

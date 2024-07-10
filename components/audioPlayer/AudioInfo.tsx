@@ -20,10 +20,12 @@ export default function AudioInfo({
           width={400}
           height={400}
           alt={title + " image"}
-          className="w-16 h-16 aspect-square object-cover object-center rounded-md py-3 pl-4"
+          className="w-16 h-16 aspect-square object-cover object-center rounded-md py-2"
         />
       ) : (
-        <BrokenImage />
+        <div className="w-16 h-16">
+          <BrokenImage />
+        </div>
       )}
       <div className="pl-3">
         <p className="font-semibold text-white line-clamp-1">{title}</p>

@@ -1,4 +1,4 @@
-import useGlobalVal from "./useGlobalVal";
 import useMusic from "./useMusic";
+import useAudio from "./useAudio";
 
-export { useGlobalVal, useMusic };
+export { useMusic, useAudio };

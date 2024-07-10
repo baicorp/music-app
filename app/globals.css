@@ -35,3 +35,18 @@ body {
     text-wrap: balance;
   }
 }
+
+input[type="range"] {
+  appearance: none;
+  background-color: transparent;
+  height: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 100%;
+  -webkit-appearance: none;
+}

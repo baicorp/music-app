@@ -4,7 +4,7 @@ const tagNameList = [
   { id: 1, name: "NextJs" },
   { id: 2, name: "TailwindCSS" },
 ];
-export default async function Page() {
+export default function Page() {
   return (
     <div className="bg-secondary border border-secondary flex flex-col gap-4 justify-center items-center grow rounded-lg">
       <div className="bg-[#cfcae0] p-1 rounded-3xl h-fit">
@@ -27,7 +27,10 @@ export default async function Page() {
         </div>
         <div>
           <p className="text-center text-[#8a7ab8] pt-3 pb-2 font-semibold text-sm">
-            January 22, 2024
+            January 22, 2024{" "}
+            {process.env.NODE_ENV === "production"
+              ? "production"
+              : "development"}
           </p>
         </div>
       </div>

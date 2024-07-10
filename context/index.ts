@@ -1,4 +1,4 @@
-import GlobalProvider from "./GlobalProvider";
 import MusicProvider from "./MusicProvider";
+import AudioProvider from "./AudioProvider";
 
-export { GlobalProvider, MusicProvider };
+export { MusicProvider, AudioProvider };
