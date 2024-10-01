@@ -5,7 +5,8 @@ export async function GET(request) {
   if (!videoId) return NextResponse.json({ error: "no id given" });
 
   const response = await fetch(
-    `https://pipedapi.reallyaweso.me/streams/${videoId}`
+    // `https://pipedapi.reallyaweso.me/streams/${videoId}`
+    `https://inv.nadeko.net/api/v1/videos/${videoId}`
   );
   if (!response.ok) {
     return NextResponse.json({ error: response.status });

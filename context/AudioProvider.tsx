@@ -5,20 +5,16 @@ import { useMusic } from "@/hooks";
 import { Song } from "@/types/song";
 import useSWRImmutable from "swr/immutable";
 
-async function fetchStreamData(videoId: string): Promise<Song> {
+async function fetchMultipleStreamData(videoId: string): Promise<Song> {
   try {
     const androidTestSuite = `${BASE_URL}/api/stream/android?videoId=${videoId}`;
     const piped = `${BASE_URL}/api/stream/piped?videoId=${videoId}`;
-    // const tvhtml5 = `${BASE_URL}/api/stream/tvhtml5?videoId=${videoId}`;
 
-    // const [androidRes, pipedRes, tvhtml5res] = await Promise.all([
     const [androidRes, pipedRes] = await Promise.all([
       fetch(androidTestSuite, { method: "POST" }),
       fetch(piped),
-      // fetch(tvhtml5, { method: "POST" }),
     ]);
 
-    // if (!androidRes.ok || !tvhtml5res.ok) {
     if (!androidRes.ok || !pipedRes.ok) {
       throw new Error(
         `Server error: ${androidRes.statusText} / ${pipedRes.statusText}`
@@ -31,6 +27,24 @@ async function fetchStreamData(videoId: string): Promise<Song> {
     ]);
 
     return { ...androidData, url: [androidData?.url, pipedData] };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
+async function fetchSingleStreamData(videoId: string): Promise<Song> {
+  try {
+    const androidTestSuite = `${BASE_URL}/api/stream/android?videoId=${videoId}`;
+
+    const androidRes = await fetch(androidTestSuite, { method: "POST" });
+
+    if (!androidRes.ok) {
+      throw new Error(`Server error: ${androidRes.statusText}`);
+    }
+
+    const androidData = await androidRes.json();
+
+    return { ...androidData, url: [androidData?.url] };
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
@@ -59,7 +73,7 @@ export default function AudioProvider({
 
   const { data, isLoading } = useSWRImmutable(
     trackData?.videoId,
-    fetchStreamData,
+    fetchSingleStreamData,
     {
       onSuccess: (data) => {
         setTrackData((previous) => {
@@ -108,7 +122,7 @@ export default function AudioProvider({
       console.log(
         "cannot play this song data :(, trying to use another source..."
       );
-      audioElement.current.src = data?.url[1];
+      // audioElement.current.src = data?.url[1];
     } else {
       console.log("cannot play this song :(");
     }
@@ -126,6 +140,8 @@ export default function AudioProvider({
       setTrackData(listTrackData[nextIndex]);
     }
   }
+
+  console.log(data?.url);
 
   return (
     <AudioProviderContext.Provider

@@ -19,8 +19,10 @@ export async function POST(request) {
         videoId,
         context: {
           client: {
-            clientName: "ANDROID_TESTSUITE",
-            clientVersion: "1.9",
+            // clientName: "ANDROID_TESTSUITE",
+            // clientVersion: "1.9",
+            clientName: "ANDROID_MUSIC",
+            clientVersion: "5.26.1",
             androidSdkVersion: 30,
             hl: "en",
             gl: "US",
